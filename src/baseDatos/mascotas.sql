@@ -70,7 +70,7 @@ CREATE TABLE mascotas_db.servicios(
     id INT UNSIGNED UNIQUE PRIMARY KEY NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     descripcion VARCHAR(255) NOT NULL,
-    precio FLOAT NOT NULL,
+    precio DECIMAL(20,5) NOT NULL,
     id_producto INT UNSIGNED NOT NULL,
     FOREIGN KEY (id_producto) REFERENCES productos(id)
 );
