@@ -76,3 +76,23 @@ BEGIN
     WHERE id_usuario = p_id_usuario;
 END //
 
+CREATE PROCEDURE EliminarPropietario(
+    IN p_id_usuario INT
+)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    SET autocommit = 0;
+
+    START TRANSACTION;
+
+    DELETE FROM mascotas_bd.propietarios
+    WHERE id_usuario = p_id_usuario;
+
+    COMMIT;
+    SET autocommit = 1;
+END //
