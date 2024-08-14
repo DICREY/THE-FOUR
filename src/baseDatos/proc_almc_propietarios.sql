@@ -98,19 +98,42 @@ BEGIN
 END //
 
 CREATE PROCEDURE BuscarPropietarioID(
-    IN p_id_usuario INT
+    IN p_id_usuario INT UNSIGNED
 )
 BEGIN
     SELECT 
-        UPPER(u.nombre) AS nombre_usuario,
-        UPPER(u.apellido) AS apellido_usuario,
-        UPPER(u.ciudad) AS ciudad_usuario,
-        UPPER(u.direccion) AS direccion_usuario,
+        u.nombre AS nombre,
+        u.apellido AS apellido,
+        u.ciudad AS ciudad,
+        u.direccion AS direccion,
         u.telefono,
-        LOWER(u.email) AS email_usuario,
-        UPPER(p.mascotas) AS mascotas_propietario
-    FROM 
-        mascotas_db.propietarios p
+        u.email AS email,
+        p.barrio 
+    FROM
+        mascotas_db.usuarios u
     INNER JOIN 
-        mascotas_db.usuarios u ON p.id_usuario = u.id_usuario LIMIT 100;
+        mascotas_db.propietarios p ON u.id_usuario = p.id_usuario
+    WHERE
+        u.id_usuario = p_id_usuario;
 END //
+
+
+DELIMITER //
+
+CREATE PROCEDURE BuscarPropietarios(
+)
+BEGIN
+    SELECT 
+        u.nombre AS nombre,
+        u.apellido AS apellido,
+        u.ciudad AS ciudad,
+        u.direccion AS direccion,
+        u.telefono,
+        u.email AS email,
+        p.barrio 
+    FROM
+        propietarios p
+    INNER JOIN 
+        usuarios u ON p.id_usuario = u.id_usuario;
+END //
+
