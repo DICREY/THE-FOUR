@@ -96,3 +96,21 @@ BEGIN
     COMMIT;
     SET autocommit = 1;
 END //
+
+CREATE PROCEDURE BuscarPropietarioID(
+    IN p_id_usuario INT
+)
+BEGIN
+    SELECT 
+        UPPER(u.nombre) AS nombre_usuario,
+        UPPER(u.apellido) AS apellido_usuario,
+        UPPER(u.ciudad) AS ciudad_usuario,
+        UPPER(u.direccion) AS direccion_usuario,
+        u.telefono,
+        LOWER(u.email) AS email_usuario,
+        UPPER(p.mascotas) AS mascotas_propietario
+    FROM 
+        mascotas_db.propietarios p
+    INNER JOIN 
+        mascotas_db.usuarios u ON p.id_usuario = u.id_usuario LIMIT 100;
+END //

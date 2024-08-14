@@ -34,7 +34,7 @@ CREATE TABLE mascotas_db.historiales_medicos(
     tratamiento VARCHAR(255) NOT NULL,
     id_veterinario INT UNSIGNED NOT NULL,
     id_mascota INT UNSIGNED NOT NULL,
-    FOREIGN KEY (id_veterinario) REFERENCES veterinarios(id)
+    FOREIGN KEY (id_veterinario) REFERENCES veterinarios(id_usuario),
     Foreign Key (id_mascota) REFERENCES mascotas(id)
 );
 /* 2024-07-31 16:17:30 [31 ms] */ 
@@ -43,13 +43,13 @@ CREATE TABLE mascotas_db.mascotas(
     nombre VARCHAR(100) NOT NULL,
     especie VARCHAR(100) NOT NULL,
     raza VARCHAR(100) NOT NULL,
-    edad DECIMAL(10,12) UNSIGNED NOT NULL,
-    peso DECIMAL(10,12) UNSIGNED NOT NULL,
+    edad DECIMAL(12,10) UNSIGNED NOT NULL,
+    peso DECIMAL(12,10) UNSIGNED NOT NULL,
     id_propietario INT UNSIGNED NOT NULL,
-    FOREIGN KEY (id_propietario) REFERENCES propietarios(id)
+    FOREIGN KEY (id_propietario) REFERENCES propietarios(id_usuario)
 );
 /* 2024-07-31 16:17:35 [45 ms] */ 
-CREATE TABLE mascotas_db.administradores(,
+CREATE TABLE mascotas_db.administradores(
     id_usuario INT UNSIGNED PRIMARY KEY NOT NULL,
     cargo VARCHAR(100) NOT NULL,
     fecha_ingreso DATE NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE mascotas_db.productos(
     precio DECIMAL(20,5) NOT NULL,
     id_administrador INT UNSIGNED NOT NULL,
     id_servicio INT UNSIGNED NOT NULL,
-    FOREIGN KEY (id_administrador) REFERENCES administradores(id)
+    FOREIGN KEY (id_administrador) REFERENCES administradores(id_usuario)
 );
 /* 2024-07-31 16:17:44 [25 ms] */ 
 CREATE TABLE mascotas_db.servicios(
@@ -84,6 +84,6 @@ CREATE TABLE mascotas_db.citas(
     mascota INT UNSIGNED NOT NULL,
     estado VARCHAR(100) NOT NULL,
     FOREIGN KEY(servicio) REFERENCES servicios(id),
-    FOREIGN KEY(veterinario) REFERENCES veterinarios(id),
+    FOREIGN KEY(veterinario) REFERENCES veterinarios(id_usuario),
     FOREIGN KEY(mascota) REFERENCES mascotas(id)
 );
