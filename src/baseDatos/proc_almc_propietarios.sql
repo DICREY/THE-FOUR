@@ -137,3 +137,24 @@ BEGIN
         usuarios u ON p.id_usuario = u.id_usuario;
 END //
 
+CREATE PROCEDURE BuscarPropietarioNombre(
+    IN p_nombre VARCHAR(100) 
+)
+BEGIN
+    SELECT 
+        u.nombre AS nombre,
+        u.apellido AS apellido,
+        u.ciudad AS ciudad,
+        u.direccion AS direccion,
+        u.telefono,
+        u.email AS email,
+        p.barrio 
+    FROM
+        mascotas_db.usuarios u
+    INNER JOIN 
+        mascotas_db.propietarios p ON u.id_usuario = p.id_usuario
+    WHERE
+        nombre LIKE p_nombre;
+END //
+
+
