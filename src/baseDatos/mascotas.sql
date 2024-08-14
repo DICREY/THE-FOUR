@@ -15,16 +15,15 @@ CREATE TABLE mascotas_db.usuarios(
 );
 /* 2024-07-31 16:17:15 [44 ms] */ 
 CREATE TABLE mascotas_db.veterinarios(
-    id INT UNSIGNED UNIQUE PRIMARY KEY NOT NULL,
+    id_usuario INT UNSIGNED PRIMARY KEY NOT NULL,
     especialidad VARCHAR(100) NOT NULL,
     horario VARCHAR(100) NOT NULL,
-    id_usuario INT UNSIGNED NOT NULL,
     FOREIGN KEY(id_usuario)  REFERENCES usuarios(id_usuario)
 );
 /* 2024-07-31 16:17:17 [30 ms] */ 
 CREATE TABLE mascotas_db.propietarios(
-    id INT UNSIGNED UNIQUE PRIMARY KEY NOT NULL,
-    id_usuario INT UNSIGNED NOT NULL,
+    id_usuario INT UNSIGNED PRIMARY KEY NOT NULL,
+    barrio VARCHAR(100) NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 /* 2024-07-31 16:17:22 [29 ms] */ 
@@ -49,11 +48,10 @@ CREATE TABLE mascotas_db.mascotas(
     FOREIGN KEY (id_propietario) REFERENCES propietarios(id)
 );
 /* 2024-07-31 16:17:35 [45 ms] */ 
-CREATE TABLE mascotas_db.administradores(
-    id INT UNSIGNED UNIQUE PRIMARY KEY NOT NULL,
+CREATE TABLE mascotas_db.administradores(,
+    id_usuario INT UNSIGNED PRIMARY KEY NOT NULL,
     cargo VARCHAR(100) NOT NULL,
     fecha_ingreso DATE NOT NULL,
-    id_usuario INT UNSIGNED NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 /* 2024-07-31 16:17:40 [29 ms] */ 
