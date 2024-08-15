@@ -213,23 +213,21 @@ class Mascota():
             self.set_sexo()
             #self.set_id_usuario()
             
-    def buscar_mascota(self, id_mascota=None):
+    def BuscarMascotaID(self, id_mascota=None):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
                 mascota_encontrada = False
                 cursor_mascota = conexion.cursor()
                 print(f'Buscando la mascota {id_mascota}...')
-                cursor_mascota.callproc('BuscarMascota', [id_mascota])
+                cursor_mascota.callproc('BuscarMascotaID', [id_mascota])
                 for busqueda in cursor_mascota.stored_results():
                     resultado = busqueda.fetchone()
                     if resultado:
                         mascota_encontrada = True
-                        print(mascota_encontrada)
-                        print('Resultado:') # Si encontró  datos los imprime
-                        print('************************************************')
-                        print(resultado)
-                        print('************************************************')
+                        print('\nResultado:\n',
+                        f'************************************************\n{resultado}\n',
+                        '************************************************')
                         return mascota_encontrada
                     else:
                         print('Mascota no encontrada. Intente de nuevo.')
@@ -291,34 +289,6 @@ class Mascota():
                 BaseDatos.desconectar()
         else:
             print('Mascota no encontrada. Intente otra vez')
-
-
-
-    def BuscarMascotaID(self):
-        conexion = BaseDatos.conectar()
-        if conexion:
-            try:
-                mascota_encontrada = False
-                cursor_mascota = conexion.cursor()
-                print(f'Buscando la mascotas...')
-                cursor_mascota.callproc('BuscarMascotaID')
-                for busqueda in cursor_mascota.stored_results():
-                    resultados = busqueda.fetchall()
-                    if resultados:
-                        for datos in resultados:
-                            print(datos)
-                        return mascota_encontrada
-                    else:
-                        print('No se encontraron registros. Intente de nuevo.')
-                        print(mascota_encontrada)
-                        return mascota_encontrada
-            except Exception as e:
-                print(f'Error al buscar la mascota: {e}')
-            finally:
-                if conexion:
-                    cursor_mascota.close()
-                    BaseDatos.desconectar()    
-
 
     def eliminar_mascota(self, id_mascota):
         conexion = BaseDatos.conectar()
