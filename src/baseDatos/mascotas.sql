@@ -77,13 +77,14 @@ CREATE TABLE mascotas_db.servicios(
 );
 /* 2024-07-31 16:17:49 [33 ms] */ 
 CREATE TABLE mascotas_db.citas(
-    id INT UNSIGNED UNIQUE PRIMARY KEY NOT NULL,
+    id INT UNSIGNED UNIQUE NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
     servicio INT UNSIGNED NOT NULL,
     veterinario INT UNSIGNED NOT NULL,
     mascota INT UNSIGNED NOT NULL,
     estado ENUM("Pendiente","En espera","Cancelada","Rechazada","Realizada") NOT NULL,
+    PRIMARY KEY (id,mascota)
     FOREIGN KEY(servicio) REFERENCES servicios(id),
     FOREIGN KEY(veterinario) REFERENCES veterinarios(id_usuario) ON DELETE CASCADE
     ON UPDATE CASCADE,
