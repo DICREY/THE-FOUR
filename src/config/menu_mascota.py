@@ -34,7 +34,7 @@ def main():
                 system("cls")
                 inser_mascota = Mascota()
                 id = int(input("Id de mascota a buscar: "))
-                inser_mascota.buscar_mascota(id)
+                inser_mascota.BuscarMascotaID(id)
             
             elif opcion == 3:
                 system("cls")
