@@ -1,4 +1,4 @@
-CREATE PROCEDURE mascotas_bd.InsertarMascota(
+CREATE PROCEDURE mascotas_db.InsertarMascota(
     IN p_id INT UNSIGNED,
     IN p_nombre VARCHAR(100),
     IN p_especie VARCHAR(100),
@@ -25,7 +25,7 @@ BEGIN
     SET autocommit = 1;
 END //
 
-CREATE PROCEDURE mascotas_bd.ActualizarMascota(
+CREATE PROCEDURE mascotas_db.ActualizarMascota(
     IN p_id INT UNSIGNED,
     IN p_nombre VARCHAR(100),
     IN p_especie VARCHAR(100),
@@ -58,7 +58,7 @@ BEGIN
     SET autocommit = 1;
 END //
 
-CREATE PROCEDURE EliminarMascota(
+CREATE PROCEDURE mascotas_db.EliminarMascota(
     IN p_id INT
 )
 BEGIN
@@ -79,7 +79,7 @@ BEGIN
     SET autocommit = 1;
 END //
 
-CREATE PROCEDURE BuscarMascotaID(
+CREATE PROCEDURE mascotas_db.BuscarMascotaID(
     IN p_id_mascota INT UNSIGNED
 )
 BEGIN

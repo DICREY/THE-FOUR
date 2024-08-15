@@ -5,7 +5,7 @@ class BaseDatos:
 
     _HOST = '127.0.0.1'
     _USER = 'root'
-    _PASSWORD = '12345678'
+    _PASSWORD = ''
     _DATABASE = 'mascotas_db'
     _PORT = 3306
     _conexion = None
@@ -88,5 +88,3 @@ class BaseDatos:
                 print('Conexión cerrada...')
         except mysql.connector.Error as err:
             print(f'Error al cerrar la conexión: {err}')
-
-BaseDatos.conectar()
