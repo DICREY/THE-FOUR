@@ -19,26 +19,27 @@ def main():
                     print("Opción no válida")
                     
             if opcion == 5: 
-                print("")
+                system("cls")
+                print("Gracias por utilizar nuestra pagina")
                 break
             
+        
             elif opcion == 1:
                 system("cls")
                 print("1. Registrar Mascota")
-                
                 inser_mascota = Mascota()
-                inser_mascota.registrar_mascota
+                inser_mascota.InsertarMascota()
             
             elif opcion == 2:
                 system("cls")
                 inser_mascota = Mascota()
-                codigo_mascota = int(input("Codigo de mascota a buscar"))
-                inser_mascota.buscar_mascota(codigo_mascota)
+                id = int(input("Codigo de mascota a buscar: "))
+                inser_mascota.buscar_mascota(id)
             
             elif opcion == 3:
                 system("cls")
                 inser_mascota = Mascota()
-                codigo_mascota = int(input("Codigo de mascota a actualiza"))
+                id = int(input("Codigo de mascota a actualiza: "))
             
             elif opcion == 4:
                 system("cls")

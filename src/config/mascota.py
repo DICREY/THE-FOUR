@@ -2,8 +2,7 @@ import re
 import os 
 from conexion10 import BaseDatos
 #from usuario import Usuario
-#from historialMedico import HistorialMedico
-os.system('cls')
+
 
 class Mascota():
     def __init__(self,
@@ -18,40 +17,41 @@ class Mascota():
                  #historial_medico= None
                  ):
         
-        self._id= id
+        self._id = id
         self._nombre = nombre
         self._especie = especie
         self._raza = raza
         self._edad = edad
         self._peso = peso
         self._sexo = sexo
-        #self._id_usuario = Usuario
+        self._id_usuario = id_usuario
         #self._historial_medico = historial_medico if historial_medico is not None else []
         
     
     #get y set
-    def set_id_mascota(self, id):
-        patron = r'^\d+$'  # Expresión regular que solo permite dígitos
-        while True:
-            try:
-                id = input("Ingrese el id de la mascota): ")
-                if len(id) >= 5 and re.match(patron, id):
-                    self._id = id
-                    break
-                else:
-                    print("El ID debe tener minimo 3 digitos, intente nuevamente.")
-            except KeyboardInterrupt:
-                print('El usuario ha cancelado la entrada de datos.')
+    def set_id(self):
+             while True:
+                try:
+                    id_mascota = int(input('Escriba el código de la mascota: '))
+                    if (1 <= id_mascota <= 1000000000):
+                        self._id = id_mascota
+                        break
+                    else:
+                        print('El número debe estar entre 3 y 100000000')
+                except ValueError:
+                    print('El código debe ser un número.')
+                except KeyboardInterrupt:
+                    print('El usuario ha cancelado la entrada de datos.')
                 continue
             
     def get_id(self):
         return self._id
     
     
-    def set_nombre(self, nombre):
-        patron = r'^[a-zA-Z ]+$'
+    def set_nombre(self):
         while True:
             try:
+                patron = r'^[a-zA-Z ]+$'
                 nombre = input("Ingrese el nombre de la mascota nombre: ")
                 if len(nombre) >= 3 and re.match(patron, nombre):
                     self._nombre = nombre 
@@ -65,16 +65,16 @@ class Mascota():
     def get_nombre(self):
         return self._nombre
         
-    def set_especie(self, especie):
-        patron = r'^[a-zA-Z ]+$'
+    def set_especie(self):
         while True:
             try:
-                especie = input("Ingrese su nombre: ")
+                patron = r'^[a-zA-Z ]+$'
+                especie = input("Ingrese la especie de la mascota: ")
                 if len(especie) >= 3 and re.match(patron, especie):
                     self._especie = especie
                     break
                 else:
-                    print("El nombre de la especie debe tener almenos 3 caracteres. Intente nuevamente.")
+                    print("La especie debe tener almenos 3 caracteres. Intente nuevamente.")
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 continue
@@ -82,11 +82,11 @@ class Mascota():
     def get_especie(self):
         return self._especie
         
-    def set_raza(self, raza):
-        patron = r'^[a-zA-Z ]+$'
+    def set_raza(self):
         while True:
             try:
-                raza = input("Ingrese su nombre: ")
+                patron = r'^[a-zA-Z ]+$'
+                raza = input("Ingrese la raza de la mascota: ")
                 if len(raza) >= 3 and re.match(patron, raza):
                     self._raza = raza
                     break
@@ -100,7 +100,7 @@ class Mascota():
         return self._raza
     
         
-    def set_edad(self , edad):
+    def set_edad(self):
            while True:
             try:
                 edad = float(input('Edad de la mascota (años): '))
@@ -119,7 +119,7 @@ class Mascota():
     def get_edad(self):
         return self._edad
         
-    def set_peso(self, peso):
+    def set_peso(self):
         while True:
             try:
                 peso = float(input('Peso en kg: '))
@@ -137,16 +137,16 @@ class Mascota():
     def get_peso(self):
         return self._peso
     
-    def set_sexo(self, sexo):
-        patron = r'^[a-zA-Z ]+$'
+    def set_sexo(self):
         while True:
             try:
-                raza = input("Ingrese su nombre: ")
-                if len(sexo) <= 10 and re.match(patron, raza):
+                patron = r'^[a-zA-Z ]+$'
+                sexo = input("Ingrese el genero de la mascota: ")
+                if len(sexo) <= 10 and re.match(patron, sexo):
                     self._sexo = sexo
                     break
                 else:
-                    print("El sexo de la mascota debe tener maximo 10 caracteres y no tener caracteres especiales. Intente nuevamente.")
+                    print("Error. Intente nuevamente.")
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 continue
@@ -154,8 +154,8 @@ class Mascota():
     def get_sexo(self):
         return self._sexo
     
-    """
-    def set_usuario(self):
+    
+    def set_id_usuario(self):
         while True:
             try:
                 id_usuario = int(input('Id usuario: '))
@@ -169,9 +169,9 @@ class Mascota():
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 continue       
-    """
-    #def get_usuario(self):
-       # return self._usuario
+    
+    def get_usuario(self):
+        return self._usuario
     
     #def get_historial(self):
        # return self.__historial
@@ -183,7 +183,7 @@ class Mascota():
         
 #Metodos
 
-    def registrar_mascota(self):
+    def InsertarMascota(self):
             self.capturar_datos()
             conexion = BaseDatos.conectar()
             if conexion:
@@ -196,7 +196,7 @@ class Mascota():
                     self.get_edad(),
                     self.get_peso(),
                     self.get_sexo(),
-                    #self.get_id_usuario()
+                    self.get_id_usuario()
                 ])
                 conexion.commit()
             print('Mascota registrada correctamente...')
@@ -213,14 +213,14 @@ class Mascota():
             self.sexo()
             #self.set_id_usuario()
             
-    def buscar_mascota(self, id=None):
+    def buscar_mascota(self, id_mascota=None):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
                 mascota_encontrada = False
                 cursor_mascota = conexion.cursor()
-                print(f'Buscando la mascota {id}...')
-                cursor_mascota.callproc('BuscarMascota', [id])
+                print(f'Buscando la mascota {id_mascota}...')
+                cursor_mascota.callproc('BuscarMascota', [id_mascota])
                 for busqueda in cursor_mascota.stored_results():
                     resultado = busqueda.fetchone()
                     if resultado:
@@ -244,9 +244,9 @@ class Mascota():
 
 
 
-    def actualizar_mascota(self, id):
+    def ActualizarMascota(self, id_mascota):
         conexion = BaseDatos.conectar()
-        mascota_encontrada = self.buscar_mascota(id)
+        mascota_encontrada = self.buscar_mascota(id_mascota)
         if mascota_encontrada:
             try:
                 print('Escriba los nuevos datos de la mascota: ')
@@ -264,7 +264,7 @@ class Mascota():
                 nuevo_peso = self.get_peso()
                 nuevo_sexo = self.get_sexo()
                 
-                print(f'Código: {id}')
+                print(f'Código: {id_mascota}')
                 print(f'Nuevo nombre: {nuevo_nombre}')
                 print(f'Nueva especie: {nueva_especie}')
                 print(f'Nueva raza: {nueva_raza}')
@@ -274,7 +274,7 @@ class Mascota():
 
                 cursor_mascota = conexion.cursor()
                 cursor_mascota.callproc('ActualizarMascota', [
-                    id,
+                    id_mascota,
                     nuevo_nombre,
                     nueva_especie,
                     nueva_raza,
@@ -320,13 +320,13 @@ class Mascota():
                     BaseDatos.desconectar()    
 
 
-    def eliminar_mascota(self, id):
+    def eliminar_mascota(self, id_mascota):
         conexion = BaseDatos.conectar()
-        mascota_encontrada = self.buscar_mascota(id)
+        mascota_encontrada = self.buscar_mascota(id_mascota)
         if mascota_encontrada:
             try:
                 cursor_mascota = conexion.cursor()
-                cursor_mascota.callproc('EliminarMascota', [id])
+                cursor_mascota.callproc('EliminarMascota', [id_mascota])
                 conexion.commit()
                 cursor_mascota.close()
                 print('Mascota eliminada')
