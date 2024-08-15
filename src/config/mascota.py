@@ -301,7 +301,7 @@ class Mascota():
                 mascota_encontrada = False
                 cursor_mascota = conexion.cursor()
                 print(f'Buscando la mascotas...')
-                cursor_mascota.callproc('BuscarMascotas')
+                cursor_mascota.callproc('BuscarMascotaID')
                 for busqueda in cursor_mascota.stored_results():
                     resultados = busqueda.fetchall()
                     if resultados:
