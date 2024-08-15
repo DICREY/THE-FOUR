@@ -46,6 +46,7 @@ CREATE TABLE mascotas_db.mascotas(
     edad DECIMAL(12,10) UNSIGNED NOT NULL,
     peso DECIMAL(12,10) UNSIGNED NOT NULL,
     id_propietario INT UNSIGNED NOT NULL,
+    sexo ENUM('F','M')NOT NULL,
     FOREIGN KEY (id_propietario) REFERENCES propietarios(id_usuario)
 );
 /* 2024-07-31 16:17:35 [45 ms] */ 
