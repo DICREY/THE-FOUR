@@ -84,7 +84,7 @@ CREATE TABLE mascotas_db.citas(
     veterinario INT UNSIGNED NOT NULL,
     mascota INT UNSIGNED NOT NULL,
     estado ENUM("Pendiente","En espera","Cancelada","Rechazada","Realizada") NOT NULL,
-    PRIMARY KEY (id,mascota)
+    PRIMARY KEY (id,mascota),
     FOREIGN KEY(servicio) REFERENCES servicios(id),
     FOREIGN KEY(veterinario) REFERENCES veterinarios(id_usuario) ON DELETE CASCADE
     ON UPDATE CASCADE,
