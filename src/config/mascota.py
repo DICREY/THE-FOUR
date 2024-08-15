@@ -13,7 +13,7 @@ class Mascota():
                  edad : float = None,
                  peso :float = None,
                  sexo : str = None,
-                 id_usuario: int = None,
+                 id_propietario: int = None,
                  #historial_medico= None
                  ):
         
@@ -24,7 +24,7 @@ class Mascota():
         self._edad = edad
         self._peso = peso
         self._sexo = sexo
-        self._id_usuario = id_usuario
+        self._id_propietario = id_propietario
         #self._historial_medico = historial_medico if historial_medico is not None else []
         
     
@@ -154,12 +154,12 @@ class Mascota():
     def get_sexo(self):
         return self._sexo
     
-    def set_id_usuario(self):
+    def set_id_propietario(self):
         while True:
             try:
-                id_usuario = int(input('Id usuario: '))
-                if (0 < id_usuario <= 1000000000):
-                    self._id_usuario = id_usuario
+                id_propietario = int(input('Id Propietario: '))
+                if (0 < id_propietario <= 1000000000):
+                    self._id_propietario = id_propietario
                     break
                 else:
                     print('Usuario no válido')
@@ -169,12 +169,11 @@ class Mascota():
                 print('El usuario ha cancelado la entrada de datos.')
                 continue       
     
-    def get_id_usuario(self):
-        return self._id_usuario
+    def get_id_propietario(self):
+        return self._id_propietario
     
     #def get_historial(self):
        # return self.__historial
-
 
 
     #def agregar_historial_medico(self, entrada: str):
@@ -194,8 +193,8 @@ class Mascota():
                     self.get_raza(),
                     self.get_edad(),
                     self.get_peso(),
-                    self.get_sexo(),
-                    self.get_id_usuario()
+                    self.get_id_propietario(),
+                    self.get_sexo()
                 ])
                 conexion.commit()
             print('Mascota registrada correctamente...')
@@ -210,7 +209,7 @@ class Mascota():
             self.set_edad()
             self.set_peso()
             self.set_sexo()
-            self.set_id_usuario()
+            self.set_id_propietario()
             
     def BuscarMascotaID(self, id_mascota=None):
         conexion = BaseDatos.conectar()

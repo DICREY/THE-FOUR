@@ -5,7 +5,7 @@ INSERT INTO mascotas_db.usuarios (id_usuario, nombre, apellido, ciudad, direccio
 (4, 'Maria', 'Lopez', 'Barranquilla', 'Calle 101', '4567890123', 1, 0, 0, 'maria.lopez@example.com', 'password4'),
 (5, 'Carlos', 'Martínez', 'Cartagena', 'Avenida 202', '5678901234', 0, 1, 0, 'carlos.martinez@example.com', 'password5'),
 (6, 'Sofia', 'Sánchez', 'Bucaramanga', 'Calle 303', '6789012345', 1, 0, 0, 'sofia.sanchez@example.com', 'password6'),
-(7, 'Miguel', 'Hernández', 'Pereira', 'Carrera 404', '7890123456', 1, 0, 0, 'miguel.hernandez@example.com', 'password7'),
+(7, 'Cristian', 'Arrieta', 'Romero', 'Carrera 404', '7890123456', 1, 0, 0, 'cristianarrieta@example.com', 'password7'),
 (8, 'Laura', 'Gómez', 'Santa Marta', 'Calle 505', '8901234567', 0, 1, 0, 'laura.gomez@example.com', 'password8'),
 (9, 'Andrés', 'Mora', 'Ibagué', 'Avenida 606', '9012345678', 1, 0, 0, 'andres.mora@example.com', 'password9'),
 (10, 'Catalina', 'Morales', 'Neiva', 'Calle 707', '0123456789', 1, 0, 0, 'catalina.morales@example.com', 'password10'),

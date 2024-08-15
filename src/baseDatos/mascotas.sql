@@ -46,11 +46,12 @@ CREATE TABLE mascotas_db.mascotas(
     nombre VARCHAR(100) NOT NULL,
     especie VARCHAR(100) NOT NULL,
     raza VARCHAR(100) NOT NULL,
-    edad DECIMAL(12,10) UNSIGNED NOT NULL,
-    peso DECIMAL(12,10) UNSIGNED NOT NULL,
+    edad FLOAT(12,10) UNSIGNED NOT NULL,
+    peso FLOAT(12,10) UNSIGNED NOT NULL,
     id_propietario INT UNSIGNED NOT NULL,
     sexo ENUM('F','M')NOT NULL,
-    FOREIGN KEY (id_propietario) REFERENCES propietarios(id_usuario)
+    FOREIGN KEY (id_propietario) REFERENCES propietarios(id_usuario) ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 /* 2024-07-31 16:17:35 [45 ms] */ 
 CREATE TABLE mascotas_db.administradores(

@@ -1,13 +1,13 @@
 DELIMITER //
 CREATE PROCEDURE mascotas_db.InsertarMascota(
-    IN p_id INT UNSIGNED,
-    IN p_nombre INT UNSIGNED,
+    IN p_id INT,
+    IN p_nombre VARCHAR(100),
     IN p_especie VARCHAR(100),
     IN p_raza VARCHAR(100),
-    IN p_edad VARCHAR(100),
-    IN p_peso INT UNSIGNED, 
-    IN p_id_propietario FLOAT,
-    IN p_sexo INT UNSIGNED
+    IN p_edad FLOAT(12,10),
+    IN p_peso FLOAT(12,10),
+    IN p_id_propietario INT,
+    IN p_sexo ENUM('F','M')
 )
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -27,16 +27,15 @@ BEGIN
     SET autocommit = 1;
 END //
 
-
 CREATE PROCEDURE mascotas_db.ActualizarMascota(
-    IN p_id INT UNSIGNED,
-    IN p_nombre INT UNSIGNED,
+    IN p_id INT,
+    IN p_nombre VARCHAR(100),
     IN p_especie VARCHAR(100),
     IN p_raza VARCHAR(100),
-    IN p_edad VARCHAR(100),
-    IN p_peso INT UNSIGNED, 
-    IN p_id_propietario FLOAT,
-    IN p_sexo INT UNSIGNED
+    IN p_edad FLOAT(12,10),
+    IN p_peso FLOAT(12,10),
+    IN p_id_propietario INT,
+    IN p_sexo ENUM('F','M')
 ) 
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
