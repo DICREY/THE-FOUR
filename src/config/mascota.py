@@ -142,8 +142,8 @@ class Mascota():
             try:
                 patron = r'^[a-zA-Z ]+$'
                 sexo = input("Ingrese el genero de la mascota: ")
-                if len(sexo) < 10 and re.match(patron, sexo):
-                    self._sexo = sexo
+                if len(sexo) >= 10 and re.match(patron, sexo):
+                    self._sexo = sexo.upper()
                     break
                 else:
                     print("Error. Intente nuevamente.")
