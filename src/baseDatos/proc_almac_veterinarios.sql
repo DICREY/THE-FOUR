@@ -89,3 +89,27 @@ BEGIN
     COMMIT;
     SET autocommit = 1;
 END //
+
+CREATE PROCEDURE mascotas_db.EliminarVeterinarios(
+    IN p_id_usuario INT UNSIGNED
+)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    SET autocommit = 0;
+
+    START TRANSACTION;
+
+    DELETE FROM mascotas_db.usuarios
+    WHERE id_usuario = p_id_usuario;
+
+    DELETE FROM mascotas_db.veterinarios
+    WHERE id_usuario = p_id_usuario;
+
+    COMMIT;
+    SET autocommit = 1;
+END //
