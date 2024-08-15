@@ -78,3 +78,25 @@ BEGIN
     COMMIT;
     SET autocommit = 1;
 END //
+
+CREATE PROCEDURE BuscarMascotaID(
+    IN p_id_mascota INT UNSIGNED
+)
+BEGIN
+    SELECT 
+        u.nombre AS nombre,
+        u.raza,
+        u.especie, 
+        u.peso,
+        u.edad,
+        u.sexo,
+        m.nombre AS nombre_propietario
+    FROM
+        mascotas_db.mascotas u
+    INNER JOIN 
+        mascotas_db.propietarios p ON u.id_propietario = p.id_usuario
+    INNER JOIN
+        mascotas_db.usuarios m ON p.id_usuario = m.id_usuario
+    WHERE
+        u.id = p_id_mascota;
+END //
