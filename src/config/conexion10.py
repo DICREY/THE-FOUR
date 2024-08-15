@@ -31,7 +31,7 @@ class BaseDatos:
                 print('Base de datos no existe')
             elif err.errno == errorcode.ER_BAD_HOST_ERROR:
                 print('El nombre del host es incorrecto')
-            elif err.errno == errorcode.ER_CONN_HOST_ERROR:
+            elif err.errno == errorcode.ER_CONN_HOST_ERROR: 
                 print('Error al intentar conectar con el host')
             elif err.errno == errorcode.ER_DBACCESS_DENIED_ERROR:
                 print('Acceso denegado a la base de datos')

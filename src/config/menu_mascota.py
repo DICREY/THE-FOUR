@@ -5,7 +5,6 @@ def main():
     try:
         while True:
             print("-------------------- Menu Veterinaria ------------------")
-            
             print("1. Regitrar nueva mascota")
             print("2. Buscar mascota")
             print("3. Actualiza mascota")
@@ -54,7 +53,6 @@ def main():
     except Exception as error:
         print(f'Ha ocurrido error no codificado {error}')
     finally:
-        print('Intente de nuevo')
+        print('Gracias por usar nuestro programa')
 
-if __name__ == "__main__":
-    main()       
+main()       
