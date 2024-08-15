@@ -131,9 +131,9 @@ INSERT INTO mascotas_db.veterinarios (id_usuario, especialidad, horario) VALUES
 INSERT INTO mascotas_db.mascotas (id, nombre, especie, raza, edad, peso, id_propietario, sexo) VALUES
 (1, 'Firulais', 'Perro', 'Labrador', 3.5, 25.3, 1, 'M'),
 (2, 'Michi', 'Gato', 'Siamés', 2.7, 4.2, 2, 'F'),
-(3, 'Toby', 'Perro', 'Golden Retriever', 4.1, 30.5, 3, 'M'),
+(3, 'Toby', 'Perro', 'Golden Retriever', 4.1, 30.5, 4, 'M'),
 (4, 'Luna', 'Gato', 'Persa', 1.9, 3.1, 4, 'F'),
-(5, 'Rex', 'Perro', 'Pastor Alemán', 5.3, 35.0, 5, 'M'),
+(5, 'Rex', 'Perro', 'Pastor Alemán', 5.3, 35.0, 6, 'M'),
 (6, 'Bella', 'Gato', 'Bengala', 2.3, 3.5, 6, 'F'),
 (7, 'Max', 'Perro', 'Bulldog', 4.4, 28.2, 7, 'M'),
 (8, 'Nala', 'Gato', 'Angora', 3.0, 3.8, 8, 'F'),
