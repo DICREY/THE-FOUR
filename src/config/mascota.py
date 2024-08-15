@@ -142,7 +142,7 @@ class Mascota():
             try:
                 patron = r'^[a-zA-Z ]+$'
                 sexo = input("Ingrese el genero de la mascota: ")
-                if len(sexo) <= 10 and re.match(patron, sexo):
+                if len(sexo) < 10 and re.match(patron, sexo):
                     self._sexo = sexo
                     break
                 else:
@@ -210,7 +210,7 @@ class Mascota():
             self.set_raza()
             self.set_edad()
             self.set_peso()
-            self.sexo()
+            self.set_sexo()
             #self.set_id_usuario()
             
     def buscar_mascota(self, id_mascota=None):
@@ -294,7 +294,7 @@ class Mascota():
 
 
 
-    def buscar_mascotas(self):
+    def BuscarMascotaID(self):
         conexion = BaseDatos.conectar()
         if conexion:
             try:

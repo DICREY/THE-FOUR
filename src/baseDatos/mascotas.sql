@@ -89,3 +89,4 @@ CREATE TABLE mascotas_db.citas(
     ON UPDATE CASCADE,
     FOREIGN KEY(mascota) REFERENCES mascotas(id)
 );
+

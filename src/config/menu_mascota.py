@@ -1,13 +1,13 @@
 from mascota import Mascota
 from os import system
-
+system("cls")
 def main():
     try:
         while True:
             print("-------------------- Menu Veterinaria ------------------")
             print("1. Regitrar nueva mascota")
             print("2. Buscar mascota")
-            print("3. Actualiza mascota")
+            print("3. Actualizar mascota")
             print("4. Eliminar mascota")
             print("5. Salir")            
 
@@ -33,13 +33,13 @@ def main():
             elif opcion == 2:
                 system("cls")
                 inser_mascota = Mascota()
-                id = int(input("Codigo de mascota a buscar: "))
+                id = int(input("Id de mascota a buscar: "))
                 inser_mascota.buscar_mascota(id)
             
             elif opcion == 3:
                 system("cls")
                 inser_mascota = Mascota()
-                id = int(input("Codigo de mascota a actualiza: "))
+                id = int(input("Id de mascota a actualizar : "))
             
             elif opcion == 4:
                 system("cls")
