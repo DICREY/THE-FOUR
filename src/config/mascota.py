@@ -142,7 +142,7 @@ class Mascota():
             try:
                 patron = r'^[a-zA-Z ]+$'
                 sexo = input("Ingrese el genero de la mascota: ")
-                if len(sexo) >= 10 and re.match(patron, sexo):
+                if re.match(patron, sexo):
                     self._sexo = sexo.upper()
                     break
                 else:
@@ -153,7 +153,6 @@ class Mascota():
         
     def get_sexo(self):
         return self._sexo
-    
     
     def set_id_usuario(self):
         while True:
@@ -170,8 +169,8 @@ class Mascota():
                 print('El usuario ha cancelado la entrada de datos.')
                 continue       
     
-    def get_usuario(self):
-        return self._usuario
+    def get_id_usuario(self):
+        return self._id_usuario
     
     #def get_historial(self):
        # return self.__historial
@@ -188,7 +187,7 @@ class Mascota():
             conexion = BaseDatos.conectar()
             if conexion:
                 cursor_mascota = conexion.cursor()
-                cursor_mascota.callproc('CrearMascota', [
+                cursor_mascota.callproc('InsertarMascota', [
                     self.get_id(),
                     self.get_nombre(),
                     self.get_especie(),
@@ -211,7 +210,7 @@ class Mascota():
             self.set_edad()
             self.set_peso()
             self.set_sexo()
-            #self.set_id_usuario()
+            self.set_id_usuario()
             
     def BuscarMascotaID(self, id_mascota=None):
         conexion = BaseDatos.conectar()
