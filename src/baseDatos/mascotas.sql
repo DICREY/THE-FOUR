@@ -32,8 +32,8 @@ CREATE TABLE mascotas_db.propietarios(
 CREATE TABLE mascotas_db.historiales_medicos(
     id INT UNSIGNED UNIQUE PRIMARY KEY NOT NULL,
     fecha DATE NOT NULL,
-    descripcion VARCHAR(255) NOT NULL,
-    tratamiento VARCHAR(255) NOT NULL,
+    descripcion TEXT NOT NULL,
+    tratamiento  TEXT NOT NULL,
     id_veterinario INT UNSIGNED NOT NULL,
     id_mascota INT UNSIGNED NOT NULL,
     FOREIGN KEY (id_veterinario) REFERENCES veterinarios(id_usuario),
@@ -64,20 +64,16 @@ CREATE TABLE mascotas_db.administradores(
 CREATE TABLE mascotas_db.productos(
     id INT UNSIGNED UNIQUE PRIMARY KEY NOT NULL,
     nombre VARCHAR(100) NOT NULL,
-    descripcion VARCHAR(255) NOT NULL,
+    descripcion TEXT NOT NULL,
     precio DECIMAL(20,5) NOT NULL,
-    id_administrador INT UNSIGNED NOT NULL,
-    id_servicio INT UNSIGNED NOT NULL,
-    FOREIGN KEY (id_administrador) REFERENCES administradores(id_usuario)
+    stock SMALLINT NOT NULL
 );
 /* 2024-07-31 16:17:44 [25 ms] */ 
 CREATE TABLE mascotas_db.servicios(
     id INT UNSIGNED UNIQUE PRIMARY KEY NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     descripcion VARCHAR(255) NOT NULL,
-    precio DECIMAL(20,5) NOT NULL,
-    id_producto INT UNSIGNED NOT NULL,
-    FOREIGN KEY (id_producto) REFERENCES productos(id)
+    precio DECIMAL(20,5) NOT NULL
 );
 /* 2024-07-31 16:17:49 [33 ms] */ 
 CREATE TABLE mascotas_db.citas(
@@ -87,8 +83,9 @@ CREATE TABLE mascotas_db.citas(
     servicio INT UNSIGNED NOT NULL,
     veterinario INT UNSIGNED NOT NULL,
     mascota INT UNSIGNED NOT NULL,
-    estado VARCHAR(100) NOT NULL,
+    estado ENUM("Pendiente","En espera","Cancelada","Rechazada","Realizada") NOT NULL,
     FOREIGN KEY(servicio) REFERENCES servicios(id),
-    FOREIGN KEY(veterinario) REFERENCES veterinarios(id_usuario),
+    FOREIGN KEY(veterinario) REFERENCES veterinarios(id_usuario) ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY(mascota) REFERENCES mascotas(id)
 );
