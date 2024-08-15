@@ -19,12 +19,14 @@ CREATE TABLE mascotas_db.veterinarios(
     especialidad VARCHAR(100) NOT NULL,
     horario VARCHAR(100) NOT NULL,
     FOREIGN KEY(id_usuario)  REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 /* 2024-07-31 16:17:17 [30 ms] */ 
 CREATE TABLE mascotas_db.propietarios(
     id_usuario INT UNSIGNED PRIMARY KEY NOT NULL,
     barrio VARCHAR(100) NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 /* 2024-07-31 16:17:22 [29 ms] */ 
 CREATE TABLE mascotas_db.historiales_medicos(
@@ -36,6 +38,7 @@ CREATE TABLE mascotas_db.historiales_medicos(
     id_mascota INT UNSIGNED NOT NULL,
     FOREIGN KEY (id_veterinario) REFERENCES veterinarios(id_usuario),
     Foreign Key (id_mascota) REFERENCES mascotas(id) ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 /* 2024-07-31 16:17:30 [31 ms] */ 
 CREATE TABLE mascotas_db.mascotas(
@@ -55,6 +58,7 @@ CREATE TABLE mascotas_db.administradores(
     cargo VARCHAR(100) NOT NULL,
     fecha_ingreso DATE NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 /* 2024-07-31 16:17:40 [29 ms] */ 
 CREATE TABLE mascotas_db.productos(
