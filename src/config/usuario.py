@@ -216,7 +216,4 @@ class Usuario:
         if conexion:
             BaseDatos.desconectar()
 
-usuario1 = Usuario()
-    
-usuario1.registrar()
 
