@@ -127,3 +127,21 @@ BEGIN
     WHERE
         m.nombre LIKE p_nombre;
 END //
+
+CREATE PROCEDURE mascotas_db.BuscarMascotas()
+BEGIN
+    SELECT 
+        m.nombre,
+        m.raza,
+        m.especie, 
+        m.peso,
+        m.edad,
+        m.sexo,
+        u.nombre AS nombre_propietario
+    FROM
+        mascotas_db.mascotas m
+    INNER JOIN 
+        mascotas_db.propietarios p ON m.id_propietario = p.id_usuario
+    INNER JOIN
+        mascotas_db.usuarios u ON p.id_usuario = u.id_usuario;
+END //
