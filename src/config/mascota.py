@@ -1,6 +1,6 @@
 import re
 import os 
-from conexion10 import BaseDatos
+from config.conexion10 import BaseDatos
 #from usuario import Usuario
 
 
