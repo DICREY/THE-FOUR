@@ -29,19 +29,24 @@ def main():
                 print("1. Registrar Mascota")
                 inser_mascota = Mascota()
                 inser_mascota.InsertarMascota()
+                system('pause')
+                system('cls')
             
             elif opcion == 2:
                 system("cls")
                 inser_mascota = Mascota()
                 id = int(input("Id de mascota a buscar: "))
                 inser_mascota.BuscarMascotaID(id)
+                system('pause')
+                system('cls')
             
             elif opcion == 3:
                 system("cls")
                 inser_mascota = Mascota()
                 id = int(input("Id de mascota a actualizar : "))
                 inser_mascota.ActualizarMascota(id)
-            
+                system('pause')
+                system('cls')
             elif opcion == 4:
                 system("cls")
                 print("")

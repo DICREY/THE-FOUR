@@ -252,6 +252,7 @@ class Mascota():
                 self.set_edad()
                 self.set_peso()
                 self.set_sexo()
+                self.set_id_propietario()
                 
                 nuevo_nombre = self.get_nombre()
                 nueva_especie = self.get_especie()
@@ -259,6 +260,7 @@ class Mascota():
                 nueva_edad = self.get_edad()
                 nuevo_peso = self.get_peso()
                 nuevo_sexo = self.get_sexo()
+                nuevo_id_propietario = self.get_id_propietario()
                 
                 print(f'Código: {id_mascota}')
                 print(f'Nuevo nombre: {nuevo_nombre}')
@@ -267,7 +269,8 @@ class Mascota():
                 print(f'Nueva edad: {nueva_edad}')
                 print(f'Nuevo peso: {nuevo_peso}')
                 print(f'Nuevo sexo: {nuevo_sexo}')
-
+                print(f'Nuevo propietario: {nuevo_id_propietario}')
+                
                 cursor_mascota = conexion.cursor()
                 cursor_mascota.callproc('ActualizarMascota', [
                     id_mascota,
@@ -276,7 +279,9 @@ class Mascota():
                     nueva_raza,
                     nueva_edad,
                     nuevo_peso,
+                    nuevo_id_propietario,
                     nuevo_sexo
+
                 ])
                 conexion.commit()
                 cursor_mascota.close()
