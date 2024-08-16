@@ -35,7 +35,7 @@ class Veterinario(Usuario):
         while True:
             try:
                 hor=input('Ingrese los horarios de atención del usuario: ')
-                if len(hor)>10 and len(hor)<100 :
+                if len(hor)>5 and len(hor)<100 :
                     self.__horarios = hor
                     print('Los horarios de atención del usuario se han insertado exitosamente')
                     break
@@ -73,5 +73,28 @@ class Veterinario(Usuario):
         if conexion:
             BaseDatos.desconectar()
 
+    def actualizarV(self):
+        self.capturar_datosV()
+        conexion = BaseDatos.conectar()
+        if conexion:
+            cursor = conexion.cursor()
+            cursor.callproc('ActualizarVeterinario', [
+                self.get_codigo(),
+                self.get_nombre(),
+                self.get_apellido(),
+                self.get_ciudad(),
+                self.get_direccion(),
+                self.get_telefono(),
+                self.get_email(),
+                self.get_contrasenna(),
+                self.get_especialidad(),
+                self.get_horarios()
+            ])
+
+
+
+
+
 Veterinario1=Veterinario()
 Veterinario1.capturar_datosV()
+#Veterinario1.actualizarV()
