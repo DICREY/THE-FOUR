@@ -1,5 +1,7 @@
 from mascota import Mascota
 from os import system
+from sys import stdout
+from time import sleep
 system("cls")
 def main():
     try:
@@ -20,7 +22,6 @@ def main():
                     
             if opcion == 5: 
                 system("cls")
-                print("Gracias por utilizar nuestra pagina")
                 break
             
         
@@ -29,22 +30,31 @@ def main():
                 print("1. Registrar Mascota")
                 inser_mascota = Mascota()
                 inser_mascota.InsertarMascota()
+                system('pause')
+                system('cls')
             
             elif opcion == 2:
                 system("cls")
                 inser_mascota = Mascota()
                 id = int(input("Id de mascota a buscar: "))
                 inser_mascota.BuscarMascotaID(id)
+                system('pause')
+                system('cls')
             
             elif opcion == 3:
                 system("cls")
                 inser_mascota = Mascota()
                 id = int(input("Id de mascota a actualizar : "))
-            
+                inser_mascota.ActualizarMascota(id)
+                system('pause')
+                system('cls')
             elif opcion == 4:
                 system("cls")
-                print("")
-                
+                inser_mascota = Mascota()
+                id = int(input('Ingrese el id de la mascota que desea eliminar: '))
+                inser_mascota.EliminarMascota(id)
+                system('pause')
+                system('cls')
             else:
                 system("cls")
                 print("Opcion no valida intente de nuevo")   
@@ -53,6 +63,10 @@ def main():
     except Exception as error:
         print(f'Ha ocurrido error no codificado {error}')
     finally:
-        print('Gracias por usar nuestro programa')
-
-main()       
+        end = 'Gracias por usar nuestro programa'
+        for i in end:
+            print(i,end="")
+            stdout.flush()
+            sleep(0.1)
+            
+main()
