@@ -120,3 +120,25 @@ BEGIN
     COMMIT;
     set autocommit = 1;
 END //
+
+CREATE PROCEDURE mascotas_db.BuscarAdministradorID(
+    IN p_id_usuario INT
+)
+BEGIN
+    SELECT 
+        u.nombre,
+        u.apellido,
+        u.ciudad,
+        u.direccion,
+        u.telefono,
+        u.email,
+        u.contrasenna,
+        a.cargo,
+        a.fecha_ingreso
+    FROM 
+        mascotas_db.usuarios u
+    INNER JOIN 
+        mascotas_db.administradores a ON u.id_usuario = a.id_usuario
+    WHERE 
+        a.id_usuario = p_id_usuario;
+END //

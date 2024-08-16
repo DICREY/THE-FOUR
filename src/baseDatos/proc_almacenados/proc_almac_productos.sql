@@ -71,3 +71,11 @@ BEGIN
     COMMIT;
     SET autocommit = 1;
 END //
+ 
+CREATE PROCEDURE mascotas_db.BuscarProductoID(
+    IN p_id INT
+)
+BEGIN
+    SELECT * FROM mascotas_db.productos
+    WHERE id = p_id;
+END //
