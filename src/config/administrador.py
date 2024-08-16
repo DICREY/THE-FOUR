@@ -2,7 +2,7 @@ import os
 import re
 from usuario import Usuario
 from datetime import datetime
-from conexion10 import BaseDatos
+from config.conexion10 import BaseDatos
 
 class Administrador(Usuario):
     def __init__(self,
@@ -73,9 +73,6 @@ class Administrador(Usuario):
                 self.get_ciudad(),
                 self.get_direccion(),
                 self.get_telefono(),
-                self.get_es_propietario(),
-                self.get_es_veterinario(),
-                self.get_es_administrador(),
                 self.get_email(),
                 self.get_contrasenna(),
                 self.get_cargo(),
@@ -88,8 +85,8 @@ class Administrador(Usuario):
         
     def ActualizarAdministrador(self, codigo = None):
         conexion = BaseDatos.conectar()
-        usuario_encontrado = self.""(codigo)
-        if usuario_encontrado:
+        mostrar_usuario = self.BuscarAdministrador(codigo)
+        if mostrar_usuario:
             try:
                     print('--------------- Escriba los nuevos del administrador ---------------')
                     self.get_id_usuario()
@@ -98,9 +95,6 @@ class Administrador(Usuario):
                     self.set_ciudad()
                     self.set_direccion()
                     self.set_telefono()
-                    self.set_es_propietario()
-                    self.set_es_veterinario()
-                    self.set_es_administrador()
                     self.set_email()
                     self.set_contrasenna()
                     self.set_cargo()
@@ -112,12 +106,10 @@ class Administrador(Usuario):
                     nueva_ciudad = self.get_ciudad()
                     nueva_direccion = self.get_direccion()
                     nuevo_telefono = self.get_telefono()
-                    nuevo_es_propietario = self.get_es_propietario()
-                    nuevo_es_veterinario =self.get_es_veterinario()
-                    nuevo_es_administrador = self.get_es_administrador()
                     nuevo_email = self.get_email()
                     nueva_contrasenna = self.get_contrasenna()
                     nuevo_cargo = self.get_cargo()
+                    nueva_fecha_in = self.get_fecha_in()
                     
                     print(f'Id: {codigo}')
                     print(f'Nuevo nombre: {nuevo_nombre}')
@@ -125,30 +117,26 @@ class Administrador(Usuario):
                     print(f'Nueva ciudad: {nueva_ciudad}')
                     print(f'Nueva direccion: {nueva_direccion}')
                     print(f'Nuevo telefono: {nuevo_telefono}')
-                    print(f'Es propietario: {nuevo_es_propietario}')
-                    print(f'Es veterinario: {nuevo_es_veterinario}')
-                    print(f'Es administrador: {nuevo_es_administrador}')
                     print(f'Nuevo email: {nuevo_email}')
                     print(f'Nueva contraseña: {nueva_contrasenna}')
                     print(f'Nuevo cargo: {nuevo_cargo}')
+                    print(f'Nuevo fecha de ingreso: {nueva_fecha_in}')
                     
-                    cursor_mascota = conexion.cursor()
-                    cursor_mascota.callproc('ActualizarAdministrador', [
-                        codigo,
-                        nuevo_nombre,
-                        nuevo_apellido,
-                        nueva_ciudad,
-                        nueva_direccion,
-                        nuevo_telefono,
-                        nuevo_es_propietario,
-                        nuevo_es_veterinario,
-                        nuevo_es_administrador,
-                        nuevo_email,
-                        nueva_contrasenna
-                    ])
+                    cursor_admin = conexion.cursor()
+                    cursor_admin.callproc('ActualizarAdministrador', [
+                                    codigo,
+                                    nuevo_nombre,
+                                    nuevo_apellido,
+                                    nueva_ciudad,
+                                    nueva_direccion,
+                                    nuevo_telefono,
+                                    nuevo_email,
+                                    nueva_contrasenna,
+                                    nueva_fecha_in
+                                ])
                     conexion.commit()
-                    cursor_mascota.close()
-                    print('Administrador actualizada')
+                    cursor_admin.close()
+                    print('Administrador actualizado')
             except Exception as error:
                 print(f'Error al actualizar el administrador: {error}. Intente de nuevo')
             finally:
@@ -156,19 +144,45 @@ class Administrador(Usuario):
         else:
             print('Administrador no encontrada. Intente otra vez')
     
-
-
          
+    def BuscarAdministradorID(self, codigo):
+        conexion = BaseDatos.conectar()
+        if conexion:
+            try:
+                mostrar_usuario = False
+                cursor_admin = conexion.cursor()
+                print(f'Buscando administrador {codigo}...')
+                cursor_admin.callproc('BuscarAdministradorID', [codigo])
+                for busqueda in cursor_admin.stored_results():
+                    resultado = busqueda.fetchone()
+                    if resultado:
+                        mostrar_usuario = True
+                        print('\nResultado:\n',
+                        f'************************************************\n{resultado}\n',
+                        '************************************************')
+                        return mostrar_usuario
+                    else:
+                        print('Admi no encontrada. Intente de nuevo.')
+                        print(mostrar_usuario)
+                        return mostrar_usuario
+            except Exception as e:
+                print(f'Error al buscar administrador: {e}')
+            finally:
+                if conexion:
+                    cursor_admin.close()
+                    BaseDatos.desconectar()
+         
+            
     def EliminarAdministrador(self, codigo):
         conexion = BaseDatos.conectar()
-        mascota_encontrada = self.BuscarMascotaID(codigo)
-        if mascota_encontrada:
+        mostrar_usuario = self.BuscarMascotaID(codigo)
+        if mostrar_usuario:
             try:
-                cursor_mascota = conexion.cursor()
-                cursor_mascota.callproc('EliminarAdministrador', [codigo])
+                cursor_admin = conexion.cursor()
+                cursor_admin.callproc('EliminarAdministrador', [codigo])
                 conexion.commit()
-                cursor_mascota.close()
-                print('Mascota eliminada')
+                cursor_admin.close()
+                print('Administrador eliminado')
             except Exception as error:
                 print(f'Error al eliminar el administrador: {error}. Intente de nuevo')
             finally:

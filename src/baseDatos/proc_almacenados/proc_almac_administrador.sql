@@ -1,3 +1,4 @@
+-- Active: 1723756094814@@127.0.0.1@3306@mascotas_db
 CREATE PROCEDURE mascotas_db.InsertarAdministrador(
     IN p_id_usuario INT,
     IN p_nombre VARCHAR(100),
