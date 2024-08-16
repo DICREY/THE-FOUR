@@ -1,3 +1,4 @@
+-- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
 DELIMITER //
 CREATE PROCEDURE mascotas_db.InsertarMascota(
     IN p_id INT,
@@ -103,4 +104,26 @@ BEGIN
         mascotas_db.usuarios m ON p.id_usuario = m.id_usuario
     WHERE
         u.id = p_id_mascota;
+END //
+
+CREATE PROCEDURE mascotas_db.BuscarMascotaNombre(
+    IN p_nombre VARCHAR(100)
+)
+BEGIN
+    SELECT 
+        m.nombre,
+        m.raza,
+        m.especie, 
+        m.peso,
+        m.edad,
+        m.sexo,
+        u.nombre AS nombre_propietario
+    FROM
+        mascotas_db.mascotas m
+    INNER JOIN 
+        mascotas_db.propietarios p ON m.id_propietario = p.id_usuario
+    INNER JOIN
+        mascotas_db.usuarios u ON p.id_usuario = u.id_usuario
+    WHERE
+        m.nombre LIKE p_nombre;
 END //
