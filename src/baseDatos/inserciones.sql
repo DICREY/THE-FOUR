@@ -61,6 +61,8 @@ INSERT INTO mascotas_db.usuarios (id_usuario, nombre, apellido, ciudad, direccio
 (60, 'Sandra', 'Mendoza', 'Pasto', 'Carrera 5757', '0123456789', 0, 1, 0, 'sandra.mendoza@example.com', 'password60');
 
 
+SELECT * from mascotas_db.usuarios;
+
 INSERT INTO mascotas_db.propietarios (id_usuario, barrio) VALUES
 (1, 'Zona Norte'),
 (2, 'Centro Histórico'),
