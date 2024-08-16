@@ -1,3 +1,4 @@
-from config.menu_mascota import main
-main()
+from menus import menu_mascota
+
+menu_mascota.main()
 
