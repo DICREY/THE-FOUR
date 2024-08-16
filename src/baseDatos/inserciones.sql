@@ -1,4 +1,3 @@
--- Active: 1723829021103@@127.0.0.1@3306@mascotas_db
 INSERT INTO mascotas_db.usuarios (id_usuario, nombre, apellido, ciudad, direccion, telefono, es_propietario, es_veterinario, es_administrador, email, contrasenna) VALUES
 (1, 'Juan', 'Pérez', 'Bogotá', 'Calle 123', '1234567890', 1, 0, 0, 'juan.perez@example.com', 'password1'),
 (2, 'Ana', 'García', 'Medellín', 'Avenida 456', '2345678901', 1, 0, 0, 'ana.garcia@example.com', 'password2'),
@@ -60,8 +59,6 @@ INSERT INTO mascotas_db.usuarios (id_usuario, nombre, apellido, ciudad, direccio
 (58, 'Mariana', 'García', 'Cartagena', 'Calle 5555', '8901234567', 1, 0, 0, 'mariana.garcia@example.com', 'password58'),
 (59, 'Daniel', 'Valdés', 'Bucaramanga', 'Avenida 5656', '9012345678', 1, 0, 0, 'daniel.valdes@example.com', 'password59'),
 (60, 'Sandra', 'Mendoza', 'Pasto', 'Carrera 5757', '0123456789', 0, 1, 0, 'sandra.mendoza@example.com', 'password60');
-
-
 
 
 INSERT INTO mascotas_db.propietarios (id_usuario, barrio) VALUES

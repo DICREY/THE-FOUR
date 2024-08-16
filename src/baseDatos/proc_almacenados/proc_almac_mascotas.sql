@@ -1,4 +1,4 @@
--- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
+-- Active: 1715350134884@@127.0.0.1@3306@mascotas_db
 DELIMITER //
 CREATE PROCEDURE mascotas_db.InsertarMascota(
     IN p_id INT,

@@ -1,4 +1,4 @@
--- Active: 1723756094814@@127.0.0.1@3306@mascotas_db
+-- Active: 1715350134884@@127.0.0.1@3306@mascotas_db
 CREATE PROCEDURE mascotas_db.InsertarAdministrador(
     IN p_id_usuario INT,
     IN p_nombre VARCHAR(100),
@@ -142,4 +142,44 @@ BEGIN
         mascotas_db.administradores a ON u.id_usuario = a.id_usuario
     WHERE 
         a.id_usuario = p_id_usuario;
+END //
+
+CREATE PROCEDURE mascotas_db.BuscarAdministradorNombre(
+    IN p_nombre VARCHAR(100)
+)
+BEGIN
+    SELECT 
+        u.nombre,
+        u.apellido,
+        u.ciudad,
+        u.direccion,
+        u.telefono,
+        u.email,
+        u.contrasenna,
+        a.cargo,
+        a.fecha_ingreso
+    FROM 
+        mascotas_db.usuarios u
+    INNER JOIN 
+        mascotas_db.administradores a ON u.id_usuario = a.id_usuario
+    WHERE 
+        u.nombre = p_nombre;
+END //
+
+CREATE PROCEDURE mascotas_db.BuscarAdministradores()
+BEGIN
+    SELECT 
+        u.nombre,
+        u.apellido,
+        u.ciudad,
+        u.direccion,
+        u.telefono,
+        u.email,
+        u.contrasenna,
+        a.cargo,
+        a.fecha_ingreso
+    FROM 
+        mascotas_db.usuarios u
+    INNER JOIN 
+        mascotas_db.administradores a ON u.id_usuario = a.id_usuario;
 END //

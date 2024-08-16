@@ -117,23 +117,6 @@ BEGIN
         u.id_usuario = p_id_usuario;
 END //
 
-CREATE PROCEDURE mascotas_db.BuscarPropietarios(
-)
-BEGIN
-    SELECT 
-        u.nombre AS nombre,
-        u.apellido AS apellido,
-        u.ciudad AS ciudad,
-        u.direccion AS direccion,
-        u.telefono,
-        u.email AS email,
-        p.barrio 
-    FROM
-        propietarios p
-    INNER JOIN 
-        usuarios u ON p.id_usuario = u.id_usuario;
-END //
-
 CREATE PROCEDURE mascotas_db.BuscarPropietarioNombre(
     IN p_nombre VARCHAR(100) 
 )
@@ -154,4 +137,19 @@ BEGIN
         nombre LIKE p_nombre;
 END //
 
-
+CREATE PROCEDURE mascotas_db.BuscarPropietarios(
+)
+BEGIN
+    SELECT 
+        u.nombre AS nombre,
+        u.apellido AS apellido,
+        u.ciudad AS ciudad,
+        u.direccion AS direccion,
+        u.telefono,
+        u.email AS email,
+        p.barrio 
+    FROM
+        propietarios p
+    INNER JOIN 
+        usuarios u ON p.id_usuario = u.id_usuario;
+END //
