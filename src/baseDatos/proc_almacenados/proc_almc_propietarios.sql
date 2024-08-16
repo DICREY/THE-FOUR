@@ -1,4 +1,4 @@
-CREATE PROCEDURE InsertarPropietario(
+CREATE PROCEDURE mascotas_db.InsertarPropietario(
     IN p_id_usuario INT,
     IN p_nombre VARCHAR(100),
     IN p_apellido VARCHAR(100),
@@ -17,7 +17,7 @@ BEGIN
     END;
     SET autocommit = 0;
     START TRANSACTION;
-    INSERT INTO mascotas_bd.usuarios (
+    INSERT INTO mascotas_db.usuarios (
         id_usuario,
         nombre,
         apellido,
@@ -42,7 +42,7 @@ BEGIN
     SET autocommit = 1;
 END //
 
-CREATE PROCEDURE ActualizarPropietario(
+CREATE PROCEDURE mascotas_db.ActualizarPropietario(
     IN p_id_usuario INT,
     IN p_nombre VARCHAR(100),
     IN p_apellido VARCHAR(100),
@@ -64,7 +64,7 @@ BEGIN
 
     START TRANSACTION;
 
-    UPDATE mascotas_bd.propietarios
+    UPDATE mascotas_db.propietarios
     SET nombre = p_nombre,
         apellido = p_apellido,
         ciudad = p_ciudad,
@@ -76,7 +76,7 @@ BEGIN
     WHERE id_usuario = p_id_usuario;
 END //
 
-CREATE PROCEDURE EliminarPropietario(
+CREATE PROCEDURE mascotas_db.EliminarPropietario(
     IN p_id_usuario INT
 )
 BEGIN
@@ -90,14 +90,14 @@ BEGIN
 
     START TRANSACTION;
 
-    DELETE FROM mascotas_bd.propietarios
+    DELETE FROM mascotas_db.propietarios
     WHERE id_usuario = p_id_usuario;
 
     COMMIT;
     SET autocommit = 1;
 END //
 
-CREATE PROCEDURE BuscarPropietarioID(
+CREATE PROCEDURE mascotas_db.BuscarPropietarioID(
     IN p_id_usuario INT UNSIGNED
 )
 BEGIN
@@ -117,10 +117,7 @@ BEGIN
         u.id_usuario = p_id_usuario;
 END //
 
-
-DELIMITER //
-
-CREATE PROCEDURE BuscarPropietarios(
+CREATE PROCEDURE mascotas_db.BuscarPropietarios(
 )
 BEGIN
     SELECT 
@@ -137,7 +134,7 @@ BEGIN
         usuarios u ON p.id_usuario = u.id_usuario;
 END //
 
-CREATE PROCEDURE BuscarPropietarioNombre(
+CREATE PROCEDURE mascotas_db.BuscarPropietarioNombre(
     IN p_nombre VARCHAR(100) 
 )
 BEGIN

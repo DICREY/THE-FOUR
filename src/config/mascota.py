@@ -140,10 +140,10 @@ class Mascota():
     def set_sexo(self):
         while True:
             try:
-                patron = r'^[a-zA-Z ]+$'
-                sexo = input("Ingrese el genero de la mascota: ")
-                if re.match(patron, sexo):
-                    self._sexo = sexo.upper()
+                list_sexo = ["F","M"]
+                sexo = input("Ingrese el genero de la mascota: ").upper()
+                if sexo in list_sexo:
+                    self._sexo = sexo
                     break
                 else:
                     print("Error. Intente nuevamente.")
