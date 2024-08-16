@@ -5,7 +5,7 @@ class BaseDatos:
 
     _HOST = '127.0.0.1'
     _USER = 'root'
-    _PASSWORD = ''
+    _PASSWORD = '12345678'
     _DATABASE = 'mascotas_db'
     _PORT = 3306
     _conexion = None
