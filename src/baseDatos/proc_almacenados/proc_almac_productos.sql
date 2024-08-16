@@ -50,3 +50,24 @@ BEGIN
     COMMIT;
     SET autocommit = 1;
 END //
+
+CREATE PROCEDURE mascotas_db.EliminarProducto(
+    IN p_id INT
+)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    SET autocommit = 0;
+
+    START TRANSACTION;
+
+    DELETE FROM mascotas_db.productos
+    WHERE id = p_id;
+
+    COMMIT;
+    SET autocommit = 1;
+END //
