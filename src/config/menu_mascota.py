@@ -1,5 +1,7 @@
 from mascota import Mascota
 from os import system
+from sys import stdout
+from time import sleep
 system("cls")
 def main():
     try:
@@ -20,7 +22,6 @@ def main():
                     
             if opcion == 5: 
                 system("cls")
-                print("Gracias por utilizar nuestra pagina")
                 break
             
         
@@ -59,6 +60,11 @@ def main():
     except Exception as error:
         print(f'Ha ocurrido error no codificado {error}')
     finally:
-        print('Gracias por usar nuestro programa')
+        end = 'Gracias por usar nuestro programa'
+        for i in end:
+            print(i,end="")
+            stdout.flush()
+            sleep(0.1)
+
 
 main()       
