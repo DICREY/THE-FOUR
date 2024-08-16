@@ -20,7 +20,6 @@ class Veterinario(Usuario):
                 espe=input('Ingrese la especialidad del usuario: ')
                 if len(espe)>4 and len(espe)<50 :
                     self.__especialidad = espe
-                    print('La especialidad del usuario se ha insertado exitosamente')
                     break
                 else:
                     print('La especilidad no cumple con los requisitos (deve tener una longitud mayor a 4 y menor a 50)')
@@ -37,7 +36,6 @@ class Veterinario(Usuario):
                 hor=input('Ingrese los horarios de atención del usuario: ')
                 if len(hor)>5 and len(hor)<100 :
                     self.__horarios = hor
-                    print('Los horarios de atención del usuario se han insertado exitosamente')
                     break
                 else:
                     print('Los horarios no cumplen con los requisitos (deve tener una longitud mayor a 10 y menor a 100)')
@@ -109,10 +107,32 @@ class Veterinario(Usuario):
         finally:
                 BaseDatos.desconectar()
 
+    def buscarV(self,):
+        conexion = BaseDatos.conectar()
+        id_usuario=int(input('ingrese el id del veterianrio a buscar: '))
+        if conexion:
+            try:
+                veterinariocursor_veterinario_encontrada = False
+                cursor_veterinario = conexion.cursor()
+                print(f'Buscando al veterinario {id_usuario}...')
+                cursor_veterinario.callproc('ConsultarVeterinario', [id_usuario])
+                for busqueda in cursor_veterinario.stored_results():
+                    resultado = busqueda.fetchone()
+                    if resultado:
+                        veterinariocursor_veterinario_encontrada = True
+                        print('\nResultado:\n',
+                        f'************************************************\n{resultado}\n',
+                        '************************************************')
+                        return veterinariocursor_veterinario_encontrada
+                    else:
+                        print('veterinariocursor_veterinario no encontrada. Intente de nuevo.')
+                        print(veterinariocursor_veterinario_encontrada)
+                        return veterinariocursor_veterinario_encontrada
+            except Exception as e:
+                print(f'Error al buscar la veterinariocursor_veterinario: {e}')
+            finally:
+                if conexion:
+                    cursor_veterinario.close()
+                    BaseDatos.desconectar()
 
 
-
-veterinario1=Veterinario()
-#Veterinario1.capturar_datosV()
-#Veterinario1.actualizarV()
-veterinario1.eliminarV()
