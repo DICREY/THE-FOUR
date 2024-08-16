@@ -1,4 +1,4 @@
--- Active: 1722373368305@@127.0.0.1@3306@mascotas_db
+-- Active: 1723829021103@@127.0.0.1@3306@mascotas_db
 INSERT INTO mascotas_db.usuarios (id_usuario, nombre, apellido, ciudad, direccion, telefono, es_propietario, es_veterinario, es_administrador, email, contrasenna) VALUES
 (1, 'Juan', 'Pérez', 'Bogotá', 'Calle 123', '1234567890', 1, 0, 0, 'juan.perez@example.com', 'password1'),
 (2, 'Ana', 'García', 'Medellín', 'Avenida 456', '2345678901', 1, 0, 0, 'ana.garcia@example.com', 'password2'),
@@ -163,6 +163,24 @@ INSERT INTO mascotas_db.mascotas (id, nombre, especie, raza, edad, peso, id_prop
 (29, 'Rufus', 'Perro', 'Terrier', 3.7, 10.8, 29, 'M'),
 (30, 'Molly', 'Gato', 'Americano de Pelo Corto', 1.8, 4.6, 30, 'F');
 
-CALL BuscarMascotaNombre("Oso");
-
-SELECT * FROM mascotas_db.veterinarios; 
+INSERT INTO mascotas_db.productos (id, nombre, descripcion, precio, stock) VALUES
+(1, 'Collar Antipulgas', 'Collar para perros y gatos que repele pulgas y garrapatas', 12.99, 150),
+(2, 'Alimento Seco para Perro', 'Alimento seco balanceado para perros adultos', 45.50, 80),
+(3, 'Juguete de Goma', 'Juguete resistente para perros', 8.75, 200),
+(4, 'Arena para Gatos', 'Arena absorbente para gatos', 10.30, 120),
+(5, 'Alimento Húmedo para Gato', 'Alimento húmedo enlatado para gatos adultos', 1.99, 300),
+(6, 'Transportadora para Mascotas', 'Caja transportadora para mascotas de tamaño mediano', 25.99, 50),
+(7, 'Cepillo de Cerdas Suaves', 'Cepillo para el pelaje de perros y gatos', 7.50, 90),
+(8, 'Champú para Perros', 'Champú suave para perros con piel sensible', 13.20, 70),
+(9, 'Rascador para Gatos', 'Rascador de cartón para gatos', 18.90, 60),
+(10, 'Cama para Perros', 'Cama acolchada para perros de tamaño grande', 35.75, 40),
+(11, 'Correa Retráctil', 'Correa retráctil de 5 metros para perros', 14.50, 110),
+(12, 'Alimento Seco para Gato', 'Alimento seco premium para gatos adultos', 30.00, 100),
+(13, 'Galletas para Perros', 'Galletas crujientes para entrenamiento de perros', 5.99, 250),
+(14, 'Juguete Interactivo para Gatos', 'Juguete con plumas y campanas para gatos', 9.99, 140),
+(15, 'Antiparasitario Interno', 'Antiparasitario interno en tabletas para perros', 22.50, 130),
+(16, 'Cepillo Dental para Mascotas', 'Cepillo dental doble para perros y gatos', 4.75, 180),
+(17, 'Spray Repelente de Pulgas', 'Spray repelente de pulgas para el hogar y mascotas', 15.99, 70),
+(18, 'Comedero Antiderrame', 'Comedero antiderrame para perros y gatos', 12.49, 85),
+(19, 'Arenero para Gatos', 'Arenero con cubierta para gatos', 28.99, 65),
+(20, 'Ropa para Perros', 'Abrigo para perros pequeños', 20.00, 55);
