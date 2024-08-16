@@ -96,5 +96,5 @@ class Veterinario(Usuario):
 
 
 Veterinario1=Veterinario()
-Veterinario1.capturar_datosV()
+Veterinario1.registrarV()
 #Veterinario1.actualizarV()

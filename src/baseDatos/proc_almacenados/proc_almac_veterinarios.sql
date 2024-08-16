@@ -19,7 +19,7 @@ BEGIN
 
     SET autocommit = 0;
     START TRANSACTION;
-    INSERT INTO mascotas_bd.veterinarios(
+    INSERT INTO mascotas_db.veterinarios(
         id_usuario,
         nombre,
         apellido,
@@ -41,7 +41,7 @@ BEGIN
             1,
             p_email,
             p_contrasenna);
-    INSERT INTO mascotas_bd.veterinarios(id_usuario,especialidad,horario)
+    INSERT INTO mascotas_db.veterinarios(id_usuario,especialidad,horario)
     VALUES(p_id_usuario,p_especialidad,p_horario);
 
     COMMIT;
