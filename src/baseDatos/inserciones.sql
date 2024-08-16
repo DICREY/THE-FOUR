@@ -1,3 +1,4 @@
+-- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
 INSERT INTO mascotas_db.usuarios (id_usuario, nombre, apellido, ciudad, direccion, telefono, es_propietario, es_veterinario, es_administrador, email, contrasenna) VALUES
 (1, 'Juan', 'Pérez', 'Bogotá', 'Calle 123', '1234567890', 1, 0, 0, 'juan.perez@example.com', 'password1'),
 (2, 'Ana', 'García', 'Medellín', 'Avenida 456', '2345678901', 1, 0, 0, 'ana.garcia@example.com', 'password2'),
@@ -61,7 +62,7 @@ INSERT INTO mascotas_db.usuarios (id_usuario, nombre, apellido, ciudad, direccio
 (60, 'Sandra', 'Mendoza', 'Pasto', 'Carrera 5757', '0123456789', 0, 1, 0, 'sandra.mendoza@example.com', 'password60');
 
 
-SELECT * from mascotas_db.usuarios;
+
 
 INSERT INTO mascotas_db.propietarios (id_usuario, barrio) VALUES
 (1, 'Zona Norte'),
@@ -162,4 +163,6 @@ INSERT INTO mascotas_db.mascotas (id, nombre, especie, raza, edad, peso, id_prop
 (29, 'Rufus', 'Perro', 'Terrier', 3.7, 10.8, 29, 'M'),
 (30, 'Molly', 'Gato', 'Americano de Pelo Corto', 1.8, 4.6, 30, 'F');
 
+CALL BuscarMascotaNombre("Oso");
 
+SELECT * FROM mascotas_db.veterinarios; 

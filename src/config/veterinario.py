@@ -90,11 +90,29 @@ class Veterinario(Usuario):
                 self.get_especialidad(),
                 self.get_horarios()
             ])
+            conexion.commit()
+            print("Usuario actualizado correctamente")
+        if conexion:
+            BaseDatos.desconectar()
+
+    def eliminarV(self):
+        conexion = BaseDatos.conectar()
+        id_usuario=int(input('ingrese el veterinario que desea eliminar: '))
+        try:
+                cursor_veterinario= conexion.cursor()
+                cursor_veterinario.callproc('EliminarVeterinario', [id_usuario])
+                conexion.commit()
+                cursor_veterinario.close()
+                print('veterinario eliminado')
+        except Exception as error:
+                print(f'Error al eliminar el veterinario: {error}. Intente de nuevo')
+        finally:
+                BaseDatos.desconectar()
 
 
 
 
-
-Veterinario1=Veterinario()
-Veterinario1.capturar_datosV()
+veterinario1=Veterinario()
+#Veterinario1.capturar_datosV()
 #Veterinario1.actualizarV()
+veterinario1.eliminarV()
