@@ -18,17 +18,17 @@ class Usuario:
             email: str = None,
             contrasenna: str = None
             ):
-        self.__id_usuario = id_usuario
-        self.__nombre = nombre
-        self.__apellido = apellido
-        self.__ciudad = ciudad
-        self.__direccion = direccion
-        self.__telefono = telefono
-        self.__es_propietario = es_propietario
-        self.__es_veterinario = es_veterinario
-        self.__es_administrador = es_administrador
-        self.__email = email
-        self.__contrasenna = contrasenna
+        self._id_usuario = id_usuario
+        self._nombre = nombre
+        self._apellido = apellido
+        self._ciudad = ciudad
+        self._direccion = direccion
+        self._telefono = telefono
+        self._es_propietario = es_propietario
+        self._es_veterinario = es_veterinario
+        self._es_administrador = es_administrador
+        self._email = email
+        self._contrasenna = contrasenna
 
     # GET y SET
 
