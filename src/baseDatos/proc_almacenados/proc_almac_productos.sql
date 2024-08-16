@@ -1,3 +1,4 @@
+-- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
 CREATE PROCEDURE mascotas_db.InsertarProducto(
     IN p_id INT,
     IN p_nombre VARCHAR(100),
@@ -70,4 +71,25 @@ BEGIN
 
     COMMIT;
     SET autocommit = 1;
+END //
+ 
+CREATE PROCEDURE mascotas_db.BuscarProductoID(
+    IN p_id INT
+)
+BEGIN
+    SELECT * FROM mascotas_db.productos
+    WHERE id = p_id;
+END //
+
+CREATE PROCEDURE mascotas_db.BuscarProductoNombre(
+    IN p_nombre VARCHAR(100)
+)
+BEGIN
+    SELECT * FROM mascotas_db.productos
+    WHERE nombre LIKE p_nombre;
+END //
+
+CREATE PROCEDURE mascotas_db.BuscarProductos()
+BEGIN
+    SELECT * FROM mascotas_db.productos;
 END //
