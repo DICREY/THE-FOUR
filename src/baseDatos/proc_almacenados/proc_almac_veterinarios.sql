@@ -1,4 +1,4 @@
--- Active: 1722373368305@@127.0.0.1@3306@mascotas_db
+-- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
 CREATE PROCEDURE InsertarVeterinario(
     IN p_id_usuario INT,
     IN p_nombre VARCHAR(100),
@@ -115,7 +115,7 @@ BEGIN
     SET autocommit = 1;
 END //
 
-CREATE PROCEDURE mascotas_db.ConsultarVeterinario(
+CREATE PROCEDURE mascotas_db.BuscarVeterinarioID(
     IN p_id_usuario INT
 )
 BEGIN
@@ -136,5 +136,40 @@ BEGIN
         v.id_usuario = p_id_usuario;
 END //
 
+CREATE PROCEDURE mascotas_db.BuscarVeterinarioNombre(
+    IN p_nombre VARCHAR(100)
+)
+BEGIN
+    SELECT 
+        u.nombre,
+        u.apellido,
+        u.ciudad,
+        u.direccion,
+        u.telefono,
+        u.email,
+        v.especialidad,
+        v.horario
+    FROM
+        mascotas_db.usuarios u
+    INNER JOIN 
+        mascotas_db.veterinarios v ON u.id_usuario = v.id_usuario
+    WHERE
+        nombre LIKE p_nombre;
+END //
 
-CALL mascotas_db.ConsultarVeterinario(3)
+CREATE PROCEDURE mascotas_db.BuscarVeterinarios()
+BEGIN
+    SELECT 
+        u.nombre,
+        u.apellido,
+        u.ciudad,
+        u.direccion,
+        u.telefono,
+        u.email,
+        v.especialidad,
+        v.horario
+    FROM
+        mascotas_db.usuarios u
+    INNER JOIN 
+        mascotas_db.veterinarios v ON u.id_usuario = v.id_usuario;
+END //
