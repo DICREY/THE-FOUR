@@ -113,3 +113,27 @@ BEGIN
     COMMIT;
     SET autocommit = 1;
 END //
+
+CREATE PROCEDURE mascotas_db.ConsultarVeterinario(
+    IN p_id_usuario INT
+)
+BEGIN
+    SELECT 
+        u.nombre,
+        u.apellido,
+        u.ciudad,
+        u.direccion,
+        u.telefono,
+        u.email,
+        v.especialidad,
+        v.horario
+    FROM
+        mascotas_db.usuarios u
+    INNER JOIN 
+        mascotas_db.veterinarios v ON u.id_usuario = v.id_usuario
+    WHERE
+        v.id_usuario = p_id_usuario;
+END //
+
+
+CALL mascotas_db.ConsultarVeterinario(3)
