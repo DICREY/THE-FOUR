@@ -242,10 +242,10 @@ class Mascota():
 
     def ActualizarMascota(self, id_mascota):
         conexion = BaseDatos.conectar()
-        mascota_encontrada = self.buscar_mascota(id_mascota)
+        mascota_encontrada = self.BuscarMascotaID(id_mascota)
         if mascota_encontrada:
             try:
-                print('Escriba los nuevos datos de la mascota: ')
+                print('--------------- Escriba los nuevos datos de la mascota ---------------')
                 self.set_nombre()
                 self.set_especie()
                 self.set_raza()
@@ -287,6 +287,7 @@ class Mascota():
                 BaseDatos.desconectar()
         else:
             print('Mascota no encontrada. Intente otra vez')
+             
 
     def eliminar_mascota(self, id_mascota):
         conexion = BaseDatos.conectar()

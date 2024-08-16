@@ -40,6 +40,7 @@ def main():
                 system("cls")
                 inser_mascota = Mascota()
                 id = int(input("Id de mascota a actualizar : "))
+                inser_mascota.ActualizarMascota(id)
             
             elif opcion == 4:
                 system("cls")
