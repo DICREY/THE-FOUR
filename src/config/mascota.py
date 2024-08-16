@@ -294,9 +294,9 @@ class Mascota():
             print('Mascota no encontrada. Intente otra vez')
              
 
-    def eliminar_mascota(self, id_mascota):
+    def EliminarMascota(self, id_mascota):
         conexion = BaseDatos.conectar()
-        mascota_encontrada = self.buscar_mascota(id_mascota)
+        mascota_encontrada = self.BuscarMascotaID(id_mascota)
         if mascota_encontrada:
             try:
                 cursor_mascota = conexion.cursor()

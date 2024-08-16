@@ -50,8 +50,11 @@ def main():
                 system('cls')
             elif opcion == 4:
                 system("cls")
-                print("")
-                
+                inser_mascota = Mascota()
+                id = int(input('Ingrese el id de la mascota que desea eliminar: '))
+                inser_mascota.EliminarMascota(id)
+                system('pause')
+                system('cls')
             else:
                 system("cls")
                 print("Opcion no valida intente de nuevo")   
@@ -65,6 +68,5 @@ def main():
             print(i,end="")
             stdout.flush()
             sleep(0.1)
-
-
+            
 main()       
