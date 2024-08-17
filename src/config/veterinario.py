@@ -1,15 +1,13 @@
 from conexion10 import BaseDatos
-import re
 from usuario import Usuario
 
 class Veterinario(Usuario):
-    def __init__(
-        self,
+    def __init__(self,
         especialidad: str = None,
-        horarios: str = None        
+        horarios: str = None
     ):
-        self.__especialidad=especialidad
-        self.__horarios=horarios
+        self.__especialidad = especialidad,
+        self.__horarios = horarios
         
     def get_especialidad(self):
         return self.__especialidad
@@ -49,7 +47,7 @@ class Veterinario(Usuario):
         self.set_horarios()
         
     
-    def registrarV(self):
+    def insertar_veterinario(self):
         self.capturar_datosV()
         conexion = BaseDatos.conectar()
         if conexion:
@@ -67,11 +65,11 @@ class Veterinario(Usuario):
                 self.get_horarios()
             ])
             conexion.commit()
-        print("Usuario registrado correctamente")
+        print("Veterinario registrado correctamente")
         if conexion:
             BaseDatos.desconectar()
 
-    def actualizarV(self):
+    def actualizar_veterinario(self):
         self.capturar_datosV()
         conexion = BaseDatos.conectar()
         if conexion:
@@ -89,16 +87,16 @@ class Veterinario(Usuario):
                 self.get_horarios()
             ])
             conexion.commit()
-            print("Usuario actualizado correctamente")
+            print("Veterinario actualizado correctamente")
         if conexion:
             BaseDatos.desconectar()
 
-    def eliminarV(self):
+    def eliminar_veterinario(self):
         conexion = BaseDatos.conectar()
-        id_usuario=int(input('ingrese el veterinario que desea eliminar: '))
+        id_usuario=int(input('ingrese el id del veterinario que desea eliminar: '))
         try:
                 cursor_veterinario= conexion.cursor()
-                cursor_veterinario.callproc('EliminarVeterinario', [id_usuario])
+                cursor_veterinario.callproc('EliminarVeterinarios', [id_usuario])
                 conexion.commit()
                 cursor_veterinario.close()
                 print('veterinario eliminado')
@@ -107,7 +105,7 @@ class Veterinario(Usuario):
         finally:
                 BaseDatos.desconectar()
 
-    def buscarV(self,):
+    def buscar_veterinario(self):
         conexion = BaseDatos.conectar()
         id_usuario=int(input('ingrese el id del veterianrio a buscar: '))
         if conexion:
@@ -115,7 +113,7 @@ class Veterinario(Usuario):
                 veterinariocursor_veterinario_encontrada = False
                 cursor_veterinario = conexion.cursor()
                 print(f'Buscando al veterinario {id_usuario}...')
-                cursor_veterinario.callproc('ConsultarVeterinario', [id_usuario])
+                cursor_veterinario.callproc('BuscarVeterinarioID', [id_usuario])
                 for busqueda in cursor_veterinario.stored_results():
                     resultado = busqueda.fetchone()
                     if resultado:
@@ -134,5 +132,3 @@ class Veterinario(Usuario):
                 if conexion:
                     cursor_veterinario.close()
                     BaseDatos.desconectar()
-
-

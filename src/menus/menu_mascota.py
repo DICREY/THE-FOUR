@@ -69,5 +69,3 @@ def main():
             print(i,end="")
             stdout.flush()
             sleep(0.1)
-            
-main()
