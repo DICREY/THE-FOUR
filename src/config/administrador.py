@@ -1,6 +1,6 @@
 import os 
 import re
-from usuario import Usuario
+from config.usuario import Usuario
 from datetime import datetime
 from config.conexion10 import BaseDatos
 

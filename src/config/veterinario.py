@@ -1,5 +1,5 @@
-from conexion10 import BaseDatos
-from usuario import Usuario
+from config.conexion10 import BaseDatos
+from config.usuario import Usuario
 
 class Veterinario(Usuario):
     def __init__(self,

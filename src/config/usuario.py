@@ -1,5 +1,5 @@
 #from historial_medico import HistorialMedico
-from conexion10 import BaseDatos
+from config.conexion10 import BaseDatos
 import re
 
 class Usuario:
