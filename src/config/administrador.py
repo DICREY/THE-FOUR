@@ -4,6 +4,8 @@ from config.usuario import Usuario
 from datetime import datetime
 from config.conexion10 import BaseDatos
 
+os.system("cls")
+
 class Administrador(Usuario):
     def __init__(self,
                  

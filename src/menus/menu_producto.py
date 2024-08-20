@@ -1,4 +1,4 @@
-from config.veterinario import Veterinario
+from config.producto import Productos
 from os import system
 from sys import stdout
 from time import sleep
@@ -7,14 +7,12 @@ system("cls")
 def main():
     try:
         while True:
-            print("-------------------- Menu Veterinaria ------------------")
-            print("1. Regitrar nuevo veterinario")
-            print("2. Buscar veterinario")
-            print("3. Actualizar veterinario")
-            print("4. Eliminar veterinario")
-            print("5. Salir")
-
-            inser_veterinario = Veterinario()
+            print("-------------------- Menu Productos------------------")
+            print("1. Regitrar nueva producto")
+            print("2. Buscar producto")
+            print("3. Actualizar producto")
+            print("4. Eliminar producto")
+            print("5. Salir")            
 
             while True:
                 try:
@@ -30,28 +28,32 @@ def main():
         
             elif opcion == 1:
                 system("cls")
-                print("1. Registrar veterinario")
-                inser_veterinario.insertar_veterinario()
+                print("1. Registrar producto")
+                inser_Productos = Productos()
+                inser_Productos.InsertarProducto()
                 system('pause')
                 system('cls')
             
             elif opcion == 2:
                 system("cls")
-                id = int(input("Id del veterinario a buscar: "))
-                inser_veterinario.buscar_veterinario(id)
+                inser_Productos = Productos()
+                id = int(input("Id del producto a buscar: "))
+                inser_Productos.BuscarProductoID(id)
                 system('pause')
                 system('cls')
             
             elif opcion == 3:
                 system("cls")
-                id = int(input("Id del veterinario a actualizar : "))
-                inser_veterinario.actualizar_veterinario(id)
+                inser_Productos = Productos()
+                id = int(input("Id del producto a actualizar : "))
+                inser_Productos.ActualizarProducto(id)
                 system('pause')
                 system('cls')
             elif opcion == 4:
                 system("cls")
-                id = int(input('Ingrese el id del veterinario que desea eliminar: '))
-                inser_veterinario.eliminar_veterinario(id)
+                inser_Productos = Productos()
+                id = int(input('Ingrese el id del producto que desea eliminar: '))
+                inser_Productos.EliminarProducto(id)
                 system('pause')
                 system('cls')
             else:
@@ -67,4 +69,4 @@ def main():
             print(i,end="")
             stdout.flush()
             sleep(0.1)
-main()
+            
