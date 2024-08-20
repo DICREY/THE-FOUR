@@ -1,4 +1,4 @@
--- Active: 1715350134884@@127.0.0.1@3306@mascotas_db
+-- Active: 1722373368305@@127.0.0.1@3306@mascotas_db
 CREATE PROCEDURE mascotas_db.InsertarProducto(
     IN p_id INT,
     IN p_nombre VARCHAR(100),
