@@ -7,7 +7,7 @@ system("cls")
 def main():
     try:
         while True:
-            print("-------------------- Menu Veterinaria ------------------")
+            print("-------------------- Menu Veterinario ------------------")
             print("1. Regitrar nuevo veterinario")
             print("2. Buscar veterinario")
             print("3. Actualizar veterinario")

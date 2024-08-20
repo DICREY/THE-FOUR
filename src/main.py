@@ -1,4 +1,7 @@
-from menus import menu_mascota
+from menus import menu_mascota as ma
+from menus import menu_veterinario as mv
+from menus import menu_admi as mad
 
-menu_mascota.main()
-
+ma.main()
+# mad.main()
+# mv.main()
