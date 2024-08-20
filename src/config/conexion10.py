@@ -2,7 +2,6 @@ import mysql.connector
 from mysql.connector import errorcode
 
 class BaseDatos:
-
     _HOST = '127.0.0.1'
     _USER = 'root'
     _PASSWORD = ''
