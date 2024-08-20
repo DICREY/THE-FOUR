@@ -181,3 +181,15 @@ INSERT INTO mascotas_db.productos (id, nombre, descripcion, precio, stock) VALUE
 (18, 'Comedero Antiderrame', 'Comedero antiderrame para perros y gatos', 12.49, 85),
 (19, 'Arenero para Gatos', 'Arenero con cubierta para gatos', 28.99, 65),
 (20, 'Ropa para Perros', 'Abrigo para perros pequeños', 20.00, 55);
+
+INSERT INTO mascotas_db.servicios (id, nombre, descripcion, precio) VALUES
+(1, 'Consulta Veterinaria General', 'Consulta médica general para mascotas', 50.00),
+(2, 'Vacunación', 'Aplicación de vacunas esenciales para perros y gatos', 25.00),
+(3, 'Desparasitación', 'Tratamiento para la eliminación de parásitos internos y externos', 30.00),
+(4, 'Limpieza Dental', 'Limpieza dental para prevenir problemas bucales en mascotas', 70.00),
+(5, 'Baño y Corte de Pelo', 'Servicio completo de baño y corte de pelo para mascotas', 40.00),
+(6, 'Cirugía Menor', 'Procedimientos quirúrgicos menores para mascotas', 200.00),
+(7, 'Consulta de Emergencia', 'Atención médica de emergencia para mascotas', 100.00),
+(8, 'Radiografía', 'Radiografía para diagnóstico de problemas internos en mascotas', 80.00),
+(9, 'Esterilización/Castración', 'Procedimiento quirúrgico para esterilizar o castrar mascotas', 150.00),
+(10, 'Terapia Física', 'Sesiones de terapia física para la rehabilitación de mascotas', 60.00);
