@@ -44,6 +44,9 @@ CREATE TABLE mascotas_db.mascotas(
     FOREIGN KEY (id_propietario) REFERENCES propietarios(id_usuario) ON DELETE CASCADE
     ON UPDATE CASCADE
 );
+
+SELECT * FROM mascotas_db.mascotas;
+
 CREATE TABLE mascotas_db.historiales_medicos(
     id VARCHAR(20) UNIQUE PRIMARY KEY NOT NULL,
     fecha DATE NOT NULL,

@@ -1,4 +1,4 @@
--- Active: 1715350134884@@127.0.0.1@3306@mascotas_db
+-- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
 DELIMITER //
 CREATE PROCEDURE mascotas_db.InsertarMascota(
     IN p_id INT,
@@ -125,8 +125,10 @@ BEGIN
     INNER JOIN
         mascotas_db.usuarios u ON p.id_usuario = u.id_usuario
     WHERE
-        m.nombre LIKE p_nombre;
+        m.nombre LIKE CONCAT("%",p_nombre,"%");
 END //
+
+CALL `BuscarMascotaNombre`("M");
 
 CREATE PROCEDURE mascotas_db.BuscarMascotas()
 BEGIN
