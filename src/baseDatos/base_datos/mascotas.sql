@@ -1,3 +1,4 @@
+-- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
 CREATE DATABASE mascotas_db;
 CREATE TABLE mascotas_db.usuarios(
     id_usuario VARCHAR(20) UNIQUE PRIMARY KEY NOT NULL,
@@ -32,6 +33,9 @@ CREATE TABLE mascotas_db.administradores(
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
     ON UPDATE CASCADE
 );
+
+SELECT * FROM mascotas_db.administradores;
+
 CREATE TABLE mascotas_db.mascotas(
     id VARCHAR(20) UNIQUE PRIMARY KEY NOT NULL,
     nombre VARCHAR(100) NOT NULL,

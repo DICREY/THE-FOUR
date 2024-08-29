@@ -8,6 +8,7 @@ from os import system
 os.system("cls")
 
 class Administrador(Usuario):
+    @classmethod
     def __init__(cls,
                  
                  cargo: str = None,
@@ -37,6 +38,7 @@ class Administrador(Usuario):
                 print('El usuario ha cancelado la entrada de datos.')
             continue
 
+    @classmethod
     def get_cargo(cls):
         return cls.cargo
     
@@ -89,12 +91,13 @@ class Administrador(Usuario):
             if conexion:
                 BaseDatos.desconectar()
     @classmethod
-    def ActualizarAdministrador(cls, codigo = None):
+    def ActualizarAdministrador(cls):
+        codigo = int(input("Escribe el codigo del administrador que deseas actualizar -->"))
         conexion = BaseDatos.conectar()
-        mostrar_usuario = cls.BuscarAdministrador(codigo)
+        mostrar_usuario = cls.BuscarAdministradorID(codigo)
         if mostrar_usuario:
             try:
-                    print('--------------- Escriba los nuevos del administrador ---------------')
+                    print('--------------- Escriba los nuevos datos del administrador ---------------')
                     cls.get_id_usuario()
                     cls.set_nombre()
                     cls.set_apellido()
@@ -151,15 +154,15 @@ class Administrador(Usuario):
             print('Administrador no encontrada. Intente otra vez')
     
     @classmethod
-    def BuscarAdministradorID(cls):
+    def BuscarAdministradorID(cls, codigo=None):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
                 system("cls")
-                id = int(input("Id del administrador buscar: "))
-                inser_admin = Administrador()
-                inser_admin.BuscarAdministradorID(id)
-                system('pause')
+                if codigo is not None:
+                    id = codigo
+                else:
+                    id = int(input("Id del administrador buscar: "))
                 system('cls')
                 mostrar_usuario = False
                 cursor_admin = conexion.cursor()
@@ -174,7 +177,7 @@ class Administrador(Usuario):
                         '************************************************')
                         return mostrar_usuario
                     else:
-                        print('Admi no encontrada. Intente de nuevo.')
+                        print('Admin no encontrada. Intente de nuevo.')
                         print(mostrar_usuario)
                         return mostrar_usuario
             except Exception as e:
@@ -200,4 +203,4 @@ class Administrador(Usuario):
             finally:
                 BaseDatos.desconectar()       
                 
-           
+

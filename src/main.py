@@ -8,15 +8,11 @@ from os import system
 def main():
     name_menu=["No deberias estar aqui :)","Propietarios","Veterinarios","Administradores","Mascotas",
             "Historial Medico","Productos","Citas Medicas","Servicios","Gracias por usar nuestro programa"]
-    print("-------------------- Menu Veterinaria ------------------",
-        "\n1. Propietarios\n2. Veterinarios\n3. Administradores\n4. Mascotas\n5. Historial Medico",
-        "\n6. Productos\n7. Citas Medicas\n8. Servicios\n9. Salir",
-        "\n--------------------------------------------------------")
     def menu(opcion):
         diccionario = {
-            "Propietarios":[ Propietario().buscar_propietario],
-            "Veterinarios":[],
-            "Administradores": [ Administrador().InsertarAdministrador , Administrador().BuscarAdministradorID ],
+            "Propietarios":[ Propietario().insertar_propietario, Propietario().buscar_propietario, Propietario.actualizar_propietario, Propietario.eliminar_propietario],
+            "Veterinarios":[ Veterinario.insertar_veterinario, Veterinario.buscar_veterinario, Veterinario.actualizar_veterinario, Veterinario.eliminar_veterinario ],
+            "Administradores": [ Administrador().InsertarAdministrador , Administrador().BuscarAdministradorID, Administrador.ActualizarAdministrador, Administrador.EliminarAdministrador ],
             "Mascotas":[],
             "HistorialMedico":[],
             "Productos":[],
@@ -24,15 +20,15 @@ def main():
             "Servicios":[],
         }
         try:
-            system("cls")
-            print(f"-------------------- Menu {name_menu[opcion]} ------------------")
-            print(f"1. Regitrar nueva {name_menu[opcion]}")
-            print(f"2. Buscar {name_menu[opcion]}")
-            print(f"3. Actualizar {name_menu[opcion]}")
-            print(f"4. Eliminar {name_menu[opcion]}")
-            print("5. Salir") 
-
             while True:
+                system("cls")
+                print(f"-------------------- Menu {name_menu[opcion]} ------------------")
+                print(f"1. Regitrar nueva {name_menu[opcion]}")
+                print(f"2. Buscar {name_menu[opcion]}")
+                print(f"3. Actualizar {name_menu[opcion]}")
+                print(f"4. Eliminar {name_menu[opcion]}")
+                print("5. Salir") 
+
                 while True:
                     try:
                         opcion1 = int(input("Seleccione una opcion: "))
@@ -44,12 +40,31 @@ def main():
                     system("cls")
                     break
                 
+                elif opcion1 == 1:
+                    system("cls")
+                    diccionario[name_menu[opcion]][0]()
+                    system('pause')
+                    system('cls')
+
                 elif opcion1 == 2:
                     system("cls")
-                    diccionario[name_menu[opcion][1]]()
+                    diccionario[name_menu[opcion]][1]()
                     system('pause')
                     system('cls')
                 
+                elif opcion1 == 3:
+                    system("cls")
+                    diccionario[name_menu[opcion]][2]()
+                    system('pause')
+                    system('cls')
+
+                elif opcion1 == 4:
+                    system("cls")
+                    diccionario[name_menu[opcion]][3]()
+                    system('pause')
+                    system('cls')
+                    
+
                 else:
                     system("cls")
                     print("Opcion no valida intente de nuevo")
@@ -60,6 +75,10 @@ def main():
             
     while True:
         try:
+            print("-------------------- Menu Veterinaria ------------------",
+            "\n1. Propietarios\n2. Veterinarios\n3. Administradores\n4. Mascotas\n5. Historial Medico",
+            "\n6. Productos\n7. Citas Medicas\n8. Servicios\n9. Salir",
+            "\n--------------------------------------------------------")
             opcion = int(input("Ingrese una opcion: "))
             if opcion != 9:
                 menu(opcion) 

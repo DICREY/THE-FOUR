@@ -3,73 +3,79 @@ from datetime import datetime
 from config.conexion10 import BaseDatos
 
 class Propietario(Usuario):
-    def __init__(self,
+    def __init__(cls,
         barrio: str = None
     ):
-        self.__barrio = barrio
+        cls.__barrio = barrio
     
-    def set_barrio(self):
+    @classmethod
+    def set_barrio(cls):
         while True:
             try:
                 barrio=input('Ingrese la barrio del usuario: ')
                 if len(barrio)>4 and len(barrio)<50 :
-                    self.__barrio = barrio
+                    cls.__barrio = barrio
                     break
                 else:
                     print('El barrio no cumple con los requisitos (deve tener una longitud mayor a 4 y menor a 50)')
             except KeyboardInterrupt:
                 print('Operación cancelada por el usuario')
 
-    def get_barrio(self):
-        return self._barrio
+    @classmethod
+    def get_barrio(cls):
+        return cls._barrio
 
-    def capturar_datos_propietarios(self):
-        self.capturar_datos(),
-        self.set_barrio()
+    @classmethod
+    def capturar_datos_propietarios(cls):
+        cls.capturar_datos(),
+        cls.set_barrio()
 
-    def insertar_propietario(self):
-        self.capturar_datosV()
+    @classmethod
+    def insertar_propietario(cls):
+        cls.capturar_datosV()
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
             cursor.callproc('InsertarPropietario', [
-                self.get_codigo(),
-                self.get_nombre(),
-                self.get_apellido(),
-                self.get_ciudad(),
-                self.get_direccion(),
-                self.get_telefono(),
-                self.get_email(),
-                self.get_contrasenna(),
-                self.get_barrio()
+                cls.get_codigo(),
+                cls.get_nombre(),
+                cls.get_apellido(),
+                cls.get_ciudad(),
+                cls.get_direccion(),
+                cls.get_telefono(),
+                cls.get_email(),
+                cls.get_contrasenna(),
+                cls.get_barrio()
             ])
             conexion.commit()
         print("Propietario registrado correctamente")
         if conexion:
             BaseDatos.desconectar()
 
-    def actualizar_propietario(self):
-        self.capturar_datosV()
+    @classmethod
+    def actualizar_propietario(cls):
+        cls.capturar_datosV()
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
             cursor.callproc('ActualizarPropietario', [
-                self.get_codigo(),
-                self.get_nombre(),
-                self.get_apellido(),
-                self.get_ciudad(),
-                self.get_direccion(),
-                self.get_telefono(),
-                self.get_email(),
-                self.get_contrasenna(),
-                self.get_barrio()
+                cls.get_codigo(),
+                cls.get_nombre(),
+                cls.get_apellido(),
+                cls.get_ciudad(),
+                cls.get_direccion(),
+                cls.get_telefono(),
+                cls.get_email(),
+                cls.get_contrasenna(),
+                cls.get_barrio()
             ])
             conexion.commit()
             print("Propietario actualizado correctamente")
         if conexion:
             BaseDatos.desconectar()
 
-    def eliminar_propietario(self):
+    @classmethod
+    def eliminar_propietario(cls):
         conexion = BaseDatos.conectar()
         id_usuario=int(input('ingrese el id del propietario que desea eliminar: '))
         try:
@@ -83,7 +89,8 @@ class Propietario(Usuario):
         finally:
                 BaseDatos.desconectar()
 
-    def buscar_propietario(self):
+    @classmethod
+    def buscar_propietario(cls):
         conexion = BaseDatos.conectar()
         id_usuario=int(input('ingrese el id del veterianrio a buscar: '))
         if conexion:

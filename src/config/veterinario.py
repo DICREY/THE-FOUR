@@ -2,22 +2,25 @@ from config.conexion10 import BaseDatos
 from config.usuario import Usuario
 
 class Veterinario(Usuario):
-    def __init__(self,
+    @classmethod
+    def __init__(cls,
         especialidad: str = None,
         horarios: str = None
     ):
-        self.__especialidad = especialidad,
-        self.__horarios = horarios
+        cls.__especialidad = especialidad,
+        cls.__horarios = horarios
         
-    def get_especialidad(self):
-        return self.__especialidad
+    @classmethod
+    def get_especialidad(cls):
+        return cls.__especialidad
     
-    def set_especialidad(self):
+    @classmethod
+    def set_especialidad(cls):
         while True:
             try:
                 espe=input('Ingrese la especialidad del usuario: ')
                 if len(espe)>4 and len(espe)<50 :
-                    self.__especialidad = espe
+                    cls.__especialidad = espe
                     break
                 else:
                     print('La especilidad no cumple con los requisitos (deve tener una longitud mayor a 4 y menor a 50)')
@@ -25,15 +28,17 @@ class Veterinario(Usuario):
                 print('Operación cancelada por el usuario')
                 continue
     
-    def get_horarios(self):
-        return self.__horarios
+    @classmethod
+    def get_horarios(cls):
+        return cls.__horarios
     
-    def set_horarios(self):
+    @classmethod
+    def set_horarios(cls):
         while True:
             try:
                 hor=input('Ingrese los horarios de atención del usuario: ')
                 if len(hor)>5 and len(hor)<100 :
-                    self.__horarios = hor
+                    cls.__horarios = hor
                     break
                 else:
                     print('Los horarios no cumplen con los requisitos (deve tener una longitud mayor a 10 y menor a 100)')
@@ -41,57 +46,61 @@ class Veterinario(Usuario):
                 print('Operación cancelada por el usuario')
                 continue
     
-    def capturar_datosV(self):
-        self.capturar_datos(),
-        self.set_especialidad(),
-        self.set_horarios()
+    @classmethod
+    def capturar_datosV(cls):
+        cls.capturar_datos(),
+        cls.set_especialidad(),
+        cls.set_horarios()
         
     
-    def insertar_veterinario(self):
-        self.capturar_datosV()
+    @classmethod
+    def insertar_veterinario(cls):
+        cls.capturar_datosV()
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
             cursor.callproc('InsertarVeterinario', [
-                self.get_codigo(),
-                self.get_nombre(),
-                self.get_apellido(),
-                self.get_ciudad(),
-                self.get_direccion(),
-                self.get_telefono(),
-                self.get_email(),
-                self.get_contrasenna(),
-                self.get_especialidad(),
-                self.get_horarios()
+                cls.get_codigo(),
+                cls.get_nombre(),
+                cls.get_apellido(),
+                cls.get_ciudad(),
+                cls.get_direccion(),
+                cls.get_telefono(),
+                cls.get_email(),
+                cls.get_contrasenna(),
+                cls.get_especialidad(),
+                cls.get_horarios()
             ])
             conexion.commit()
         print("Veterinario registrado correctamente")
         if conexion:
             BaseDatos.desconectar()
 
-    def actualizar_veterinario(self):
-        self.capturar_datosV()
+    @classmethod
+    def actualizar_veterinario(cls):
+        cls.capturar_datosV()
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
             cursor.callproc('ActualizarVeterinario', [
-                self.get_codigo(),
-                self.get_nombre(),
-                self.get_apellido(),
-                self.get_ciudad(),
-                self.get_direccion(),
-                self.get_telefono(),
-                self.get_email(),
-                self.get_contrasenna(),
-                self.get_especialidad(),
-                self.get_horarios()
+                cls.get_codigo(),
+                cls.get_nombre(),
+                cls.get_apellido(),
+                cls.get_ciudad(),
+                cls.get_direccion(),
+                cls.get_telefono(),
+                cls.get_email(),
+                cls.get_contrasenna(),
+                cls.get_especialidad(),
+                cls.get_horarios()
             ])
             conexion.commit()
             print("Veterinario actualizado correctamente")
         if conexion:
             BaseDatos.desconectar()
 
-    def eliminar_veterinario(self):
+    @classmethod
+    def eliminar_veterinario(cls):
         conexion = BaseDatos.conectar()
         id_usuario=int(input('ingrese el id del veterinario que desea eliminar: '))
         try:
@@ -105,7 +114,8 @@ class Veterinario(Usuario):
         finally:
                 BaseDatos.desconectar()
 
-    def buscar_veterinario(self):
+    @classmethod
+    def buscar_veterinario(cls):
         conexion = BaseDatos.conectar()
         id_usuario=int(input('ingrese el id del veterianrio a buscar: '))
         if conexion:
