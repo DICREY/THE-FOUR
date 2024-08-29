@@ -1,4 +1,3 @@
--- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
 CREATE PROCEDURE mascotas_db.InsertarServicio(
     IN p_id INT,
     IN p_nombre VARCHAR(100),
@@ -84,7 +83,7 @@ CREATE PROCEDURE mascotas_db.BuscarServicioNombre(
 )
 BEGIN
     SELECT * FROM mascotas_db.servicios
-    WHERE nombre LIKE p_nombre;
+    WHERE nombre LIKE %p_nombre%;
 END //
 
 CREATE PROCEDURE mascotas_db.BuscarServicios()
