@@ -1,5 +1,3 @@
-from usuario import Usuario
-import re
 from config.usuario import Usuario
 from datetime import datetime
 from config.conexion10 import BaseDatos

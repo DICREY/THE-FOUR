@@ -3,11 +3,12 @@ import re
 from config.usuario import Usuario
 from datetime import datetime
 from config.conexion10 import BaseDatos
+from os import system
 
 os.system("cls")
 
 class Administrador(Usuario):
-    def __init__(self,
+    def __init__(cls,
                  
                  cargo: str = None,
                  fecha: datetime = None
@@ -15,16 +16,17 @@ class Administrador(Usuario):
         #super().__init__(id_usuario, nombre, apellido, ciudad, direccion, telefono,
                          #es_propietario, es_veterinario, es_administrador,
                          #email, contrasenna)
-        self._fecha = fecha
-        self._cargo = cargo
+        cls._fecha = fecha
+        cls._cargo = cargo
         
-    def set_cargo(self):
+    @classmethod
+    def set_cargo(cls):
         while True:
             try:
                 patron = r'^[a-zA-Z ]+$'
                 cargo = input("Ingrese el cargo del administrador: ")
                 if len(cargo) >= 3 and re.match(patron, cargo):
-                    self.set_cargo= cargo
+                    cls.set_cargo= cargo
                     break
                 else:
                     print("Error, intente nuevamente")
@@ -35,10 +37,11 @@ class Administrador(Usuario):
                 print('El usuario ha cancelado la entrada de datos.')
             continue
 
-    def get_cargo(self):
-        return self.cargo
+    def get_cargo(cls):
+        return cls.cargo
     
-    def set_fecha_in(self):
+    @classmethod
+    def set_fecha_in(cls):
         while True:
             try:
                 patron = r'^\d{4}-\d{2}-\d{2}$'
@@ -47,7 +50,7 @@ class Administrador(Usuario):
                 if re.match(patron, fecha):
                     try:
                         datetime.strptime(fecha, '%Y-%m-%d')
-                        self.fecha = fecha
+                        cls.fecha = fecha
                         break
                     except ValueError:
                         print("Fecha inválida, intente nuevamente.")
@@ -57,61 +60,62 @@ class Administrador(Usuario):
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 break
+    @classmethod
+    def capturar_datos(cls):
+        cls.set_cargo()
+        cls.set_fecha_in ()
     
-    def capturar_datos(self):
-        self.set_cargo()
-        self.set_fecha_in ()
-    
-    def InsertarAdministrador(self):
-        self.capturar_datos()
+    @classmethod
+    def InsertarAdministrador(cls):
+        cls.capturar_datos()
         conexion = BaseDatos.conectar()
         
         if conexion:
             cursor_admin = conexion.cursor
             cursor_admin.callproc('InsertarAdministrador', [
-                self.get_id_usuario(),
-                self.get_nombre(),
-                self.get_apellido(),
-                self.get_ciudad(),
-                self.get_direccion(),
-                self.get_telefono(),
-                self.get_email(),
-                self.get_contrasenna(),
-                self.get_cargo(),
-                self.get_fecha_in()
+                cls.get_id_usuario(),
+                cls.get_nombre(),
+                cls.get_apellido(),
+                cls.get_ciudad(),
+                cls.get_direccion(),
+                cls.get_telefono(),
+                cls.get_email(),
+                cls.get_contrasenna(),
+                cls.get_cargo(),
+                cls.get_fecha_in()
             ])
             conexion.commit()
             print('Administrador registrado correctamente...')
             if conexion:
                 BaseDatos.desconectar()
-        
-    def ActualizarAdministrador(self, codigo = None):
+    @classmethod
+    def ActualizarAdministrador(cls, codigo = None):
         conexion = BaseDatos.conectar()
-        mostrar_usuario = self.BuscarAdministrador(codigo)
+        mostrar_usuario = cls.BuscarAdministrador(codigo)
         if mostrar_usuario:
             try:
                     print('--------------- Escriba los nuevos del administrador ---------------')
-                    self.get_id_usuario()
-                    self.set_nombre()
-                    self.set_apellido()
-                    self.set_ciudad()
-                    self.set_direccion()
-                    self.set_telefono()
-                    self.set_email()
-                    self.set_contrasenna()
-                    self.set_cargo()
-                    self.set_fecha_in()
+                    cls.get_id_usuario()
+                    cls.set_nombre()
+                    cls.set_apellido()
+                    cls.set_ciudad()
+                    cls.set_direccion()
+                    cls.set_telefono()
+                    cls.set_email()
+                    cls.set_contrasenna()
+                    cls.set_cargo()
+                    cls.set_fecha_in()
                 
                 
-                    nuevo_nombre = self.get_nombre()
-                    nuevo_apellido = self.get_apellido()
-                    nueva_ciudad = self.get_ciudad()
-                    nueva_direccion = self.get_direccion()
-                    nuevo_telefono = self.get_telefono()
-                    nuevo_email = self.get_email()
-                    nueva_contrasenna = self.get_contrasenna()
-                    nuevo_cargo = self.get_cargo()
-                    nueva_fecha_in = self.get_fecha_in()
+                    nuevo_nombre = cls.get_nombre()
+                    nuevo_apellido = cls.get_apellido()
+                    nueva_ciudad = cls.get_ciudad()
+                    nueva_direccion = cls.get_direccion()
+                    nuevo_telefono = cls.get_telefono()
+                    nuevo_email = cls.get_email()
+                    nueva_contrasenna = cls.get_contrasenna()
+                    nuevo_cargo = cls.get_cargo()
+                    nueva_fecha_in = cls.get_fecha_in()
                     
                     print(f'Id: {codigo}')
                     print(f'Nuevo nombre: {nuevo_nombre}')
@@ -146,15 +150,21 @@ class Administrador(Usuario):
         else:
             print('Administrador no encontrada. Intente otra vez')
     
-         
-    def BuscarAdministradorID(self, codigo):
+    @classmethod
+    def BuscarAdministradorID(cls):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
+                system("cls")
+                id = int(input("Id del administrador buscar: "))
+                inser_admin = Administrador()
+                inser_admin.BuscarAdministradorID(id)
+                system('pause')
+                system('cls')
                 mostrar_usuario = False
                 cursor_admin = conexion.cursor()
-                print(f'Buscando administrador {codigo}...')
-                cursor_admin.callproc('BuscarAdministradorID', [codigo])
+                print(f'Buscando administrador {id}...')
+                cursor_admin.callproc('BuscarAdministradorID', [id])
                 for busqueda in cursor_admin.stored_results():
                     resultado = busqueda.fetchone()
                     if resultado:
@@ -174,10 +184,10 @@ class Administrador(Usuario):
                     cursor_admin.close()
                     BaseDatos.desconectar()
          
-            
-    def EliminarAdministrador(self, codigo):
+    @classmethod
+    def EliminarAdministrador(cls, codigo):
         conexion = BaseDatos.conectar()
-        mostrar_usuario = self.BuscarMascotaID(codigo)
+        mostrar_usuario = cls.BuscarMascotaID(codigo)
         if mostrar_usuario:
             try:
                 cursor_admin = conexion.cursor()
