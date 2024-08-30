@@ -1,6 +1,11 @@
 from config.propietario import Propietario
 from config.veterinario import Veterinario
 from config.administrador import Administrador
+from config.mascota import Mascota
+from config.historial_m import HistorialMedico
+from config.producto import Productos
+from config.citas import Cita
+from config.servicios import Servicios
 from time import sleep
 from sys import stdout
 from os import system
@@ -10,14 +15,14 @@ def main():
             "Historial Medico","Productos","Citas Medicas","Servicios","Gracias por usar nuestro programa"]
     def menu(opcion):
         diccionario = {
-            "Propietarios":[ Propietario().insertar_propietario, Propietario().buscar_propietario, Propietario.actualizar_propietario, Propietario.eliminar_propietario, Propietario.buscar_propietario_nombre],
-            "Veterinarios":[ Veterinario.insertar_veterinario, Veterinario.buscar_veterinario_id, Veterinario.actualizar_veterinario, Veterinario.eliminar_veterinario, Veterinario.buscar_veterinario_nombre ],
-            "Administradores": [ Administrador().insertar_administrador , Administrador().buscar_administrador_id, Administrador.actualizar_administrador, Administrador.eliminar_administrador,Administrador.buscar_administrador_nombre ],
-            "Mascotas":[],
-            "Historial Medico":[],
-            "Productos":[],
-            "Citas Medicas":[],
-            "Servicios":[],
+            "Propietarios":[ Propietario.insertar_propietario, Propietario.buscar_propietario,Propietario.buscar_propietario_nombre, Propietario.actualizar_propietario, Propietario.eliminar_propietario],
+            "Veterinarios":[ Veterinario.insertar_veterinario, Veterinario.buscar_veterinario_id, Veterinario.buscar_veterinario_nombre, Veterinario.actualizar_veterinario, Veterinario.eliminar_veterinario ],
+            "Administradores": [ Administrador.insertar_administrador , Administrador.buscar_administrador_id, Administrador.buscar_administrador_nombre, Administrador.actualizar_administrador, Administrador.eliminar_administrador ],
+            "Mascotas":[Mascota.insertar_mascota, Mascota.buscar_mascota_id, Mascota.buscar_mascota_nombre, Mascota.actualizar_mascota, Mascota.eliminar_mascota],
+            "Historial Medico":[HistorialMedico.InsertarHistorialMedico, HistorialMedico.BuscarHistorialMedicoID, HistorialMedico.BuscarHistorialesMedicos, HistorialMedico.ActualizarHistorialMedico, HistorialMedico.EliminarHistorialMedico],
+            "Productos":[Productos.insertar_producto, Productos.buscar_producto_id, Productos.buscar_producto_nombre, Productos.actualizar_producto, Productos.eliminar_producto],
+            "Citas Medicas":[Cita.insertar_cita, Cita.buscar_cita_mascota, Cita.buscar_cita_fecha, Cita, Cita.eliminar_cita],
+            "Servicios":[Servicios.InsertarServicio, Servicios.BuscarservicioID, Servicios.BuscarservicioID, Servicios.Actualizarservicio, Servicios.Eliminarservicio],
         }
         try:
             while True:
@@ -57,21 +62,21 @@ def main():
                 elif opcion1 == 3:
                     system("cls")
                     name = input("Ingrese el nombre para buscar: ")
-                    diccionario[name_menu[opcion]][4](name)
+                    diccionario[name_menu[opcion]][2](name)
                     system('pause')
                     system('cls')
 
                 elif opcion1 == 4:
                     system("cls")
-                    codigo = input("Ingrese el id a buscar: ")
-                    diccionario[name_menu[opcion]][2](codigo)
+                    codigo = input("Ingrese el id a actualizar: ")
+                    diccionario[name_menu[opcion]][3](codigo)
                     system('pause')
                     system('cls')
 
                 elif opcion1 == 5:
                     system("cls")
                     codigo = input("Ingrese el id a eliminar: ")
-                    diccionario[name_menu[opcion]][3](codigo)
+                    diccionario[name_menu[opcion]][4](codigo)
                     system('pause')
                     system('cls')
 

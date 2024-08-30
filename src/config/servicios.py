@@ -2,7 +2,7 @@ from mysql import connector
 import os
 import re
 import mysql.connector.errors as errs
-from conexion10 import BaseDatos
+from config.conexion10 import BaseDatos
 
 
 class Servicios:

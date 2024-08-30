@@ -1,4 +1,4 @@
-from conexion10 import BaseDatos
+from config.conexion10 import BaseDatos
 from datetime import datetime
 import re
 from os import system

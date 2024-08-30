@@ -1,7 +1,6 @@
 import re
 import os 
 from config.conexion10 import BaseDatos
-from historial_m import HistorialMedico
 
 class Mascota():
     @classmethod
