@@ -56,7 +56,7 @@ BEGIN
     SELECT * FROM mascotas_db.citas;
 END //
 
-CREATE PROCEDURE mascotas_db.EliminarHistorialPorCodigo(
+CREATE PROCEDURE mascotas_db.EliminarCitaPorCodigo(
     IN p_codigo VARCHAR(20)
 )
 BEGIN 
