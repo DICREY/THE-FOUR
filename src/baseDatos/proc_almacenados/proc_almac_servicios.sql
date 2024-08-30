@@ -1,5 +1,5 @@
 CREATE PROCEDURE mascotas_db.InsertarServicio(
-    IN p_id INT,
+    IN p_id VARCHAR(20),
     IN p_nombre VARCHAR(100),
     IN p_descripcion TEXT,
     IN p_precio DECIMAL(18,2)
@@ -22,7 +22,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.ActualizarServicio(
-    IN p_id INT,
+    IN p_id VARCHAR(20),
     IN p_nombre VARCHAR(100),
     IN p_descripcion TEXT,
     IN p_precio DECIMAL(18,2)
@@ -50,7 +50,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.EliminarServicio(
-    IN p_id INT
+    IN p_id VARCHAR(20)
 )
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -71,7 +71,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.BuscarServicioID(
-    IN p_id INT
+    IN p_id VARCHAR(20)
 )
 BEGIN
     SELECT * FROM mascotas_db.servicios
@@ -83,7 +83,7 @@ CREATE PROCEDURE mascotas_db.BuscarServicioNombre(
 )
 BEGIN
     SELECT * FROM mascotas_db.servicios
-    WHERE nombre LIKE %p_nombre%;
+    WHERE nombre LIKE CONCAT("%",p_nombre,"%");
 END //
 
 CREATE PROCEDURE mascotas_db.BuscarServicios()

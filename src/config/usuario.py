@@ -237,4 +237,17 @@ class Usuario:
         if conexion:
             BaseDatos.desconectar()
 
+    @classmethod
+    def login(cls,email = None,password = None):
+        try:
+            conexion = BaseDatos.conectar()
+            if conexion:
+                results = conexion.cursor().callproc("Login",[email,password])
+                if results:
+                    return True
+                else:
+                    return False
+
+        except Exception as e:
+                print(f'Error al buscar el producto: {e}')
 

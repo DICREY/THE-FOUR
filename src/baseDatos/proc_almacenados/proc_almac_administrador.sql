@@ -1,6 +1,6 @@
--- Active: 1715350134884@@127.0.0.1@3306@mascotas_db
+-- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
 CREATE PROCEDURE mascotas_db.InsertarAdministrador(
-    IN p_id_usuario INT,
+    IN p_id_usuario VARCHAR(20),
     IN p_nombre VARCHAR(100),
     IN p_apellido VARCHAR(100),
     IN p_ciudad VARCHAR(100),
@@ -57,7 +57,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.ActualizarAdministrador(
-    IN p_id_usuario INT,
+    IN p_id_usuario VARCHAR(20),
     IN p_nombre VARCHAR(100),
     IN p_apellido VARCHAR(100),
     IN p_ciudad VARCHAR(100),
@@ -123,7 +123,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.BuscarAdministradorID(
-    IN p_id_usuario INT
+    IN p_id_usuario VARCHAR(20)
 )
 BEGIN
     SELECT 
