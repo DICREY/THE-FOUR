@@ -87,3 +87,6 @@ class BaseDatos:
                 print('Conexión cerrada...')
         except connector.Error as err:
             print(f'Error al cerrar la conexión: {err}')
+
+
+BaseDatos.conectar()

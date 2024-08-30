@@ -18,6 +18,8 @@ class Administrador(Usuario):
                          #email, contrasenna)
         cls.__fecha = fecha
         cls.__cargo = cargo
+        cls.__fecha = fecha
+        cls.__cargo = cargo
         
     @classmethod
     def set_cargo(cls):
@@ -27,6 +29,7 @@ class Administrador(Usuario):
                 cargo = input("Ingrese el cargo del administrador: ")
                 if len(cargo) >= 3 and re.match(patron, cargo):
                     cls.__cargo= cargo
+                    cls.__cargo = cargo
                     break
                 else:
                     print("Error, intente nuevamente")
@@ -40,6 +43,7 @@ class Administrador(Usuario):
     @classmethod
     def get_cargo(cls):
         return cls.__cargo
+        return cls.__cargo
     
     @classmethod
     def set_fecha_in(cls):
@@ -52,6 +56,7 @@ class Administrador(Usuario):
                     try:
                         datetime.strptime(fecha, '%Y-%m-%d')
                         cls.__fecha = fecha
+                        cls.__fecha = fecha
                         break
                     except ValueError:
                         print("Fecha inválida, intente nuevamente.")
@@ -63,16 +68,18 @@ class Administrador(Usuario):
                 break
 
     @classmethod
-    def get_fecha(cls):
+    def get_fecha (cls):
         return cls.__fecha
-            
+    
+    
     @classmethod
-    def capturar_datos_administrador(cls):
-        cls.capturar_datos()
+    def capturar_datos(cls):
         cls.set_cargo()
         cls.set_fecha_in()
     
     @classmethod
+    def insertar_administrador(cls):
+        cls.capturar_datos()
     def InsertarAdministrador(cls):
         cls.capturar_datos_administrador()
         conexion = BaseDatos.conectar()
@@ -95,7 +102,7 @@ class Administrador(Usuario):
             if conexion:
                 BaseDatos.desconectar()
     @classmethod
-    def ActualizarAdministrador(cls,codigo = None):
+    def actualizar_administrador(cls,codigo = None):
         conexion = BaseDatos.conectar()
         mostrar_usuario = cls.BuscarAdministradorID(codigo)
         if mostrar_usuario:
@@ -157,7 +164,7 @@ class Administrador(Usuario):
             print('Administrador no encontrada. Intente otra vez')
     
     @classmethod
-    def BuscarAdministradorID(cls, codigo=None):
+    def buscar_administrador_id(cls, codigo=None):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
@@ -186,7 +193,7 @@ class Administrador(Usuario):
                     BaseDatos.desconectar()
          
     @classmethod
-    def EliminarAdministrador(cls, codigo):
+    def eliminar_administrador(cls, codigo):
         conexion = BaseDatos.conectar()
         mostrar_usuario = cls.BuscarMascotaID(codigo)
         if mostrar_usuario:
@@ -202,7 +209,7 @@ class Administrador(Usuario):
                 BaseDatos.desconectar()       
     
     @classmethod
-    def BuscarAdministradorNombre(cls):
+    def buscar_administrador_nombre(cls):
         conexion = BaseDatos.conectar()
         if conexion:
             try:

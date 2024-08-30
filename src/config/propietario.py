@@ -24,7 +24,7 @@ class Propietario(Usuario):
 
     @classmethod
     def get_barrio(cls):
-        return cls._barrio
+        return cls.__barrio
 
     @classmethod
     def capturar_datos_propietarios(cls):
@@ -118,7 +118,7 @@ class Propietario(Usuario):
                     BaseDatos.desconectar()
     
     @classmethod
-    def BuscarPropietarioNombre(cls):
+    def buscar_propietario_nombre(cls):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
