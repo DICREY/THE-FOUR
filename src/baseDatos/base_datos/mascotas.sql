@@ -1,4 +1,4 @@
--- Active: 1723829021103@@127.0.0.1@3306@mascotas_db
+-- Active: 1724263333991@@127.0.0.1@3306@mascotas_db
 CREATE DATABASE mascotas_db;
 CREATE TABLE mascotas_db.usuarios(
     id_usuario VARCHAR(20) UNIQUE PRIMARY KEY NOT NULL,
@@ -98,3 +98,4 @@ CREATE TABLE mascotas_db.citas(
     ON UPDATE CASCADE,
     FOREIGN KEY(mascota) REFERENCES mascotas(id)
 );
+select*from servicios where id=11

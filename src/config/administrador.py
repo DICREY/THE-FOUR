@@ -18,8 +18,6 @@ class Administrador(Usuario):
                          #email, contrasenna)
         cls.__fecha = fecha
         cls.__cargo = cargo
-        cls.__fecha = fecha
-        cls.__cargo = cargo
         
     @classmethod
     def set_cargo(cls):
@@ -28,7 +26,6 @@ class Administrador(Usuario):
                 patron = r'^[a-zA-Z ]+$'
                 cargo = input("Ingrese el cargo del administrador: ")
                 if len(cargo) >= 3 and re.match(patron, cargo):
-                    cls.__cargo= cargo
                     cls.__cargo = cargo
                     break
                 else:
@@ -43,7 +40,6 @@ class Administrador(Usuario):
     @classmethod
     def get_cargo(cls):
         return cls.__cargo
-        return cls.__cargo
     
     @classmethod
     def set_fecha_in(cls):
@@ -55,7 +51,6 @@ class Administrador(Usuario):
                 if re.match(patron, fecha):
                     try:
                         datetime.strptime(fecha, '%Y-%m-%d')
-                        cls.__fecha = fecha
                         cls.__fecha = fecha
                         break
                     except ValueError:
@@ -73,14 +68,13 @@ class Administrador(Usuario):
     
     
     @classmethod
-    def capturar_datos(cls):
+    def capturar_datos_administrador(cls):
+        cls.capturar_datos()
         cls.set_cargo()
         cls.set_fecha_in()
     
     @classmethod
     def insertar_administrador(cls):
-        cls.capturar_datos()
-    def InsertarAdministrador(cls):
         cls.capturar_datos_administrador()
         conexion = BaseDatos.conectar()
         if conexion:
@@ -104,7 +98,7 @@ class Administrador(Usuario):
     @classmethod
     def actualizar_administrador(cls,codigo = None):
         conexion = BaseDatos.conectar()
-        mostrar_usuario = cls.BuscarAdministradorID(codigo)
+        mostrar_usuario = cls.buscar_administrador_id(codigo)
         if mostrar_usuario:
             try:
                     print('--------------- Escriba los nuevos datos del administrador ---------------')
@@ -128,7 +122,7 @@ class Administrador(Usuario):
                     nuevo_email = cls.get_email()
                     nueva_contrasenna = cls.get_contrasenna()
                     nuevo_cargo = cls.get_cargo()
-                    nueva_fecha_in = cls.get_fecha_in()
+                    nueva_fecha_in = cls.get_fecha()
                     
                     print(f'Id: {codigo}')
                     print(f'Nuevo nombre: {nuevo_nombre}')
@@ -195,7 +189,7 @@ class Administrador(Usuario):
     @classmethod
     def eliminar_administrador(cls, codigo):
         conexion = BaseDatos.conectar()
-        mostrar_usuario = cls.BuscarMascotaID(codigo)
+        mostrar_usuario = cls.buscar_administrador_id(codigo)
         if mostrar_usuario:
             try:
                 cursor_admin = conexion.cursor()
