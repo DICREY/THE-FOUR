@@ -308,3 +308,29 @@ class Mascota():
                 print(f'Error al eliminar la mascota: {error}. Intente de nuevo')
             finally:
                 BaseDatos.desconectar()
+
+    @classmethod
+    def BuscarMascotaNombre(cls):
+        conexion = BaseDatos.conectar()
+        if conexion:
+            try:
+                mascota_encontrado = False
+                cursor_mascota = conexion.cursor()
+                print(f'Buscando la mascotas...')
+                cursor_mascota.callproc('BuscarMascotaNombre')
+                for busqueda in cursor_mascota.stored_results():
+                    resultados = busqueda.fetchall()
+                    if resultados:
+                        for datos in resultados:
+                            print(datos)
+                        return mascota_encontrado
+                    else:
+                        print('No se encontraron registros. Intente de nuevo.')
+                        print(mascota_encontrado)
+                        return mascota_encontrado
+            except Exception as e:
+                print(f'Error al buscar la mascota: {e}')
+            finally:
+                if conexion:
+                    cursor_mascota.close()
+                    BaseDatos.desconectar()
