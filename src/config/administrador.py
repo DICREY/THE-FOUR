@@ -10,15 +10,14 @@ os.system("cls")
 class Administrador(Usuario):
     @classmethod
     def __init__(cls,
-                 
                  cargo: str = None,
                  fecha: datetime = None
                  ):
         #super().__init__(id_usuario, nombre, apellido, ciudad, direccion, telefono,
                          #es_propietario, es_veterinario, es_administrador,
                          #email, contrasenna)
-        cls._fecha = fecha
-        cls._cargo = cargo
+        cls.__fecha = fecha
+        cls.__cargo = cargo
         
     @classmethod
     def set_cargo(cls):
@@ -27,7 +26,7 @@ class Administrador(Usuario):
                 patron = r'^[a-zA-Z ]+$'
                 cargo = input("Ingrese el cargo del administrador: ")
                 if len(cargo) >= 3 and re.match(patron, cargo):
-                    cls.set_cargo= cargo
+                    cls.__cargo= cargo
                     break
                 else:
                     print("Error, intente nuevamente")
@@ -40,19 +39,19 @@ class Administrador(Usuario):
 
     @classmethod
     def get_cargo(cls):
-        return cls.cargo
+        return cls.__cargo
     
     @classmethod
     def set_fecha_in(cls):
         while True:
             try:
                 patron = r'^\d{4}-\d{2}-\d{2}$'
-                fecha = input("Ingrese la fecha en formato YYYY-MM-DD: ")
+                fecha = input("Ingrese la fecha de ingreso en formato YYYY-MM-DD: ")
                 
                 if re.match(patron, fecha):
                     try:
                         datetime.strptime(fecha, '%Y-%m-%d')
-                        cls.fecha = fecha
+                        cls.__fecha = fecha
                         break
                     except ValueError:
                         print("Fecha inválida, intente nuevamente.")
@@ -62,21 +61,25 @@ class Administrador(Usuario):
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 break
+
+    @classmethod
+    def get_fecha(cls):
+        return cls.__fecha
             
     @classmethod
-    def capturar_datos(cls):
+    def capturar_datos_administrador(cls):
+        cls.capturar_datos()
         cls.set_cargo()
-        cls.set_fecha_in ()
+        cls.set_fecha_in()
     
     @classmethod
     def InsertarAdministrador(cls):
-        cls.capturar_datos()
+        cls.capturar_datos_administrador()
         conexion = BaseDatos.conectar()
-        
         if conexion:
-            cursor_admin = conexion.cursor
+            cursor_admin = conexion.cursor()
             cursor_admin.callproc('InsertarAdministrador', [
-                cls.get_id_usuario(),
+                cls.get_codigo(),
                 cls.get_nombre(),
                 cls.get_apellido(),
                 cls.get_ciudad(),
@@ -85,7 +88,7 @@ class Administrador(Usuario):
                 cls.get_email(),
                 cls.get_contrasenna(),
                 cls.get_cargo(),
-                cls.get_fecha_in()
+                cls.get_fecha()
             ])
             conexion.commit()
             print('Administrador registrado correctamente...')

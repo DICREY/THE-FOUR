@@ -22,7 +22,7 @@ BEGIN
 
     START TRANSACTION;
 
-    INSERT INTO mascotas_bd.usuarios(
+    INSERT INTO mascotas_db.usuarios(
         id_usuario,
         nombre,
         apellido,
@@ -49,7 +49,7 @@ BEGIN
         p_contrasenna
     );
 
-    INSERT INTO mascotas_bd.administradores(id_usuario,cargo,fecha_ingreso) 
+    INSERT INTO mascotas_db.administradores(id_usuario,cargo,fecha_ingreso) 
     VALUES(p_id_usuario,p_cargo,p_fec_ing);
 
     COMMIT;
@@ -79,7 +79,7 @@ BEGIN
 
     START TRANSACTION;
 
-    UPDATE mascotas_bd.usuarios
+    UPDATE mascotas_db.usuarios
     SET nombre = p_nombre,
         apellido = p_apellido,
         ciudad = p_ciudad,
@@ -89,7 +89,7 @@ BEGIN
         contrasenna = p_contrasenna
     WHERE id_usuario = p_id_usuario;
 
-    UPDATE mascotas_bd.administradores
+    UPDATE mascotas_db.administradores
     SET cargo = p_cargo,
         fecha_ingreso = p_fec_ing
     WHERE id_usuario = p_id_usuario;

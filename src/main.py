@@ -23,7 +23,7 @@ def main():
             while True:
                 system("cls")
                 print(f"-------------------- Menu {name_menu[opcion]} ------------------")
-                print(f"1. Regitrar nueva {name_menu[opcion]}")
+                print(f"1. Regitrar {name_menu[opcion]}")
                 print(f"2. Buscar {name_menu[opcion]}")
                 print(f"3. Actualizar {name_menu[opcion]}")
                 print(f"4. Eliminar {name_menu[opcion]}")

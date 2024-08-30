@@ -1,5 +1,6 @@
 #from historial_medico import HistorialMedico
 from config.conexion10 import BaseDatos
+import bcrypt
 import re
 
 class Usuario:
@@ -18,17 +19,17 @@ class Usuario:
             email: str = None,
             contrasenna: str = None
             ):
-        cls._id_usuario = id_usuario
-        cls._nombre = nombre
-        cls._apellido = apellido
-        cls._ciudad = ciudad
-        cls._direccion = direccion
-        cls._telefono = telefono
-        cls._es_propietario = es_propietario
-        cls._es_veterinario = es_veterinario
-        cls._es_administrador = es_administrador
-        cls._email = email
-        cls._contrasenna = contrasenna
+        cls.__id_usuario = id_usuario
+        cls.__nombre = nombre
+        cls.__apellido = apellido
+        cls.__ciudad = ciudad
+        cls.__direccion = direccion
+        cls.__telefono = telefono
+        cls.__es_propietario = es_propietario
+        cls.__es_veterinario = es_veterinario
+        cls.__es_administrador = es_administrador
+        cls.__email = email
+        cls.__contrasenna = contrasenna
 
     # GET y SET
 
@@ -41,7 +42,7 @@ class Usuario:
             while True:
                 try:
                     codigo = input('Escriba el código del usuario: ')
-                    if (1 <= codigo <= 1000000000):
+                    if (1 <= len(codigo) <= 1000000000):
                         cls.__id_usuario = codigo
                         break
                     else:
@@ -193,12 +194,18 @@ class Usuario:
     def set_contrasenna(cls):
         while True:
             try:
-                contra = input('Contraseña del usuario: ')
-                cls.__contrasenna = contra
-                break
+                password = input('Contraseña del usuario: ')
+                if 8 < len(password):
+                    pwd = password.encode("utf-8")
+                    sal = bcrypt.gensalt()
+                    script = bcrypt.hashpw(pwd,sal)
+                    cls.__contrasenna = script
+                    break
+                else:
+                    print("Constraseña debe ser mayor a 8 caracteres")
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
-                continue   
+                continue
 
 
     @classmethod
