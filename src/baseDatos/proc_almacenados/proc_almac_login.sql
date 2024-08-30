@@ -1,3 +1,5 @@
+DELIMITER //
+
 CREATE PROCEDURE mascotas_db.Login(
     IN p_email VARCHAR(50),
     IN p_password VARCHAR(20)
