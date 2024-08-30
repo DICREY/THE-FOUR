@@ -128,7 +128,7 @@ class Productos():
             BaseDatos.desconectar()
             
     @classmethod
-    def captura_datos(cls):
+    def capturar_datos(cls):
         cls.set_id()
         cls.set_nombre()
         cls.set_descripcion()
