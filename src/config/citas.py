@@ -14,48 +14,48 @@ class Cita:
                  id_veterinario: str = None,
                  id_mascota: str = None,
                  estado: str = None):
-        cls._id = id
-        cls._fecha = fecha
-        cls._hora = hora
-        cls._id_veterinario = id_veterinario
-        cls._id_servicio = id_servicio
-        cls._id_mascota = id_mascota
-        cls._estado = estado
+        cls.__id = id
+        cls.__fecha = fecha
+        cls.__hora = hora
+        cls.__id_veterinario = id_veterinario
+        cls.__id_servicio = id_servicio
+        cls.__id_mascota = id_mascota
+        cls.__estado = estado
     
 
     @classmethod
     def get_id(cls):
-        return cls._id
+        return cls.__id
     
 
     @classmethod
     def get_fecha(cls):
-        return cls._fecha
+        return cls.__fecha
     
     
     @classmethod
     def get_hora(cls):
-        return cls._hora
+        return cls.__hora
     
 
     @classmethod
     def get_id_servicio(cls):
-        return cls._id_servicio
+        return cls.__id_servicio
 
 
     @classmethod
     def get_id_mascota(cls):
-        return cls._id_mascota
+        return cls.__id_mascota
 
 
     @classmethod
     def get_estado(cls):
-        return cls._estado
+        return cls.__estado
 
 
     @classmethod
     def get_id_veterinario(cls):
-        return cls._id_veterinario
+        return cls.__id_veterinario
 
     @classmethod
     def set_fecha(cls):
@@ -67,7 +67,7 @@ class Cita:
                 if re.match(patron, fecha):
                     try:
                         datetime.strptime(fecha, '%Y-%m-%d')
-                        cls._fecha = fecha
+                        cls.__fecha = fecha
                         break
                     except ValueError:
                         print("Fecha inválida, intente nuevamente.")
@@ -84,7 +84,7 @@ class Cita:
                 try:
                     codigo = input('Escriba el codigo de la cita: ')
                     if (1 <= len(codigo) <= 1000000000):
-                        cls._id = codigo
+                        cls.__id = codigo
                         break
                     else:
                         print('El número debe estar entre 3 y 100000000')
@@ -99,7 +99,7 @@ class Cita:
             try:
                 hora= input("Escribe la hora de la cita: ")
                 if (1 < len(hora) <= 200):
-                    cls._hora = hora
+                    cls.__hora = hora
                     break
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
@@ -111,7 +111,7 @@ class Cita:
             try:
                 id = input('Escriba el id del servicio: ')
                 if (1 <= len(id) <= 1000000000):
-                    cls._id_servicio = id
+                    cls.__id_servicio = id
                     break
                 else:
                     print('El número debe estar entre 3 y 100000000')
@@ -125,7 +125,7 @@ class Cita:
             try:
                 id = input('Escriba el id del veterinario: ')
                 if (1 <= len(id) <= 1000000000):
-                    cls._id_veterinario = id
+                    cls.__id_veterinario = id
                     break
                 else:
                     print('El número debe estar entre 3 y 100000000')
@@ -141,7 +141,7 @@ class Cita:
                 try:
                     id_mascota = input('Escriba el código de la mascota: ')
                     if (1 <= len(id_mascota) <= 1000000000):
-                        cls._id_mascota = id_mascota
+                        cls.__id_mascota = id_mascota
                         break
                     else:
                         print('El número debe estar entre 3 y 100000000')
@@ -156,7 +156,7 @@ class Cita:
                 estados=("Pendiente","En espera","Cancelada","Rechazada","Realizada")
                 usuario = input("Escribe el estado de la cita: ").capitalize()
                 if usuario in estados:
-                    cls._estado = usuario
+                    cls.__estado = usuario
                     break
                 else:
                     print("Estado no valido")
