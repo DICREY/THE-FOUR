@@ -1,11 +1,11 @@
--- Active: 1723829021103@@127.0.0.1@3306@mascotas_db
+-- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
 CREATE PROCEDURE mascotas_db.InsertarCita(
-    IN p_codigo INT UNSIGNED,
+    IN p_codigo VARCHAR(20),
     IN p_fecha DATE,
     IN p_hora TIME,
-    IN p_servicio INT,
-    IN p_veterinario INT,
-    IN p_mascota INT,
+    IN p_servicio VARCHAR(20),
+    IN p_veterinario VARCHAR(20),
+    IN p_mascota VARCHAR(20),
     IN p_estado ENUM("Pendiente","En espera","Cancelada","Rechazada","Realizada")
 )
 BEGIN
@@ -44,7 +44,7 @@ END //
 
 
 CREATE PROCEDURE mascotas_db.BuscarCitaPorMascota(
-    IN p_mascota INT
+    IN p_mascota VARCHAR(20)
 )
 BEGIN
     SELECT * FROM mascotas_db.citas
@@ -56,8 +56,8 @@ BEGIN
     SELECT * FROM mascotas_db.citas;
 END //
 
-CREATE PROCEDURE mascotas_db.EliminarCitaPorCodigo(
-    IN p_codigo INT
+CREATE PROCEDURE mascotas_db.EliminarHistorialPorCodigo(
+    IN p_codigo VARCHAR(20)
 )
 BEGIN 
     DELETE  FROM mascotas_db.citas

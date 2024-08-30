@@ -221,4 +221,31 @@ class Productos():
                 print(f"Error al eliminar producto: {error}. intente de nuevo")
             finally:
                 BaseDatos.desconectar()
-            
+
+    @classmethod
+    def BuscarProductoNombre(cls):
+        conexion = BaseDatos.conectar()
+        if conexion:
+            try:
+                producto_encontrado = False
+                cursor_producto = conexion.cursor()
+                print(f'Buscando producto...')
+                cursor_producto.callproc('BuscarProductoNombre')
+                for busqueda in cursor_producto.stored_results():
+                    resultados = busqueda.fetchall()
+                    if resultados:
+                        for datos in resultados:
+                            print(datos)
+                        return producto_encontrado
+                    else:
+                        print('No se encontraron registros. Intente de nuevo.')
+                        print(producto_encontrado)
+                        return producto_encontrado
+            except Exception as e:
+                print(f'Error al buscar producto: {e}')
+            finally:
+                if conexion:
+                    cursor_producto.close()
+                    BaseDatos.desconectar()
+    
+    

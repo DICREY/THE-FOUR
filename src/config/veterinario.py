@@ -142,3 +142,33 @@ class Veterinario(Usuario):
                 if conexion:
                     cursor_veterinario.close()
                     BaseDatos.desconectar()
+    
+    
+    @classmethod
+    def BuscarVeterinarioNombre(cls):
+        conexion = BaseDatos.conectar()
+        if conexion:
+            try:
+                veterinario_encontrado = False
+                cursor_veterinario = conexion.cursor()
+                print(f'Buscando veterinario...')
+                cursor_veterinario.callproc('BuscarVeterinarioNombre')
+                for busqueda in cursor_veterinario.stored_results():
+                    resultados = busqueda.fetchall()
+                    if resultados:
+                        for datos in resultados:
+                            print(datos)
+                        return veterinario_encontrado
+                    else:
+                        print('No se encontraron registros. Intente de nuevo.')
+                        print(veterinario_encontrado)
+                        return veterinario_encontrado
+            except Exception as e:
+                print(f'Error al buscar veterinario: {e}')
+            finally:
+                if conexion:
+                    cursor_veterinario.close()
+                    BaseDatos.desconectar()
+    
+    
+    

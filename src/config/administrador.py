@@ -62,6 +62,7 @@ class Administrador(Usuario):
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 break
+            
     @classmethod
     def capturar_datos(cls):
         cls.set_cargo()
@@ -97,7 +98,7 @@ class Administrador(Usuario):
         if mostrar_usuario:
             try:
                     print('--------------- Escriba los nuevos datos del administrador ---------------')
-                    cls.get_id_usuario()
+                    cls.set_id_usuario()
                     cls.set_nombre()
                     cls.set_apellido()
                     cls.set_ciudad()
@@ -196,5 +197,30 @@ class Administrador(Usuario):
                 print(f'Error al eliminar el administrador: {error}. Intente de nuevo')
             finally:
                 BaseDatos.desconectar()       
-                
+    
+    @classmethod
+    def BuscarAdministradorNombre(cls):
+        conexion = BaseDatos.conectar()
+        if conexion:
+            try:
+                admin_encontrado = False
+                cursor_admin = conexion.cursor()
+                print(f'Buscando el administrador...')
+                cursor_admin.callproc('BuscarAdministradorNombre')
+                for busqueda in cursor_admin.stored_results():
+                    resultados = busqueda.fetchall()
+                    if resultados:
+                        for datos in resultados:
+                            print(datos)
+                        return admin_encontrado
+                    else:
+                        print('No se encontraron registros. Intente de nuevo.')
+                        print(admin_encontrado)
+                        return admin_encontrado
+            except Exception as e:
+                print(f'Error al buscar administrador: {e}')
+            finally:
+                if conexion:
+                    cursor_admin.close()
+                    BaseDatos.desconectar()             
 
