@@ -48,12 +48,14 @@ def main():
 
                 elif opcion1 == 2:
                     system("cls")
-                    diccionario[name_menu[opcion]][1]()
+                    codigo = input("Ingrese el id a buscar: ")
+                    diccionario[name_menu[opcion]][1](codigo)
                     system('pause')
                     system('cls')
                 
                 elif opcion1 == 3:
                     system("cls")
+                    codigo = input("Ingrese el id a buscar: ")
                     diccionario[name_menu[opcion]][2]()
                     system('pause')
                     system('cls')
@@ -63,7 +65,6 @@ def main():
                     diccionario[name_menu[opcion]][3]()
                     system('pause')
                     system('cls')
-                    
 
                 else:
                     system("cls")

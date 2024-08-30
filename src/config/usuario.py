@@ -3,10 +3,10 @@ from config.conexion10 import BaseDatos
 import re
 
 class Usuario:
-
+    @classmethod
     def __init__(
-            self,
-            id_usuario: int = None,
+            cls,
+            id_usuario: str = None,
             nombre: str= None,
             apellido: str= None,
             ciudad: str= None,
@@ -18,29 +18,31 @@ class Usuario:
             email: str = None,
             contrasenna: str = None
             ):
-        self._id_usuario = id_usuario
-        self._nombre = nombre
-        self._apellido = apellido
-        self._ciudad = ciudad
-        self._direccion = direccion
-        self._telefono = telefono
-        self._es_propietario = es_propietario
-        self._es_veterinario = es_veterinario
-        self._es_administrador = es_administrador
-        self._email = email
-        self._contrasenna = contrasenna
+        cls._id_usuario = id_usuario
+        cls._nombre = nombre
+        cls._apellido = apellido
+        cls._ciudad = ciudad
+        cls._direccion = direccion
+        cls._telefono = telefono
+        cls._es_propietario = es_propietario
+        cls._es_veterinario = es_veterinario
+        cls._es_administrador = es_administrador
+        cls._email = email
+        cls._contrasenna = contrasenna
 
     # GET y SET
 
-    def get_codigo(self):
-        return self.__id_usuario
+    @classmethod
+    def get_codigo(cls):
+        return cls.__id_usuario
     
-    def set_codigo(self):
+    @classmethod
+    def set_codigo(cls):
             while True:
                 try:
-                    codigo = int(input('Escriba el código del usuario: '))
+                    codigo = input('Escriba el código del usuario: ')
                     if (1 <= codigo <= 1000000000):
-                        self.__id_usuario = codigo
+                        cls.__id_usuario = codigo
                         break
                     else:
                         print('El número debe estar entre 3 y 100000000')
@@ -51,16 +53,18 @@ class Usuario:
                 continue
  
 
-    def get_nombre(self):
-        return self.__nombre
+    @classmethod
+    def get_nombre(cls):
+        return cls.__nombre
     
 
-    def set_nombre(self):
+    @classmethod
+    def set_nombre(cls):
         while True:
             try:
                 nombre = input('Nombre del usuario: ')
                 if len(nombre)>3:
-                    self.__nombre = nombre
+                    cls.__nombre = nombre
                     break
                 else:
                     print('Nombre incorrecto. Intente de nuevo')
@@ -69,16 +73,18 @@ class Usuario:
                 continue
 
 
-    def get_apellido(self):
-        return self.__apellido
+    @classmethod
+    def get_apellido(cls):
+        return cls.__apellido
 
     
-    def set_apellido(self):
+    @classmethod
+    def set_apellido(cls):
         while True:
             try:
                 apellido = input('apellido del usuario: ')
                 if 3 < len(apellido) <= 50:
-                    self.__apellido = apellido
+                    cls.__apellido = apellido
                     break
                 else:
                     print('Datos incorrectos. Intente de nuevo')
@@ -87,17 +93,19 @@ class Usuario:
                 continue
 
 
-    def get_ciudad(self):
-        return self.__ciudad
+    @classmethod
+    def get_ciudad(cls):
+        return cls.__ciudad
     
 
-    def set_ciudad(self):
+    @classmethod
+    def set_ciudad(cls):
         while True:
             try:
                 ciudad = input('ciudad del usuario: ')
                 # Verificar que solo contenga letras y espacios y que la longitud esté entre 2 y 30 caracteres
                 if re.match(r'^[A-Za-z\s]{3,30}$', ciudad):
-                    self.__ciudad = ciudad
+                    cls.__ciudad = ciudad
                     break
                 else:
                     print('Datos de ciudad incorrectos. Intente de nuevo')
@@ -107,58 +115,67 @@ class Usuario:
 
 
     
-    def get_direccion(self):
-        return self.__direccion
+    @classmethod
+    def get_direccion(cls):
+        return cls.__direccion
     
 
-    def set_direccion(self):
+    @classmethod
+    def set_direccion(cls):
         while True:
             try:
                 direccion = input('direccion del usuario: ')
-                self.__direccion = direccion
+                cls.__direccion = direccion
                 break
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 continue                
 
 
-    def get_telefono(self):
-        return self.__telefono
+    @classmethod
+    def get_telefono(cls):
+        return cls.__telefono
     
 
-    def set_telefono(self):
+    @classmethod
+    def set_telefono(cls):
         while True:
             try:
                 telefono = input('Escribe el telefono del usuario: ')
-                self.__telefono = telefono
+                cls.__telefono = telefono
                 break
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 continue                 
 
 
-    def get_es_propietario(self):
-        return self.__es_propietario
+    @classmethod
+    def get_es_propietario(cls):
+        return cls.__es_propietario
     
 
-    def get_es_veterinario(self):
-        return self.__es_veterinario
+    @classmethod
+    def get_es_veterinario(cls):
+        return cls.__es_veterinario
     
 
-    def get_es_administrador(self):
-        return self.__es_administrador
+    @classmethod
+    def get_es_administrador(cls):
+        return cls.__es_administrador
     
 
-    def get_email(self):
-        return self.__email
+    @classmethod
+    def get_email(cls):
+        return cls.__email
     
 
-    def set_email(self):
+    @classmethod
+    def set_email(cls):
         while True:
             try:
                 email = input('Email del usuario : ')
                 if "@" in email:
-                    self.__email = email
+                    cls.__email = email
                     break  
                 else:
                     print("Escribe un correo valido")
@@ -167,53 +184,70 @@ class Usuario:
                 continue    
 
 
-    def get_contrasenna(self):
-        return self.__contrasenna
+    @classmethod
+    def get_contrasenna(cls):
+        return cls.__contrasenna
     
 
-    def set_contrasenna(self):
+    @classmethod
+    def set_contrasenna(cls):
         while True:
             try:
                 contra = input('Contraseña del usuario: ')
-                self.__contrasenna = contra
+                cls.__contrasenna = contra
                 break
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 continue   
 
 
-    def capturar_datos(self):
-            self.set_codigo()
-            self.set_nombre()
-            self.set_apellido()
-            self.set_ciudad()
-            self.set_direccion()
-            self.set_telefono()
-            self.set_email()
-            self.set_contrasenna()
+    @classmethod
+    def capturar_datos(cls):
+            cls.set_codigo()
+            cls.set_nombre()
+            cls.set_apellido()
+            cls.set_ciudad()
+            cls.set_direccion()
+            cls.set_telefono()
+            cls.set_email()
+            cls.set_contrasenna()
 
 
-    def registrar(self):
-        self.capturar_datos()
+    @classmethod
+    def registrar(cls):
+        cls.capturar_datos()
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
             cursor.callproc('InsertarUsuario', [
-                self.get_codigo(),
-                self.get_nombre(),
-                self.get_apellido(),
-                self.get_ciudad(),
-                self.get_direccion(),
-                self.get_telefono(),
-                self.get_es_propietario(),
-                self.get_es_veterinario(),
-                self.get_es_administrador(),
-                self.get_email(),
-                self.get_contrasenna()
+                cls.get_codigo(),
+                cls.get_nombre(),
+                cls.get_apellido(),
+                cls.get_ciudad(),
+                cls.get_direccion(),
+                cls.get_telefono(),
+                cls.get_es_propietario(),
+                cls.get_es_veterinario(),
+                cls.get_es_administrador(),
+                cls.get_email(),
+                cls.get_contrasenna()
             ])
             conexion.commit()
         print("Usuario registrado correctamente")
         if conexion:
             BaseDatos.desconectar()
 
+    @classmethod
+    def login(cls,email = None,password = None):
+        try:
+            conexion = BaseDatos.conectar()
+            if conexion:
+                results = conexion.cursor().callproc("Login",[email,password])
+                if results:
+                    return True
+                else:
+                    return False
+
+        except Exception as e:
+                print(f'Error al buscar el producto: {e}')
 

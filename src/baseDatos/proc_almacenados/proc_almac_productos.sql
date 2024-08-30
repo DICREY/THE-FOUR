@@ -1,6 +1,6 @@
--- Active: 1722373368305@@127.0.0.1@3306@mascotas_db
+-- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
 CREATE PROCEDURE mascotas_db.InsertarProducto(
-    IN p_id INT,
+    IN p_id VARCHAR(20),
     IN p_nombre VARCHAR(100),
     IN p_descripcion VARCHAR(100),
     IN p_precio DECIMAL(20,5),
@@ -24,7 +24,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.ActualizarProducto(
-    IN p_id INT,
+    IN p_id VARCHAR(20),
     IN p_nombre VARCHAR(100),
     IN p_descripcion VARCHAR(100),
     IN p_precio DECIMAL(20,5),
@@ -53,7 +53,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.EliminarProducto(
-    IN p_id INT
+    IN p_id VARCHAR(20)
 )
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -74,7 +74,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.BuscarProductoID(
-    IN p_id INT
+    IN p_id VARCHAR(20)
 )
 BEGIN
     SELECT * FROM mascotas_db.productos

@@ -1,4 +1,4 @@
-import mysql.connector
+from mysql import connector
 from mysql.connector import errorcode
 
 class BaseDatos:
@@ -13,7 +13,7 @@ class BaseDatos:
     @classmethod
     def conectar(cls):
         try:
-            cls._conexion = mysql.connector.connect(
+            cls._conexion = connector.connect(
                 host=cls._HOST,
                 user=cls._USER,
                 password=cls._PASSWORD,
@@ -23,7 +23,7 @@ class BaseDatos:
             cls._cursor = cls._conexion.cursor()
             print('Conexión abierta...')
             return cls._conexion
-        except mysql.connector.Error as err:
+        except connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                 print('Verifique las credenciales de conexión')
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
@@ -58,19 +58,19 @@ class BaseDatos:
             else:
                 cls.conexion.commit()
                 print('Query ejecutada con éxito')
-        except mysql.connector.ProgrammingError as pe:
+        except connector.ProgrammingError as pe:
             print(f'Error en la query: {pe}')
-        except mysql.connector.DataError as de:
+        except connector.DataError as de:
             print(f'Error de datos: {de}')
-        except mysql.connector.IntegrityError as ie:
+        except connector.IntegrityError as ie:
             print(f'Error de integridad de datos: {ie}')
-        except mysql.connector.OperationalError as oe:
+        except connector.OperationalError as oe:
             print(f'Error operacional: {oe}')
-        except mysql.connector.InternalError as ie:
+        except connector.InternalError as ie:
             print(f'Error interno del sistema: {ie}')
-        except mysql.connector.NotSupportedError as nse:
+        except connector.NotSupportedError as nse:
             print(f'Error de operación no soportada: {nse}')
-        except mysql.connector.InterfaceError as ie:
+        except connector.InterfaceError as ie:
             print(f'Error de interfaz de conexión: {ie}')
         except Exception as ex:
             print(f'Error general: {ex}')
@@ -85,5 +85,5 @@ class BaseDatos:
             else:
                 cls._conexion.close()
                 print('Conexión cerrada...')
-        except mysql.connector.Error as err:
+        except connector.Error as err:
             print(f'Error al cerrar la conexión: {err}')

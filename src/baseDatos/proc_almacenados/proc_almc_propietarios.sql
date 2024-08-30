@@ -1,5 +1,5 @@
 CREATE PROCEDURE mascotas_db.InsertarPropietario(
-    IN p_id_usuario INT,
+    IN p_id_usuario VARCHAR(20),
     IN p_nombre VARCHAR(100),
     IN p_apellido VARCHAR(100),
     IN p_ciudad VARCHAR(100),
@@ -43,7 +43,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.ActualizarPropietario(
-    IN p_id_usuario INT,
+    IN p_id_usuario VARCHAR(20),
     IN p_nombre VARCHAR(100),
     IN p_apellido VARCHAR(100),
     IN p_ciudad VARCHAR(100),
@@ -77,7 +77,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.EliminarPropietario(
-    IN p_id_usuario INT
+    IN p_id_usuario VARCHAR(20)
 )
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -98,7 +98,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.BuscarPropietarioID(
-    IN p_id_usuario INT UNSIGNED
+    IN p_id_usuario VARCHAR(20)
 )
 BEGIN
     SELECT 
@@ -134,7 +134,7 @@ BEGIN
     INNER JOIN 
         mascotas_db.propietarios p ON u.id_usuario = p.id_usuario
     WHERE
-        nombre LIKE p_nombre;
+        nombre LIKE CONCAT("%",p_nombre,"%");
 END //
 
 CREATE PROCEDURE mascotas_db.BuscarPropietarios(

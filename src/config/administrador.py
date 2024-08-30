@@ -92,8 +92,7 @@ class Administrador(Usuario):
             if conexion:
                 BaseDatos.desconectar()
     @classmethod
-    def ActualizarAdministrador(cls):
-        codigo = int(input("Escribe el codigo del administrador que deseas actualizar -->"))
+    def ActualizarAdministrador(cls,codigo = None):
         conexion = BaseDatos.conectar()
         mostrar_usuario = cls.BuscarAdministradorID(codigo)
         if mostrar_usuario:
@@ -159,16 +158,11 @@ class Administrador(Usuario):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
-                system("cls")
-                if codigo is not None:
-                    id = codigo
-                else:
-                    id = int(input("Id del administrador buscar: "))
                 system('cls')
                 mostrar_usuario = False
                 cursor_admin = conexion.cursor()
-                print(f'Buscando administrador {id}...')
-                cursor_admin.callproc('BuscarAdministradorID', [id])
+                print(f'Buscando administrador {codigo}...')
+                cursor_admin.callproc('BuscarAdministradorID', [codigo])
                 for busqueda in cursor_admin.stored_results():
                     resultado = busqueda.fetchone()
                     if resultado:

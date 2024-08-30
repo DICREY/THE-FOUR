@@ -11,8 +11,11 @@ CREATE TABLE mascotas_db.usuarios(
     es_veterinario BOOLEAN DEFAULT 0 NOT NULL,
     es_administrador BOOLEAN DEFAULT 0 NOT NULL,
     email VARCHAR(100) NOT NULL,
-    contrasenna VARCHAR(100) NOT NULL
+    contrasenna VARCHAR(255) NOT NULL
 );
+
+SELECT * FROM mascotas_db.usuarios;
+
 CREATE TABLE mascotas_db.veterinarios(
     id_usuario VARCHAR(20) PRIMARY KEY NOT NULL,
     especialidad VARCHAR(100) NOT NULL,
@@ -43,7 +46,7 @@ CREATE TABLE mascotas_db.mascotas(
     raza VARCHAR(100) NOT NULL,
     edad FLOAT(12,10) UNSIGNED NOT NULL,
     peso FLOAT(12,10) UNSIGNED NOT NULL,
-    id_propietario INT UNSIGNED NOT NULL,
+    id_propietario VARCHAR(20) NOT NULL,
     sexo ENUM('F','M')NOT NULL,
     FOREIGN KEY (id_propietario) REFERENCES propietarios(id_usuario) ON DELETE CASCADE
     ON UPDATE CASCADE
@@ -56,12 +59,15 @@ CREATE TABLE mascotas_db.historiales_medicos(
     fecha DATE NOT NULL,
     descripcion TEXT NOT NULL,
     tratamiento  TEXT NOT NULL,
-    id_veterinario INT UNSIGNED NOT NULL,
-    id_mascota INT UNSIGNED NOT NULL,
+    id_veterinario VARCHAR(20) NOT NULL,
+    id_mascota VARCHAR(20) NOT NULL,
     FOREIGN KEY (id_veterinario) REFERENCES veterinarios(id_usuario),
     Foreign Key (id_mascota) REFERENCES mascotas(id) ON DELETE CASCADE
     ON UPDATE CASCADE
 );
+
+SELECT * FROM mascotas_db.historiales_medicos;
+
 CREATE TABLE mascotas_db.productos(
     id VARCHAR(20) UNIQUE PRIMARY KEY NOT NULL,
     nombre VARCHAR(100) NOT NULL,
@@ -69,19 +75,22 @@ CREATE TABLE mascotas_db.productos(
     precio DECIMAL(20,5) NOT NULL,
     stock SMALLINT NOT NULL
 );
+
+SELECT * FROM mascotas_db.productos;
+
 CREATE TABLE mascotas_db.servicios(
     id VARCHAR(20) UNIQUE PRIMARY KEY NOT NULL,
     nombre VARCHAR(100) NOT NULL,
-    descripcion VARCHAR(255) NOT NULL,
+    descripcion TEXT NOT NULL,
     precio DECIMAL(20,5) NOT NULL
 );
 CREATE TABLE mascotas_db.citas(
     id VARCHAR(20) UNIQUE NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
-    servicio INT UNSIGNED NOT NULL,
-    veterinario INT UNSIGNED NOT NULL,
-    mascota INT UNSIGNED NOT NULL,
+    servicio VARCHAR(20) NOT NULL,
+    veterinario VARCHAR(20) NOT NULL,
+    mascota VARCHAR(20) NOT NULL,
     estado ENUM("Pendiente","En espera","Cancelada","Rechazada","Realizada") NOT NULL,
     PRIMARY KEY (id,mascota),
     FOREIGN KEY(servicio) REFERENCES servicios(id),
