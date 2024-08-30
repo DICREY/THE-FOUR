@@ -159,7 +159,6 @@ class Veterinario(Usuario):
                         return veterinario_encontrado
                     else:
                         print('No se encontraron registros. Intente de nuevo.')
-                        print(veterinario_encontrado)
                         return veterinario_encontrado
             except Exception as e:
                 print(f'Error al buscar veterinario: {e}')

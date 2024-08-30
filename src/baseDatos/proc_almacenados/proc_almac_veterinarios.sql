@@ -154,7 +154,7 @@ BEGIN
     INNER JOIN 
         mascotas_db.veterinarios v ON u.id_usuario = v.id_usuario
     WHERE
-        nombre LIKE CONCAT("%","p_nombre","%");
+        nombre LIKE CONCAT("%",p_nombre,"%");
 END //
 
 CREATE PROCEDURE mascotas_db.BuscarVeterinarios()

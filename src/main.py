@@ -14,9 +14,9 @@ def main():
             "Veterinarios":[ Veterinario.insertar_veterinario, Veterinario.buscar_veterinario_id, Veterinario.actualizar_veterinario, Veterinario.eliminar_veterinario, Veterinario.buscar_veterinario_nombre ],
             "Administradores": [ Administrador().insertar_administrador , Administrador().buscar_administrador_id, Administrador.actualizar_administrador, Administrador.eliminar_administrador,Administrador.buscar_administrador_nombre ],
             "Mascotas":[],
-            "HistorialMedico":[],
+            "Historial Medico":[],
             "Productos":[],
-            "CitasMedicas":[],
+            "Citas Medicas":[],
             "Servicios":[],
         }
         try:
