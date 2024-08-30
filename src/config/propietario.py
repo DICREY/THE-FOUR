@@ -24,7 +24,7 @@ class Propietario(Usuario):
 
     @classmethod
     def get_barrio(cls):
-        return cls._barrio
+        return cls.__barrio
 
     @classmethod
     def capturar_datos_propietarios(cls):
@@ -116,3 +116,32 @@ class Propietario(Usuario):
                 if conexion:
                     cursor_propietario.close()
                     BaseDatos.desconectar()
+    
+    @classmethod
+    def buscar_propietario_nombre(cls):
+        conexion = BaseDatos.conectar()
+        if conexion:
+            try:
+                propietario_encontrado = False
+                cursor_propietario = conexion.cursor()
+                print(f'Buscando propietario...')
+                cursor_propietario.callproc('BuscarPropietarioNombre')
+                for busqueda in cursor_propietario.stored_results():
+                    resultados = busqueda.fetchall()
+                    if resultados:
+                        for datos in resultados:
+                            print(datos)
+                        return propietario_encontrado
+                    else:
+                        print('No se encontraron registros. Intente de nuevo.')
+                        print(propietario_encontrado)
+                        return propietario_encontrado
+            except Exception as e:
+                print(f'Error al buscar propietario: {e}')
+            finally:
+                if conexion:
+                    cursor_propietario.close()
+                    BaseDatos.desconectar()
+    
+    
+    

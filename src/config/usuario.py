@@ -18,17 +18,17 @@ class Usuario:
             email: str = None,
             contrasenna: str = None
             ):
-        cls._id_usuario = id_usuario
-        cls._nombre = nombre
-        cls._apellido = apellido
-        cls._ciudad = ciudad
-        cls._direccion = direccion
-        cls._telefono = telefono
-        cls._es_propietario = es_propietario
-        cls._es_veterinario = es_veterinario
-        cls._es_administrador = es_administrador
-        cls._email = email
-        cls._contrasenna = contrasenna
+        cls.__id_usuario = id_usuario
+        cls.__nombre = nombre
+        cls.__apellido = apellido
+        cls.__ciudad = ciudad
+        cls.__direccion = direccion
+        cls.__telefono = telefono
+        cls.__es_propietario = es_propietario
+        cls.__es_veterinario = es_veterinario
+        cls.__es_administrador = es_administrador
+        cls.__email = email
+        cls.__contrasenna = contrasenna
 
     # GET y SET
 
@@ -237,4 +237,17 @@ class Usuario:
         if conexion:
             BaseDatos.desconectar()
 
+    @classmethod
+    def login(cls,email = None,password = None):
+        try:
+            conexion = BaseDatos.conectar()
+            if conexion:
+                results = conexion.cursor().callproc("Login",[email,password])
+                if results:
+                    return True
+                else:
+                    return False
+
+        except Exception as e:
+                print(f'Error al buscar el producto: {e}')
 

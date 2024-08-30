@@ -11,8 +11,11 @@ CREATE TABLE mascotas_db.usuarios(
     es_veterinario BOOLEAN DEFAULT 0 NOT NULL,
     es_administrador BOOLEAN DEFAULT 0 NOT NULL,
     email VARCHAR(100) NOT NULL,
-    contrasenna VARCHAR(100) NOT NULL
+    contrasenna VARCHAR(255) NOT NULL
 );
+
+SELECT * FROM mascotas_db.usuarios;
+
 CREATE TABLE mascotas_db.veterinarios(
     id_usuario VARCHAR(20) PRIMARY KEY NOT NULL,
     especialidad VARCHAR(100) NOT NULL,

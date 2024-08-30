@@ -17,8 +17,8 @@ class Administrador(Usuario):
         #super().__init__(id_usuario, nombre, apellido, ciudad, direccion, telefono,
                          #es_propietario, es_veterinario, es_administrador,
                          #email, contrasenna)
-        cls._fecha = fecha
-        cls._cargo = cargo
+        cls.__fecha = fecha
+        cls.__cargo = cargo
         
     @classmethod
     def set_cargo(cls):
@@ -27,7 +27,7 @@ class Administrador(Usuario):
                 patron = r'^[a-zA-Z ]+$'
                 cargo = input("Ingrese el cargo del administrador: ")
                 if len(cargo) >= 3 and re.match(patron, cargo):
-                    cls.set_cargo= cargo
+                    cls.__cargo = cargo
                     break
                 else:
                     print("Error, intente nuevamente")
@@ -40,7 +40,7 @@ class Administrador(Usuario):
 
     @classmethod
     def get_cargo(cls):
-        return cls.cargo
+        return cls.__cargo
     
     @classmethod
     def set_fecha_in(cls):
@@ -52,7 +52,7 @@ class Administrador(Usuario):
                 if re.match(patron, fecha):
                     try:
                         datetime.strptime(fecha, '%Y-%m-%d')
-                        cls.fecha = fecha
+                        cls.__fecha = fecha
                         break
                     except ValueError:
                         print("Fecha inválida, intente nuevamente.")
@@ -63,12 +63,17 @@ class Administrador(Usuario):
                 print('El usuario ha cancelado la entrada de datos.')
                 break
     @classmethod
+    def get_fecha (cls):
+        return cls.__fecha
+    
+    
+    @classmethod
     def capturar_datos(cls):
         cls.set_cargo()
         cls.set_fecha_in ()
     
     @classmethod
-    def InsertarAdministrador(cls):
+    def insertar_administrador(cls):
         cls.capturar_datos()
         conexion = BaseDatos.conectar()
         
@@ -91,13 +96,13 @@ class Administrador(Usuario):
             if conexion:
                 BaseDatos.desconectar()
     @classmethod
-    def ActualizarAdministrador(cls,codigo = None):
+    def actualizar_administrador(cls,codigo = None):
         conexion = BaseDatos.conectar()
         mostrar_usuario = cls.BuscarAdministradorID(codigo)
         if mostrar_usuario:
             try:
                     print('--------------- Escriba los nuevos datos del administrador ---------------')
-                    cls.get_id_usuario()
+                    cls.set_id_usuario()
                     cls.set_nombre()
                     cls.set_apellido()
                     cls.set_ciudad()
@@ -153,7 +158,7 @@ class Administrador(Usuario):
             print('Administrador no encontrada. Intente otra vez')
     
     @classmethod
-    def BuscarAdministradorID(cls, codigo=None):
+    def buscar_administrador_id(cls, codigo=None):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
@@ -182,7 +187,7 @@ class Administrador(Usuario):
                     BaseDatos.desconectar()
          
     @classmethod
-    def EliminarAdministrador(cls, codigo):
+    def eliminar_administrador(cls, codigo):
         conexion = BaseDatos.conectar()
         mostrar_usuario = cls.BuscarMascotaID(codigo)
         if mostrar_usuario:
@@ -196,5 +201,30 @@ class Administrador(Usuario):
                 print(f'Error al eliminar el administrador: {error}. Intente de nuevo')
             finally:
                 BaseDatos.desconectar()       
-                
+    
+    @classmethod
+    def buscar_administrador_nombre(cls):
+        conexion = BaseDatos.conectar()
+        if conexion:
+            try:
+                admin_encontrado = False
+                cursor_admin = conexion.cursor()
+                print(f'Buscando el administrador...')
+                cursor_admin.callproc('BuscarAdministradorNombre')
+                for busqueda in cursor_admin.stored_results():
+                    resultados = busqueda.fetchall()
+                    if resultados:
+                        for datos in resultados:
+                            print(datos)
+                        return admin_encontrado
+                    else:
+                        print('No se encontraron registros. Intente de nuevo.')
+                        print(admin_encontrado)
+                        return admin_encontrado
+            except Exception as e:
+                print(f'Error al buscar administrador: {e}')
+            finally:
+                if conexion:
+                    cursor_admin.close()
+                    BaseDatos.desconectar()             
 

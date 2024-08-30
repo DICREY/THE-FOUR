@@ -1,11 +1,11 @@
--- Active: 1715350134884@@127.0.0.1@3306
+-- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
 CREATE PROCEDURE mascotas_db.InsertarHistorialMedico(
-    IN p_id INT,
+    IN p_id VARCHAR(20),
     IN p_fecha DATE,
     IN p_descripcion TEXT,
     IN p_tratamiento TEXT,
-    IN p_id_veterinario INT,
-    IN p_id_mascota INT
+    IN p_id_veterinario VARCHAR(20),
+    IN p_id_mascota VARCHAR(20)
 )
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -26,12 +26,12 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.ActualizarHistorialMedico(
-    IN p_id INT,
+    IN p_id VARCHAR(20),
     IN p_fecha DATE,
     IN p_descripcion TEXT,
     IN p_tratamiento TEXT,
-    IN p_id_veterinario INT,
-    IN p_id_mascota INT
+    IN p_id_veterinario VARCHAR(20),
+    IN p_id_mascota VARCHAR(20)
 )
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -57,7 +57,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.EliminarHistorialMedico(
-    IN p_id INT
+    IN p_id VARCHAR(20)
 )
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -78,7 +78,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.BuscarHistorialMedicoID(
-    IN p_id INT
+    IN p_id VARCHAR(20)
 )
 BEGIN
     SELECT 
