@@ -10,9 +10,9 @@ def main():
             "Historial Medico","Productos","Citas Medicas","Servicios","Gracias por usar nuestro programa"]
     def menu(opcion):
         diccionario = {
-            "Propietarios":[ Propietario().insertar_propietario, Propietario().buscar_propietario, Propietario.actualizar_propietario, Propietario.eliminar_propietario],
-            "Veterinarios":[ Veterinario.insertar_veterinario, Veterinario.buscar_veterinario, Veterinario.actualizar_veterinario, Veterinario.eliminar_veterinario ],
-            "Administradores": [ Administrador().InsertarAdministrador , Administrador().BuscarAdministradorID, Administrador.ActualizarAdministrador, Administrador.EliminarAdministrador ],
+            "Propietarios":[ Propietario().insertar_propietario, Propietario().buscar_propietario, Propietario.actualizar_propietario, Propietario.eliminar_propietario, Propietario.buscar_propietario_nombre],
+            "Veterinarios":[ Veterinario.insertar_veterinario, Veterinario.buscar_veterinario_id, Veterinario.actualizar_veterinario, Veterinario.eliminar_veterinario, Veterinario.buscar_veterinario_nombre ],
+            "Administradores": [ Administrador().insertar_administrador , Administrador().buscar_administrador_id, Administrador.actualizar_administrador, Administrador.eliminar_administrador,Administrador.buscar_administrador_nombre ],
             "Mascotas":[],
             "HistorialMedico":[],
             "Productos":[],
@@ -24,10 +24,11 @@ def main():
                 system("cls")
                 print(f"-------------------- Menu {name_menu[opcion]} ------------------")
                 print(f"1. Regitrar {name_menu[opcion]}")
-                print(f"2. Buscar {name_menu[opcion]}")
-                print(f"3. Actualizar {name_menu[opcion]}")
-                print(f"4. Eliminar {name_menu[opcion]}")
-                print("5. Salir") 
+                print(f"2. Buscar {name_menu[opcion]} por id")
+                print(f"3. Buscar {name_menu[opcion]} por nombre")
+                print(f"4. Actualizar {name_menu[opcion]}")
+                print(f"5. Eliminar {name_menu[opcion]}")
+                print("6. Salir") 
 
                 while True:
                     try:
@@ -36,7 +37,7 @@ def main():
                     except ValueError:
                         print("Opción no válida")
                         
-                if opcion1 == 5: 
+                if opcion1 == 6: 
                     system("cls")
                     break
                 
@@ -55,14 +56,22 @@ def main():
                 
                 elif opcion1 == 3:
                     system("cls")
-                    codigo = input("Ingrese el id a buscar: ")
-                    diccionario[name_menu[opcion]][2]()
+                    name = input("Ingrese el nombre para buscar: ")
+                    diccionario[name_menu[opcion]][4](name)
                     system('pause')
                     system('cls')
 
                 elif opcion1 == 4:
                     system("cls")
-                    diccionario[name_menu[opcion]][3]()
+                    codigo = input("Ingrese el id a buscar: ")
+                    diccionario[name_menu[opcion]][2](codigo)
+                    system('pause')
+                    system('cls')
+
+                elif opcion1 == 5:
+                    system("cls")
+                    codigo = input("Ingrese el id a eliminar: ")
+                    diccionario[name_menu[opcion]][3](codigo)
                     system('pause')
                     system('cls')
 

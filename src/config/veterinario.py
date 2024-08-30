@@ -47,7 +47,7 @@ class Veterinario(Usuario):
                 continue
     
     @classmethod
-    def capturar_datosV(cls):
+    def capturar_datos_veterinario(cls):
         cls.capturar_datos(),
         cls.set_especialidad(),
         cls.set_horarios()
@@ -55,7 +55,7 @@ class Veterinario(Usuario):
     
     @classmethod
     def insertar_veterinario(cls):
-        cls.capturar_datosV()
+        cls.capturar_datos_veterinario()
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
@@ -77,13 +77,13 @@ class Veterinario(Usuario):
             BaseDatos.desconectar()
 
     @classmethod
-    def actualizar_veterinario(cls):
-        cls.capturar_datosV()
+    def actualizar_veterinario(cls,codigo = None):
+        cls.capturar_datos_veterinario()
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
             cursor.callproc('ActualizarVeterinario', [
-                cls.get_codigo(),
+                codigo,
                 cls.get_nombre(),
                 cls.get_apellido(),
                 cls.get_ciudad(),
@@ -100,12 +100,11 @@ class Veterinario(Usuario):
             BaseDatos.desconectar()
 
     @classmethod
-    def eliminar_veterinario(cls):
+    def eliminar_veterinario(cls,codigo = None):
         conexion = BaseDatos.conectar()
-        id_usuario=int(input('ingrese el id del veterinario que desea eliminar: '))
         try:
                 cursor_veterinario= conexion.cursor()
-                cursor_veterinario.callproc('EliminarVeterinarios', [id_usuario])
+                cursor_veterinario.callproc('EliminarVeterinarios', [codigo])
                 conexion.commit()
                 cursor_veterinario.close()
                 print('veterinario eliminado')
@@ -115,9 +114,8 @@ class Veterinario(Usuario):
                 BaseDatos.desconectar()
 
     @classmethod
-    def buscar_veterinario(cls, id_usuario = None):
+    def buscar_veterinario_id(cls, id_usuario = None):
         conexion = BaseDatos.conectar()
-        id_usuario=int(input('ingrese el id del veterianrio a buscar: '))
         if conexion:
             try:
                 veterinariocursor_veterinario_encontrada = False
@@ -145,14 +143,14 @@ class Veterinario(Usuario):
     
     
     @classmethod
-    def buscar_veterinario_nombre(cls):
+    def buscar_veterinario_nombre(cls,name = None):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
                 veterinario_encontrado = False
                 cursor_veterinario = conexion.cursor()
                 print(f'Buscando veterinario...')
-                cursor_veterinario.callproc('BuscarVeterinarioNombre')
+                cursor_veterinario.callproc('BuscarVeterinarioNombre',[name])
                 for busqueda in cursor_veterinario.stored_results():
                     resultados = busqueda.fetchall()
                     if resultados:

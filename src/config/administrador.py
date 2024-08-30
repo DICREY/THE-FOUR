@@ -101,51 +101,34 @@ class Administrador(Usuario):
         mostrar_usuario = cls.buscar_administrador_id(codigo)
         if mostrar_usuario:
             try:
+                    os.system("pause")
+                    os.system("cls")
                     print('--------------- Escriba los nuevos datos del administrador ---------------')
-                    cls.set_id_usuario()
-                    cls.set_nombre()
-                    cls.set_apellido()
-                    cls.set_ciudad()
-                    cls.set_direccion()
-                    cls.set_telefono()
-                    cls.set_email()
-                    cls.set_contrasenna()
-                    cls.set_cargo()
-                    cls.set_fecha_in()
-                
-                
-                    nuevo_nombre = cls.get_nombre()
-                    nuevo_apellido = cls.get_apellido()
-                    nueva_ciudad = cls.get_ciudad()
-                    nueva_direccion = cls.get_direccion()
-                    nuevo_telefono = cls.get_telefono()
-                    nuevo_email = cls.get_email()
-                    nueva_contrasenna = cls.get_contrasenna()
-                    nuevo_cargo = cls.get_cargo()
-                    nueva_fecha_in = cls.get_fecha()
-                    
-                    print(f'Id: {codigo}')
-                    print(f'Nuevo nombre: {nuevo_nombre}')
-                    print(f'Nueva apellido: {nuevo_apellido}')
-                    print(f'Nueva ciudad: {nueva_ciudad}')
-                    print(f'Nueva direccion: {nueva_direccion}')
-                    print(f'Nuevo telefono: {nuevo_telefono}')
-                    print(f'Nuevo email: {nuevo_email}')
-                    print(f'Nueva contraseña: {nueva_contrasenna}')
-                    print(f'Nuevo cargo: {nuevo_cargo}')
-                    print(f'Nuevo fecha de ingreso: {nueva_fecha_in}')
+                    cls.capturar_datos_administrador()
+
+                    print(f'Id: {cls.get_codigo()}')
+                    print(f'Nuevo nombre: {cls.get_nombre()}')
+                    print(f'Nueva apellido: {cls.get_apellido()}')
+                    print(f'Nueva ciudad: {cls.get_ciudad()}')
+                    print(f'Nueva direccion: {cls.get_direccion()}')
+                    print(f'Nuevo telefono: {cls.get_telefono()}')
+                    print(f'Nuevo email: {cls.get_email()}')
+                    print(f'Nueva contraseña: {cls.get_contrasenna()}')
+                    print(f'Nuevo cargo: {cls.get_cargo()}')
+                    print(f'Nuevo fecha de ingreso: {cls.get_fecha()}')
                     
                     cursor_admin = conexion.cursor()
                     cursor_admin.callproc('ActualizarAdministrador', [
-                                    codigo,
-                                    nuevo_nombre,
-                                    nuevo_apellido,
-                                    nueva_ciudad,
-                                    nueva_direccion,
-                                    nuevo_telefono,
-                                    nuevo_email,
-                                    nueva_contrasenna,
-                                    nueva_fecha_in
+                                    cls.get_codigo(),
+                                    cls.get_nombre(),
+                                    cls.get_apellido(),
+                                    cls.get_ciudad(),
+                                    cls.get_direccion(),
+                                    cls.get_telefono(),
+                                    cls.get_email(),
+                                    cls.get_contrasenna(),
+                                    cls.get_cargo(),
+                                    cls.get_fecha()
                                 ])
                     conexion.commit()
                     cursor_admin.close()
@@ -187,7 +170,7 @@ class Administrador(Usuario):
                     BaseDatos.desconectar()
          
     @classmethod
-    def eliminar_administrador(cls, codigo):
+    def eliminar_administrador(cls, codigo = None):
         conexion = BaseDatos.conectar()
         mostrar_usuario = cls.buscar_administrador_id(codigo)
         if mostrar_usuario:
@@ -203,14 +186,14 @@ class Administrador(Usuario):
                 BaseDatos.desconectar()       
     
     @classmethod
-    def buscar_administrador_nombre(cls):
+    def buscar_administrador_nombre(cls,name = None):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
                 admin_encontrado = False
                 cursor_admin = conexion.cursor()
                 print(f'Buscando el administrador...')
-                cursor_admin.callproc('BuscarAdministradorNombre')
+                cursor_admin.callproc('BuscarAdministradorNombre',[name])
                 for busqueda in cursor_admin.stored_results():
                     resultados = busqueda.fetchall()
                     if resultados:

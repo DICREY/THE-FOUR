@@ -1,3 +1,4 @@
+-- Active: 1716227707303@@127.0.0.1@3306@mascotas_db
 CREATE PROCEDURE mascotas_db.InsertarPropietario(
     IN p_id_usuario VARCHAR(20),
     IN p_nombre VARCHAR(100),
@@ -64,15 +65,18 @@ BEGIN
 
     START TRANSACTION;
 
-    UPDATE mascotas_db.propietarios
+    UPDATE mascotas_db.usuarios
     SET nombre = p_nombre,
         apellido = p_apellido,
         ciudad = p_ciudad,
         direccion = p_direccion,
         telefono = p_telefono,
         email = p_email,
-        contrasenna = p_contrasenna,
-        barrio = p_barrio
+        contrasenna = p_contrasenna
+    WHERE id_usuario = p_id_usuario;
+
+    UPDATE mascotas_db.propietarios
+    SET barrio = p_barrio
     WHERE id_usuario = p_id_usuario;
 END //
 

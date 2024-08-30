@@ -54,13 +54,13 @@ class Propietario(Usuario):
             BaseDatos.desconectar()
 
     @classmethod
-    def actualizar_propietario(cls):
+    def actualizar_propietario(cls,name = None):
         cls.capturar_datos_propietarios()
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
             cursor.callproc('ActualizarPropietario', [
-                cls.get_codigo(),
+                name,
                 cls.get_nombre(),
                 cls.get_apellido(),
                 cls.get_ciudad(),
@@ -118,14 +118,14 @@ class Propietario(Usuario):
                     BaseDatos.desconectar()
     
     @classmethod
-    def buscar_propietario_nombre(cls):
+    def buscar_propietario_nombre(cls,name = None):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
                 propietario_encontrado = False
                 cursor_propietario = conexion.cursor()
                 print(f'Buscando propietario...')
-                cursor_propietario.callproc('BuscarPropietarioNombre')
+                cursor_propietario.callproc('BuscarPropietarioNombre',[name])
                 for busqueda in cursor_propietario.stored_results():
                     resultados = busqueda.fetchall()
                     if resultados:

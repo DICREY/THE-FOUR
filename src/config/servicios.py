@@ -90,7 +90,7 @@ class Servicios:
         cls.set_precio()
         
     @classmethod
-    def InsertarServicio(cls):
+    def InsertarServicio(cls,id):
         cls.captura_datos()
         conexion = BaseDatos.conectar()
         
@@ -112,7 +112,6 @@ class Servicios:
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
-            id=int(input('id: '))
             cls.captura_datos()
             cursor.callproc('ActualizarServicio', [
                 id,
