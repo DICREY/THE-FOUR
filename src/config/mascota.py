@@ -1,8 +1,7 @@
 import re
 import os 
 from config.conexion10 import BaseDatos
-#from usuario import Usuario
-
+from historial_m import HistorialMedico
 
 class Mascota():
     @classmethod
@@ -15,18 +14,18 @@ class Mascota():
                  peso :float = None,
                  sexo : str = None,
                  id_propietario: str = None,
-                 #historial_medico= None
+                 historial_medico= None
                  ):
         
-        cls._id = id
-        cls._nombre = nombre
-        cls._especie = especie
-        cls._raza = raza
-        cls._edad = edad
-        cls._peso = peso
-        cls._sexo = sexo
-        cls._id_propietario = id_propietario
-        #cls._historial_medico = historial_medico if historial_medico is not None else []
+        cls.__id = id
+        cls.__nombre = nombre
+        cls.__especie = especie
+        cls.__raza = raza
+        cls.__edad = edad
+        cls.__peso = peso
+        cls.__sexo = sexo
+        cls.__id_propietario = id_propietario
+        cls._historial_medico = historial_medico if historial_medico is not None else []
         
     
     #get y set
@@ -36,7 +35,7 @@ class Mascota():
                 try:
                     id_mascota = input('Escriba el código de la mascota: ')
                     if (1 <= len(id_mascota) <= 1000000000):
-                        cls._id = id_mascota
+                        cls.__id = id_mascota
                         break
                     else:
                         print('El número debe estar entre 3 y 100000000')
@@ -48,7 +47,7 @@ class Mascota():
             
     @classmethod
     def get_id(cls):
-        return cls._id
+        return cls.__id
     
     
     @classmethod
@@ -58,7 +57,7 @@ class Mascota():
                 patron = r'^[a-zA-Z ]+$'
                 nombre = input("Ingrese el nombre de la mascota nombre: ")
                 if len(nombre) >= 3 and re.match(patron, nombre):
-                    cls._nombre = nombre 
+                    cls.__nombre = nombre 
                     break
                 else:
                     print("El nombre debe tener almenos 3 caracteres. Intente nuevamente.")
@@ -68,7 +67,7 @@ class Mascota():
             
     @classmethod
     def get_nombre(cls):
-        return cls._nombre
+        return cls.__nombre
         
     @classmethod
     def set_especie(cls):
@@ -77,7 +76,7 @@ class Mascota():
                 patron = r'^[a-zA-Z ]+$'
                 especie = input("Ingrese la especie de la mascota: ")
                 if len(especie) >= 3 and re.match(patron, especie):
-                    cls._especie = especie
+                    cls.__especie = especie
                     break
                 else:
                     print("La especie debe tener almenos 3 caracteres. Intente nuevamente.")
@@ -87,7 +86,7 @@ class Mascota():
             
     @classmethod
     def get_especie(cls):
-        return cls._especie
+        return cls.__especie
         
     @classmethod
     def set_raza(cls):
@@ -96,7 +95,7 @@ class Mascota():
                 patron = r'^[a-zA-Z ]+$'
                 raza = input("Ingrese la raza de la mascota: ")
                 if len(raza) >= 3 and re.match(patron, raza):
-                    cls._raza = raza
+                    cls.__raza = raza
                     break
                 else:
                     print("La raza debe tener almenos 3 caracteres. Intente nuevamente.")
@@ -106,7 +105,7 @@ class Mascota():
         
     @classmethod
     def get_raza(cls):
-        return cls._raza
+        return cls.__raza
     
         
     @classmethod
@@ -115,7 +114,7 @@ class Mascota():
             try:
                 edad = float(input('Edad de la mascota (años): '))
                 if 0 < edad <= 80.0:
-                    cls._edad = edad
+                    cls.__edad = edad
                     break
                 else:
                     print('Edad no válida')
@@ -128,7 +127,7 @@ class Mascota():
     
     @classmethod
     def get_edad(cls):
-        return cls._edad
+        return cls.__edad
         
     @classmethod
     def set_peso(cls):
@@ -136,7 +135,7 @@ class Mascota():
             try:
                 peso = float(input('Peso en kg: '))
                 if (0.1 < peso <= 1000.0):
-                    cls._peso = peso
+                    cls.__peso = peso
                     break
                 else:
                     print('Peso no válido')
@@ -148,7 +147,7 @@ class Mascota():
     
     @classmethod
     def get_peso(cls):
-        return cls._peso
+        return cls.__peso
     
     @classmethod
     def set_sexo(cls):
@@ -157,7 +156,7 @@ class Mascota():
                 list_sexo = ["F","M"]
                 sexo = input("Ingrese el genero de la mascota: ").upper()
                 if sexo in list_sexo:
-                    cls._sexo = sexo
+                    cls.__sexo = sexo
                     break
                 else:
                     print("Error. Intente nuevamente.")
@@ -167,7 +166,7 @@ class Mascota():
         
     @classmethod
     def get_sexo(cls):
-        return cls._sexo
+        return cls.__sexo
     
     @classmethod
     def set_id_propietario(cls):
@@ -175,7 +174,7 @@ class Mascota():
             try:
                 id_propietario = input('Id Propietario: ')
                 if (0 < len(id_propietario) <= 1000000000):
-                    cls._id_propietario = id_propietario
+                    cls.__id_propietario = id_propietario
                     break
                 else:
                     print('Usuario no válido')
@@ -187,21 +186,21 @@ class Mascota():
     
     @classmethod
     def get_id_propietario(cls):
-        return cls._id_propietario
+        return cls.__id_propietario
     
-    #@classmethod
-    # def get_historial(cls):
-       # return cls.__historial
+    @classmethod
+    def get_historial(cls):
+       return cls.__historial
 
 
-    #@classmethod
-    # def agregar_historial_medico(cls, entrada: str):
-       # cls.__historial_medico.append(entrada)
+    @classmethod
+    def agregar_historial_medico(cls, entrada: str):
+       cls.__historial_medico.append(entrada)
         
 #Metodos
 
     @classmethod
-    def InsertarMascota(cls):
+    def insertar_mascota(cls):
             cls.capturar_datos()
             conexion = BaseDatos.conectar()
             if conexion:
@@ -233,7 +232,7 @@ class Mascota():
             cls.set_id_propietario()
             
     @classmethod
-    def BuscarMascotaID(cls, id_mascota=None):
+    def buscar_mascota_id(cls, id_mascota=None):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
@@ -263,7 +262,7 @@ class Mascota():
 
 
     @classmethod
-    def ActualizarMascota(cls, id_mascota):
+    def actualizar_mascota(cls, id_mascota):
         conexion = BaseDatos.conectar()
         mascota_encontrada = cls.BuscarMascotaID(id_mascota)
         if mascota_encontrada:
@@ -318,7 +317,7 @@ class Mascota():
              
 
     @classmethod
-    def EliminarMascota(cls, id_mascota):
+    def eliminar_mascota(cls, id_mascota):
         conexion = BaseDatos.conectar()
         mascota_encontrada = cls.BuscarMascotaID(id_mascota)
         if mascota_encontrada:
@@ -334,7 +333,7 @@ class Mascota():
                 BaseDatos.desconectar()
 
     @classmethod
-    def BuscarMascotaNombre(cls):
+    def buscar_mascota_nombre(cls):
         conexion = BaseDatos.conectar()
         if conexion:
             try:

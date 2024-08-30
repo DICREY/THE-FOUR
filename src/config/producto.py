@@ -15,11 +15,11 @@ class Productos():
                  stock: int = None
                 ):
         
-        cls._id = id
-        cls._nombre = nombre
-        cls._descripcion = descripcion
-        cls._precio = precio
-        cls._stock = stock
+        cls.__id = id
+        cls.__nombre = nombre
+        cls.__descripcion = descripcion
+        cls.__precio = precio
+        cls.__stock = stock
         
     @classmethod
     def set_id(cls):
@@ -27,7 +27,7 @@ class Productos():
                 try:
                     id = input('Escriba el id del producto: ')
                     if (1 <= len(id) <= 1000000000):
-                        cls._id = id
+                        cls.__id = id
                         break
                     else:
                         print('El número debe estar entre 3 y 100000000')
@@ -39,7 +39,7 @@ class Productos():
             
     @classmethod
     def get_id(cls):
-        return cls._id
+        return cls.__id
          
     @classmethod
     def set_nombre(cls):
@@ -48,7 +48,7 @@ class Productos():
                 patron = r'^[a-zA-Z ]+$'
                 nombre = input("Ingrese el nombre del producto: ")
                 if len(nombre) >= 3 and re.match(patron, nombre):
-                    cls._nombre = nombre 
+                    cls.__nombre = nombre 
                     break
                 else:
                     print("El nombre debe tener almenos 3 caracteres. Intente nuevamente.")
@@ -58,7 +58,7 @@ class Productos():
             
     @classmethod
     def get_nombre(cls):
-        return cls._nombre
+        return cls.__nombre
     
     @classmethod
     def set_descripcion(cls):
@@ -67,14 +67,14 @@ class Productos():
                 patron = r'^[a-zA-Z ]+$'
                 descripcion = input("Ingrese la descripcion del producto: ")
                 if len(descripcion) > 10 and re.match(patron, descripcion):
-                    cls._descripcion = descripcion
+                    cls.__descripcion = descripcion
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 continue
     
     @classmethod
     def get_descripcion(cls):
-        return cls._descripcion
+        return cls.__descripcion
     
     @classmethod
     def set_precio(cls):
@@ -82,7 +82,7 @@ class Productos():
             try:
                 precio = input("Ingrese el precio del producto: ")
                 if (1 <= precio <= 1000000000):
-                    cls._precio = precio
+                    cls.__precio = precio
                     break
                 else:
                     print('Error inserte nuevamente')
@@ -92,24 +92,24 @@ class Productos():
             
     @classmethod
     def get_precio(cls):
-        return cls._precio
+        return cls.__precio
     
     @classmethod
     def set_stock(cls):
         while True:
             try:
                 stock = input("Inserte la cantidad de productos que hay: ")
-                cls._stock = stock
+                cls.__stock = stock
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 continue
     
     @classmethod
     def get_stock(cls):
-        return cls._stock
+        return cls.__stock
     
     @classmethod
-    def InsertarProducto(cls):
+    def insertar_producto(cls):
         cls.capturar_datos()
         conexion = BaseDatos.conectar()
         
@@ -136,7 +136,7 @@ class Productos():
         cls.set_stock()
     
     @classmethod
-    def BuscarProductoID(cls, id = None):
+    def buscar_producto_id(cls, id = None):
         conexion = BaseDatos.conectar()
         if conexion:
             try: 
@@ -164,7 +164,7 @@ class Productos():
                     BaseDatos.desconectar()        
     
     @classmethod
-    def ActualizarProducto(cls , id):
+    def actualizar_producto(cls , id):
         conexion = BaseDatos.conectar()
         producto_encontrado = cls.BuscarProductoID(id)
         if producto_encontrado:
@@ -207,7 +207,7 @@ class Productos():
             print("Producto no encontrado. intente otra vez")        
     
     @classmethod
-    def EliminarProducto (cls, id):
+    def eliminar_producto (cls, id):
         conexion = BaseDatos.conectar()
         producto_encontrado = cls.BuscarProductoID(id)
         if producto_encontrado:
@@ -223,7 +223,7 @@ class Productos():
                 BaseDatos.desconectar()
 
     @classmethod
-    def BuscarProductoNombre(cls):
+    def buscar_producto_nombre(cls):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
