@@ -145,7 +145,7 @@ class Veterinario(Usuario):
     
     
     @classmethod
-    def BuscarVeterinarioNombre(cls):
+    def buscar_veterinario_nombre(cls):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
