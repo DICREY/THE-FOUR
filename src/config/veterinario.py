@@ -115,7 +115,7 @@ class Veterinario(Usuario):
                 BaseDatos.desconectar()
 
     @classmethod
-    def buscar_veterinario(cls):
+    def buscar_veterinario(cls, id_usuario = None):
         conexion = BaseDatos.conectar()
         id_usuario=int(input('ingrese el id del veterianrio a buscar: '))
         if conexion:

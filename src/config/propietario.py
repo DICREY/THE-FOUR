@@ -3,6 +3,7 @@ from datetime import datetime
 from config.conexion10 import BaseDatos
 
 class Propietario(Usuario):
+    @classmethod
     def __init__(cls,
         barrio: str = None
     ):
@@ -13,7 +14,7 @@ class Propietario(Usuario):
         while True:
             try:
                 barrio=input('Ingrese la barrio del usuario: ')
-                if len(barrio)>4 and len(barrio)<50 :
+                if len(barrio) > 4 and len(barrio) < 50 :
                     cls.__barrio = barrio
                     break
                 else:
@@ -32,7 +33,7 @@ class Propietario(Usuario):
 
     @classmethod
     def insertar_propietario(cls):
-        cls.capturar_datosV()
+        cls.capturar_datos_propietarios()
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
@@ -54,7 +55,7 @@ class Propietario(Usuario):
 
     @classmethod
     def actualizar_propietario(cls):
-        cls.capturar_datosV()
+        cls.capturar_datos_propietarios()
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
@@ -75,12 +76,11 @@ class Propietario(Usuario):
             BaseDatos.desconectar()
 
     @classmethod
-    def eliminar_propietario(cls):
+    def eliminar_propietario(cls,codigo = None):
         conexion = BaseDatos.conectar()
-        id_usuario=int(input('ingrese el id del propietario que desea eliminar: '))
         try:
                 cursor_propietario= conexion.cursor()
-                cursor_propietario.callproc('EliminarPropietario', [id_usuario])
+                cursor_propietario.callproc('EliminarPropietario', [codigo])
                 conexion.commit()
                 cursor_propietario.close()
                 print('propietario eliminado')
@@ -90,15 +90,14 @@ class Propietario(Usuario):
                 BaseDatos.desconectar()
 
     @classmethod
-    def buscar_propietario(cls):
+    def buscar_propietario(cls,codigo = None):
         conexion = BaseDatos.conectar()
-        id_usuario=int(input('ingrese el id del veterianrio a buscar: '))
         if conexion:
             try:
                 cursor_propietario_encontrada = False
                 cursor_propietario = conexion.cursor()
-                print(f'Buscando al propietario {id_usuario}...')
-                cursor_propietario.callproc('BuscarPropietarioID', [id_usuario])
+                print(f'Buscando al propietario {codigo}...')
+                cursor_propietario.callproc('BuscarPropietarioID', [codigo])
                 for busqueda in cursor_propietario.stored_results():
                     resultado = busqueda.fetchone()
                     if resultado:
@@ -108,7 +107,7 @@ class Propietario(Usuario):
                         '************************************************')
                         return cursor_propietario_encontrada
                     else:
-                        print('propietariocursor_propietario no encontrada. Intente de nuevo.')
+                        print('propietario no encontrada. Intente de nuevo.')
                         print(cursor_propietario_encontrada)
                         return cursor_propietario_encontrada
             except Exception as e:
