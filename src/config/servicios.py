@@ -140,11 +140,17 @@ class Servicios:
                 BaseDatos.desconectar()
     
     @classmethod
-    def BuscarservicioID(cls):
+    def buscar_servicio_id(cls, id=None):
         conexion = BaseDatos.conectar()
         if conexion:
             try: 
-                id=int(input('que id quiere buscar: '))
+                if id is None:
+                    while True:
+                        id=int(input('que id quiere buscar: '))
+                        if id >= 1:
+                            break
+                        else:
+                            print("Escribe un id valido")
                 servicio_encontrado = False
                 cursor_servicios = conexion.cursor()
                 print(f"Buscando el servicio {id}...")

@@ -7,7 +7,6 @@ from os import system
 class HistorialMedico():
     
     @classmethod
-    
     def __init__(cls,
                  id: int = None,
                  fecha: datetime = None,
@@ -208,22 +207,25 @@ class HistorialMedico():
 
         
     @classmethod
-    def BuscarHistorialMedicoID(cls, codigo = None):
-        conexion = BaseDatos.conectar
+    def buscar_historial_id(cls, codigo = None):
+        conexion = BaseDatos.conectar()
         if conexion:
             try:
                 system("cls")
-                if codigo is not None:
-                    id = codigo
-                else:
-                    id = int(input("Id del historial a buscar: "))
+                if codigo is None:
+                    while True:
+                        codigo = int(input("Id del historial a buscar: "))
+                        if codigo >= 1:
+                            break
+                        else:
+                            print("Escribe un codigo valido")
                 system('cls')
                 mostrar_historial = False
                 cursor_historial = conexion.cursor()
-                print(f'Buscando historial {id}...')
-                cursor_historial.callproc('BuscarHistorialMedicoID', [id])
+                print(f'Buscando el historial {codigo}...')
+                cursor_historial.callproc('BuscarHistorialMedicoID', [codigo])
                 for busqueda in cursor_historial.stored_results():
-                    resultado = busqueda.fetchone()
+                    resultado = busqueda.fetchall()
                     if resultado:
                         mostrar_historial = True
                         print('\nResultado:\n',

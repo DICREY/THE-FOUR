@@ -332,14 +332,21 @@ class Mascota():
                 BaseDatos.desconectar()
 
     @classmethod
-    def buscar_mascota_nombre(cls):
+    def buscar_mascota_nombre(cls, nombre = None):
+        if nombre is None :
+            while True:
+                nombre = input("Escribe el nombre de la mascota que desea buscar: ")
+                if len(nombre) > 2:
+                    break
+                else:
+                    print("Porfavor escriba un nombre valido")
         conexion = BaseDatos.conectar()
         if conexion:
             try:
                 mascota_encontrado = False
                 cursor_mascota = conexion.cursor()
-                print(f'Buscando la mascotas...')
-                cursor_mascota.callproc('BuscarMascotaNombre')
+                print(f'Buscando la mascota {nombre}...')
+                cursor_mascota.callproc('BuscarMascotaNombre', [nombre])
                 for busqueda in cursor_mascota.stored_results():
                     resultados = busqueda.fetchall()
                     if resultados:

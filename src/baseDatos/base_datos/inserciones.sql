@@ -193,3 +193,16 @@ INSERT INTO mascotas_db.servicios (id, nombre, descripcion, precio) VALUES
 ("8", 'Radiografía', 'Radiografía para diagnóstico de problemas internos en mascotas', 80.00),
 ("9", 'Esterilización/Castración', 'Procedimiento quirúrgico para esterilizar o castrar mascotas', 150.00),
 ("10", 'Terapia Física', 'Sesiones de terapia física para la rehabilitación de mascotas', 60.00);
+
+
+INSERT INTO mascotas_db.historiales_medicos (id, fecha, descripcion, tratamiento, id_veterinario, id_mascota) VALUES
+(1, '2023-01-15', 'Consulta por tos persistente y fiebre.', 'Tratamiento con antibióticos durante 7 días.', 3, 5),
+(2, '2023-02-10', 'Revisión rutinaria. Vacunación contra la rabia.', 'Vacuna administrada. Revisión en 1 año.', 3, 10),
+(3, '2023-03-05', 'Infección en la piel debido a alergias.', 'Crema antibiótica y cambio de dieta.', 3, 15),
+(4, '2023-04-12', 'Chequeo general y limpieza dental.', 'Limpieza dental completa. Todo en orden.', 5, 20),
+(5, '2023-05-23', 'Fractura en la pata derecha.', 'Inmovilización y seguimiento cada 2 semanas.', 5, 25),
+(6, '2023-06-08', 'Diarrea y vómitos frecuentes.', 'Dieta especial y medicación durante 5 días.', 11, 30),
+(7, '2023-07-19', 'Revisión postoperatoria de castración.', 'Herida sana. Revisión en 1 semana.', 11, 27),
+(8, '2023-08-11', 'Otitis en oído izquierdo.', 'Limpieza y gotas antibióticas durante 10 días.', 11, 26),
+(9, '2023-09-02', 'Pérdida de apetito y decaimiento.', 'Análisis de sangre y vitaminas.', 14, 6),
+(10, '2023-10-15', 'Chequeo general. Desparasitación interna.', 'Pastilla desparasitante administrada. Revisión en 6 meses.', 15, 12);

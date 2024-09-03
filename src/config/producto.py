@@ -223,14 +223,21 @@ class Productos():
                 BaseDatos.desconectar()
 
     @classmethod
-    def buscar_producto_nombre(cls):
+    def buscar_producto_nombre(cls, nombre = None):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
+                if nombre is None:
+                    while True:
+                        nombre = input("Escribe el nombre del producto que desea buscar: ")
+                        if len(nombre) > 2:
+                            break
+                        else:
+                            print("Escribe un nombre valido")
                 producto_encontrado = False
                 cursor_producto = conexion.cursor()
                 print(f'Buscando producto...')
-                cursor_producto.callproc('BuscarProductoNombre')
+                cursor_producto.callproc('BuscarProductoNombre', [nombre])
                 for busqueda in cursor_producto.stored_results():
                     resultados = busqueda.fetchall()
                     if resultados:

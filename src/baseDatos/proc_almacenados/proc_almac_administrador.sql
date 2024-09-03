@@ -1,6 +1,8 @@
--- Active: 1723829021103@@127.0.0.1@3306@mascotas_db
+-- Active: 1721867436095@@localhost@3306
+DELIMITER //
+
 CREATE PROCEDURE mascotas_db.InsertarAdministrador(
-    IN p_id_usuario VARCHAR(20),
+    IN p_id_usuario INT,
     IN p_nombre VARCHAR(100),
     IN p_apellido VARCHAR(100),
     IN p_ciudad VARCHAR(100),
@@ -22,7 +24,7 @@ BEGIN
 
     START TRANSACTION;
 
-    INSERT INTO mascotas_db.usuarios(
+    INSERT INTO mascotas_bd.usuarios(
         id_usuario,
         nombre,
         apellido,
@@ -49,7 +51,7 @@ BEGIN
         p_contrasenna
     );
 
-    INSERT INTO mascotas_db.administradores(id_usuario,cargo,fecha_ingreso) 
+    INSERT INTO mascotas_bd.administradores(id_usuario,cargo,fecha_ingreso) 
     VALUES(p_id_usuario,p_cargo,p_fec_ing);
 
     COMMIT;
@@ -57,7 +59,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.ActualizarAdministrador(
-    IN p_id_usuario VARCHAR(20),
+    IN p_id_usuario INT,
     IN p_nombre VARCHAR(100),
     IN p_apellido VARCHAR(100),
     IN p_ciudad VARCHAR(100),
@@ -79,7 +81,7 @@ BEGIN
 
     START TRANSACTION;
 
-    UPDATE mascotas_db.usuarios
+    UPDATE mascotas_bd.usuarios
     SET nombre = p_nombre,
         apellido = p_apellido,
         ciudad = p_ciudad,
@@ -89,7 +91,7 @@ BEGIN
         contrasenna = p_contrasenna
     WHERE id_usuario = p_id_usuario;
 
-    UPDATE mascotas_db.administradores
+    UPDATE mascotas_bd.administradores
     SET cargo = p_cargo,
         fecha_ingreso = p_fec_ing
     WHERE id_usuario = p_id_usuario;
@@ -123,7 +125,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.BuscarAdministradorID(
-    IN p_id_usuario VARCHAR(20)
+    IN p_id_usuario INT
 )
 BEGIN
     SELECT 

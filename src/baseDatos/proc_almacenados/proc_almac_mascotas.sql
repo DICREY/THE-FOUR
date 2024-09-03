@@ -1,13 +1,13 @@
--- Active: 1723829021103@@127.0.0.1@3306@mascotas_db
+-- Active: 1721867436095@@localhost@3306
 DELIMITER //
 CREATE PROCEDURE mascotas_db.InsertarMascota(
-    IN p_id VARCHAR(20),
+    IN p_id INT,
     IN p_nombre VARCHAR(100),
     IN p_especie VARCHAR(100),
     IN p_raza VARCHAR(100),
     IN p_edad FLOAT(12,10),
     IN p_peso FLOAT(12,10),
-    IN p_id_propietario VARCHAR(20),
+    IN p_id_propietario INT,
     IN p_sexo ENUM('F','M')
 )
 BEGIN
@@ -29,13 +29,13 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.ActualizarMascota(
-    IN p_id VARCHAR(20),
+    IN p_id INT,
     IN p_nombre VARCHAR(100),
     IN p_especie VARCHAR(100),
     IN p_raza VARCHAR(100),
     IN p_edad FLOAT(12,10),
     IN p_peso FLOAT(12,10),
-    IN p_id_propietario VARCHAR(20),
+    IN p_id_propietario INT,
     IN p_sexo ENUM('F','M')
 ) 
 BEGIN
@@ -64,7 +64,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.EliminarMascota(
-    IN p_id VARCHAR(20)
+    IN p_id INT
 )
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -85,7 +85,7 @@ BEGIN
 END //
 
 CREATE PROCEDURE mascotas_db.BuscarMascotaID(
-    IN p_id_mascota VARCHAR(20)
+    IN p_id_mascota INT UNSIGNED
 )
 BEGIN
     SELECT 
@@ -125,9 +125,8 @@ BEGIN
     INNER JOIN
         mascotas_db.usuarios u ON p.id_usuario = u.id_usuario
     WHERE
-        m.nombre LIKE CONCAT("%",p_nombre,"%");
+        m.nombre LIKE p_nombre;
 END //
-
 
 CREATE PROCEDURE mascotas_db.BuscarMascotas()
 BEGIN

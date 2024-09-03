@@ -19,10 +19,10 @@ def main():
             "Veterinarios":[ Veterinario.insertar_veterinario, Veterinario.buscar_veterinario_id, Veterinario.buscar_veterinario_nombre, Veterinario.actualizar_veterinario, Veterinario.eliminar_veterinario ],
             "Administradores": [ Administrador.insertar_administrador , Administrador.buscar_administrador_id, Administrador.buscar_administrador_nombre, Administrador.actualizar_administrador, Administrador.eliminar_administrador ],
             "Mascotas":[Mascota.insertar_mascota, Mascota.buscar_mascota_id, Mascota.buscar_mascota_nombre, Mascota.actualizar_mascota, Mascota.eliminar_mascota],
-            "Historial Medico":[HistorialMedico.InsertarHistorialMedico, HistorialMedico.BuscarHistorialMedicoID, HistorialMedico.BuscarHistorialesMedicos, HistorialMedico.ActualizarHistorialMedico, HistorialMedico.EliminarHistorialMedico],
+            "Historial Medico":[HistorialMedico.InsertarHistorialMedico, HistorialMedico.buscar_historial_id, HistorialMedico.BuscarHistorialesMedicos, HistorialMedico.ActualizarHistorialMedico, HistorialMedico.EliminarHistorialMedico],
             "Productos":[Productos.insertar_producto, Productos.buscar_producto_id, Productos.buscar_producto_nombre, Productos.actualizar_producto, Productos.eliminar_producto],
             "Citas Medicas":[Cita.insertar_cita, Cita.buscar_cita_mascota, Cita.buscar_cita_fecha, Cita, Cita.eliminar_cita],
-            "Servicios":[Servicios.InsertarServicio, Servicios.BuscarservicioID, Servicios.BuscarservicioID, Servicios.Actualizarservicio, Servicios.Eliminarservicio],
+            "Servicios":[Servicios.InsertarServicio, Servicios.buscar_servicio_id, Servicios.buscar_servicio_id, Servicios.Actualizarservicio, Servicios.Eliminarservicio],
         }
         try:
             while True:
@@ -33,8 +33,8 @@ def main():
                 print(f"3. Buscar {name_menu[opcion]} por nombre")
                 print(f"4. Actualizar {name_menu[opcion]}")
                 print(f"5. Eliminar {name_menu[opcion]}")
-                print("6. Salir") 
-
+                print("6. Salir")
+                print("--------------------------------------------------------") 
                 while True:
                     try:
                         opcion1 = int(input("Seleccione una opcion: "))
@@ -95,8 +95,14 @@ def main():
             "\n6. Productos\n7. Citas Medicas\n8. Servicios\n9. Salir",
             "\n--------------------------------------------------------")
             opcion = int(input("Ingrese una opcion: "))
-            if opcion != 9:
-                menu(opcion) 
+            if opcion <= 0:
+                system("cls")
+                system("color 04")
+                print("Escribe una opcion valida")
+                sleep(0.5)
+                system("cls")
+            elif opcion != 9:
+                menu(opcion)
             elif opcion == 9:
                 system("cls")
                 for i in name_menu[9]:
