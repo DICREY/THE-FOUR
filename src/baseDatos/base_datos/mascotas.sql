@@ -1,4 +1,4 @@
--- Active: 1723829021103@@127.0.0.1@3306@mascotas_db
+-- Active: 1715350134884@@127.0.0.1@3306@mascotas_db
 CREATE DATABASE  IF NOT EXISTS mascotas_db;
 CREATE TABLE mascotas_db.usuarios(
     id_usuario VARCHAR(20) UNIQUE PRIMARY KEY NOT NULL,
