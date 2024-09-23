@@ -206,3 +206,4 @@ INSERT INTO mascotas_db.historiales_medicos (id, fecha, descripcion, tratamiento
 (8, '2023-08-11', 'Otitis en oído izquierdo.', 'Limpieza y gotas antibióticas durante 10 días.', 11, 26),
 (9, '2023-09-02', 'Pérdida de apetito y decaimiento.', 'Análisis de sangre y vitaminas.', 14, 6),
 (10, '2023-10-15', 'Chequeo general. Desparasitación interna.', 'Pastilla desparasitante administrada. Revisión en 6 meses.', 15, 12);
+
