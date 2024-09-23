@@ -207,3 +207,25 @@ INSERT INTO mascotas_db.historiales_medicos (id, fecha, descripcion, tratamiento
 (9, '2023-09-02', 'Pérdida de apetito y decaimiento.', 'Análisis de sangre y vitaminas.', 14, 6),
 (10, '2023-10-15', 'Chequeo general. Desparasitación interna.', 'Pastilla desparasitante administrada. Revisión en 6 meses.', 15, 12);
 
+INSERT INTO mascotas_db.citas (id, fecha, hora, servicio, veterinario, mascota, estado) VALUES
+('C001', '2024-09-25', '09:00:00', '1', '3', '1', 'Pendiente'),   -- Consulta Veterinaria General, Firulais
+('C002', '2024-09-26', '10:00:00', '2', '5', '2', 'En espera'),    -- Vacunación, Michi
+('C003', '2024-09-27', '11:00:00', '3', '11', '3', 'Cancelada'),   -- Desparasitación, Toby
+('C004', '2024-09-28', '12:00:00', '4', '12', '4', 'Rechazada'),   -- Limpieza Dental, Luna
+('C005', '2024-09-29', '13:00:00', '5', '13', '5', 'Realizada'),    -- Baño y Corte de Pelo, Rex
+('C006', '2024-09-30', '14:00:00', '1', '14', '6', 'Pendiente'),    -- Consulta Veterinaria General, Bella
+('C007', '2024-10-01', '15:00:00', '2', '15', '7', 'En espera'),    -- Vacunación, Max
+('C008', '2024-10-02', '16:00:00', '3', '16', '8', 'Cancelada'),    -- Desparasitación, Nala
+('C009', '2024-10-03', '17:00:00', '4', '17', '9', 'Rechazada'),    -- Limpieza Dental, Rocky
+('C010', '2024-10-04', '18:00:00', '5', '18', '10', 'Realizada'),    -- Baño y Corte de Pelo, Daisy
+('C011', '2024-10-05', '09:30:00', '1', '3', '11', 'Pendiente'),     -- Consulta Veterinaria General, Buddy
+('C012', '2024-10-06', '10:30:00', '2', '5', '12', 'En espera'),     -- Vacunación, Coco
+('C013', '2024-10-07', '11:30:00', '3', '11', '13', 'Cancelada'),    -- Desparasitación, Chispa
+('C014', '2024-10-08', '12:30:00', '4', '12', '14', 'Rechazada'),    -- Limpieza Dental, Simba
+('C015', '2024-10-09', '13:30:00', '5', '13', '15', 'Realizada'),     -- Baño y Corte de Pelo, Kira
+('C016', '2024-10-10', '14:30:00', '1', '14', '16', 'Pendiente'),     -- Consulta Veterinaria General, Leo
+('C017', '2024-10-11', '15:30:00', '2', '15', '17', 'En espera'),     -- Vacunación, Bruno
+('C018', '2024-10-12', '16:30:00', '3', '16', '18', 'Cancelada'),     -- Desparasitación, Maya
+('C019', '2024-10-13', '17:30:00', '4', '17', '19', 'Rechazada'),     -- Limpieza Dental, Thor
+('C020', '2024-10-14', '18:30:00', '5', '18', '20', 'Realizada');      -- Baño y Corte de Pelo, Lily
+
