@@ -22,7 +22,7 @@ def main():
             "Historial Medico":[HistorialMedico.InsertarHistorialMedico, HistorialMedico.buscar_historial_id, HistorialMedico.BuscarHistorialesMedicos, HistorialMedico.ActualizarHistorialMedico, HistorialMedico.EliminarHistorialMedico],
             "Productos":[Productos.insertar_producto, Productos.buscar_producto_id, Productos.buscar_producto_nombre, Productos.actualizar_producto, Productos.eliminar_producto],
             "Citas Medicas":[Cita.insertar_cita, Cita.buscar_cita_mascota, Cita.buscar_cita_fecha, Cita, Cita.eliminar_cita],
-            "Servicios":[Servicios.InsertarServicio, Servicios.buscar_servicio_id, Servicios.buscar_servicio_id, Servicios.Actualizarservicio, Servicios.Eliminarservicio],
+            "Servicios":[Servicios.insertar_servicio, Servicios.buscar_servicio_id, Servicios.buscar_servicio_nombre, Servicios.actualizar_servicio, Servicios.eliminar_servicio],
         }
         try:
             while True:

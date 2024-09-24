@@ -83,14 +83,15 @@ class Servicios:
     
            
     @classmethod
-    def captura_datos(cls):
-        cls.set_id()
+    def captura_datos(cls, omitir_id=False):
+        if not omitir_id:
+            cls.set_id()
         cls.set_nombre()
         cls.set_descripcion()
         cls.set_precio()
         
     @classmethod
-    def InsertarServicio(cls,id):
+    def insertar_servicio(cls):
         cls.captura_datos()
         conexion = BaseDatos.conectar()
         
@@ -108,11 +109,11 @@ class Servicios:
             BaseDatos.desconectar()
             
     @classmethod
-    def Actualizarservicio(cls):
+    def actualizar_servicio(cls,id):
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
-            cls.captura_datos()
+            cls.captura_datos(omitir_id=True)
             cursor.callproc('ActualizarServicio', [
                 id,
                 cls.get_nombre(),
@@ -125,9 +126,15 @@ class Servicios:
             BaseDatos.desconectar()
     
     @classmethod
-    def Eliminarservicio(cls):
+    def eliminar_servicio(cls, id = None):
+        if id is None:
+            while True:
+                id=input('que id quiere buscar: ')
+                if len(id) >= 1:
+                    break
+                else:
+                    print("Escribe un id valido")
         conexion = BaseDatos.conectar()
-        id=int(input('ingrese el id del servicio que desea eliminar: '))
         try:
                 cursor_servicio= conexion.cursor()
                 cursor_servicio.callproc('EliminarServicio', [id])
@@ -172,6 +179,37 @@ class Servicios:
             finally:
                 if conexion:
                     cursor_servicios.close()
-                    BaseDatos.desconectar()    
+                    BaseDatos.desconectar()
+    
+    @classmethod
+    def buscar_servicio_nombre(cls, nombre = None):
+        if nombre is None:
+            while True:
+                nombre = input("Escribe el nombre del servicio que desea buscar: ")
+                if len(nombre) > 3:
+                    break
+                else:
+                    print("Porfavor escriba un nombre valido")
+        conexion = BaseDatos.conectar()
+        if conexion:
+            try:
+                cursor_servicio = conexion.cursor()
+                print(f'Buscando el servicio {nombre}...')
+                cursor_servicio.callproc('BuscarServicioNombre', [nombre])
+                for busqueda in cursor_servicio.stored_results():
+                    resultados = busqueda.fetchall()
+                    if resultados:
+                        for datos in resultados:
+                            print(datos)
+                    else:
+                        print('No se encontraron registros. Intente de nuevo.')
+                        print(sercursor_servicio_encontrado)
+            except Exception as e:
+                print(f'Error al buscar el servicio: {e}')
+            finally:
+                if conexion:
+                    cursor_servicio.close()
+                    BaseDatos.desconectar()
+        
                     
 
