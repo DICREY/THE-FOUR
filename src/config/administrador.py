@@ -106,7 +106,6 @@ class Administrador(Usuario):
                     print('--------------- Escriba los nuevos datos del administrador ---------------')
                     cls.capturar_datos_administrador()
 
-                    print(f'Id: {cls.get_codigo()}')
                     print(f'Nuevo nombre: {cls.get_nombre()}')
                     print(f'Nueva apellido: {cls.get_apellido()}')
                     print(f'Nueva ciudad: {cls.get_ciudad()}')
@@ -119,7 +118,7 @@ class Administrador(Usuario):
                     
                     cursor_admin = conexion.cursor()
                     cursor_admin.callproc('ActualizarAdministrador', [
-                                    cls.get_codigo(),
+                                    codigo,
                                     cls.get_nombre(),
                                     cls.get_apellido(),
                                     cls.get_ciudad(),

@@ -54,13 +54,13 @@ class Propietario(Usuario):
             BaseDatos.desconectar()
 
     @classmethod
-    def actualizar_propietario(cls,name = None):
+    def actualizar_propietario(cls,codigo = None):
         cls.capturar_datos_propietarios()
         conexion = BaseDatos.conectar()
         if conexion:
             cursor = conexion.cursor()
             cursor.callproc('ActualizarPropietario', [
-                name,
+                codigo,
                 cls.get_nombre(),
                 cls.get_apellido(),
                 cls.get_ciudad(),
