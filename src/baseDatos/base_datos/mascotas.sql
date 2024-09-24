@@ -1,4 +1,4 @@
--- Active: 1721867436095@@localhost@3306
+-- Active: 1727129487513@@127.0.0.1@3306@mascotas_db
 CREATE DATABASE  IF NOT EXISTS mascotas_db;
 CREATE TABLE mascotas_db.usuarios(
     id_usuario VARCHAR(20) UNIQUE PRIMARY KEY NOT NULL,
@@ -84,9 +84,9 @@ CREATE TABLE mascotas_db.citas(
     veterinario VARCHAR(20) NOT NULL,
     mascota VARCHAR(20) NOT NULL,
     estado ENUM("Pendiente","En espera","Cancelada","Rechazada","Realizada") NOT NULL,
-    PRIMARY KEY (id,mascota),
-    FOREIGN KEY(servicio) REFERENCES servicios(id),
+    PRIMARY KEY (id,mascota) ,
+    FOREIGN KEY(servicio) REFERENCES servicios(id) ON DELETE CASCADE,
     FOREIGN KEY(veterinario) REFERENCES veterinarios(id_usuario) ON DELETE CASCADE
     ON UPDATE CASCADE,
-    FOREIGN KEY(mascota) REFERENCES mascotas(id)
+    FOREIGN KEY(mascota) REFERENCES mascotas(id) ON DELETE CASCADE
 );

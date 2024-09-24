@@ -203,7 +203,7 @@ class Servicios:
                             print(datos)
                     else:
                         print('No se encontraron registros. Intente de nuevo.')
-                        print(sercursor_servicio_encontrado)
+                        print('sercursor_servicio_encontrado')
             except Exception as e:
                 print(f'Error al buscar el servicio: {e}')
             finally:
