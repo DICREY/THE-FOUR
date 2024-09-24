@@ -68,6 +68,7 @@ class Productos():
                 descripcion = input("Ingrese la descripcion del producto: ")
                 if len(descripcion) > 10 and re.match(patron, descripcion):
                     cls.__descripcion = descripcion
+                    break
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 continue
@@ -80,7 +81,7 @@ class Productos():
     def set_precio(cls):
         while True:
             try:
-                precio = input("Ingrese el precio del producto: ")
+                precio = float(input("Ingrese el precio del producto: "))
                 if (1 <= precio <= 1000000000):
                     cls.__precio = precio
                     break
@@ -98,8 +99,9 @@ class Productos():
     def set_stock(cls):
         while True:
             try:
-                stock = input("Inserte la cantidad de productos que hay: ")
+                stock = int(input("Inserte la cantidad de productos que hay: "))
                 cls.__stock = stock
+                break
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
                 continue
@@ -166,7 +168,7 @@ class Productos():
     @classmethod
     def actualizar_producto(cls , id):
         conexion = BaseDatos.conectar()
-        producto_encontrado = cls.BuscarProductoID(id)
+        producto_encontrado = cls.buscar_producto_id(id)
         if producto_encontrado:
             try:
                 print('--------------- Escriba los nuevos datos del producto ---------------')
@@ -205,11 +207,11 @@ class Productos():
                 BaseDatos.desconectar()
         else:
             print("Producto no encontrado. intente otra vez")        
-    
+
     @classmethod
     def eliminar_producto (cls, id):
         conexion = BaseDatos.conectar()
-        producto_encontrado = cls.BuscarProductoID(id)
+        producto_encontrado = cls.buscar_producto_id(id)
         if producto_encontrado:
             try:
                 cursor_producto = conexion.cursor()
