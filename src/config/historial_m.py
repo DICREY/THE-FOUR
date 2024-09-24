@@ -19,25 +19,25 @@ class HistorialMedico():
         cls.__id = id
         cls.__fecha = fecha
         cls.__descripcion = descripcion
-        cls.__tratemiento = tratamiento
+        cls.__tratamiento = tratamiento
         cls.__id_veterinario = id_veterinario
         cls.__id_mascota = id_mascota
         
     @classmethod
     def set_id(cls):
-             while True:
-                try:
-                    id = int(input('Escriba el id del historial: '))
-                    if (1 <= id<= 1000000000):
-                        cls.__id = id
-                        break
-                    else:
-                        print('El número debe estar entre 3 y 100000000')
-                except ValueError:
-                    print('El código debe ser un número.')
-                except KeyboardInterrupt:
-                    print('El himostrar_historial ha cancelado la entrada de datos.')
-                continue
+        while True:
+            try:
+                id = int(input('Escriba el id del historial: '))
+                if (1 <= id<= 1000000000):
+                    cls.__id = id
+                    break
+                else:
+                    print('El número debe estar entre 3 y 100000000')
+            except ValueError:
+                print('El código debe ser un número.')
+            except KeyboardInterrupt:
+                print('El usuario ha cancelado la entrada de datos.')
+            continue
     @classmethod        
     def get_id(cls):
         return cls.__id
@@ -52,7 +52,7 @@ class HistorialMedico():
                 if re.match(patron, fecha):
                     try:
                         datetime.strptime(fecha, '%Y-%m-%d')
-                        cls.fecha = fecha
+                        cls.__fecha = fecha
                         break
                     except ValueError:
                         print("Fecha inválida, intente nuevamente.")
@@ -60,7 +60,7 @@ class HistorialMedico():
                     print("Formato de fecha incorrecto, intente nuevamente.")
                 
             except KeyboardInterrupt:
-                print('El himostrar_historial ha cancelado la entrada de datos.')
+                print('El usuario ha cancelado la entrada de datos.')
                 break
     @classmethod        
     def get_fecha(cls):
@@ -70,9 +70,10 @@ class HistorialMedico():
     @classmethod
     def set_descripcion(cls):
         try:
-            input("Ingrese la descripcion de la mascota")
+            descripcion = input("Ingrese la descripcion de la mascota: ")
+            cls.__descripcion = descripcion
         except KeyboardInterrupt:
-            print("El himostrar_historial ha cancelado la entrada de texto ")
+            print("El usuario ha cancelado la entrada de texto ")
     @classmethod       
     def get_descripcion(cls):
         return cls.__descripcion
@@ -80,45 +81,48 @@ class HistorialMedico():
     @classmethod
     def set_tratamiento(cls):
         try:
-            input("Ingreseel tratamiento de la mascota")
+            tratamiento = input("Ingrese el tratamiento de la mascota: ")
+            cls.__tratamiento = tratamiento
         except KeyboardInterrupt:
-            print("El himostrar_historial ha cancelado la entrada de texto ")
+            print("El usuario ha cancelado la entrada de texto ")
     @classmethod        
     def get_tratamiento(cls):
-        return cls.__tratemiento
+        return cls.__tratamiento
     
-    def set_id_veteerinario(cls):
-             while True:
-                try:
-                    id = int(input('Escriba el id del historial: '))
-                    if (1 <= id<= 1000000000):
-                        cls.__id = id
-                        break
-                    else:
-                        print('El número debe estar entre 3 y 100000000')
-                except ValueError:
-                    print('El código debe ser un número.')
-                except KeyboardInterrupt:
-                    print('El himostrar_historial ha cancelado la entrada de datos.')
-                continue
+    @classmethod
+    def set_id_veterinario(cls):
+        while True:
+            try:
+                id = int(input('Escriba el id del veterinario: '))
+                if (1 <= id<= 1000000000):
+                    cls.__id_veterinario = id
+                    break
+                else:
+                    print('El número debe estar entre 3 y 100000000')
+            except ValueError:
+                print('El código debe ser un número.')
+            except KeyboardInterrupt:
+                print('El usuario ha cancelado la entrada de datos.')
+            continue
     @classmethod        
     def get_id_veterinario(cls):
         return cls.__id_veterinario
     
+    @classmethod
     def set_id_mascota(cls):
-             while True:
-                try:
-                    id = int(input('Escriba el id del historial: '))
-                    if (1 <= id<= 1000000000):
-                        cls.__id = id
-                        break
-                    else:
-                        print('El número debe estar entre 3 y 100000000')
-                except ValueError:
-                    print('El código debe ser un número.')
-                except KeyboardInterrupt:
-                    print('El himostrar_historial ha cancelado la entrada de datos.')
-                continue
+        while True:
+            try:
+                id = int(input('Escriba el id de la mascota: '))
+                if (1 <= id<= 1000000000):
+                    cls.__id_mascota = id
+                    break
+                else:
+                    print('El número debe estar entre 3 y 100000000')
+            except ValueError:
+                print('El código debe ser un número.')
+            except KeyboardInterrupt:
+                print('El usuario ha cancelado la entrada de datos.')
+            continue
     @classmethod        
     def get_id_mascota(cls):
         return cls.__id_mascota
@@ -129,17 +133,17 @@ class HistorialMedico():
         cls.set_fecha()
         cls.set_descripcion()
         cls.set_tratamiento()
-        cls.set_id_veteerinario()
+        cls.set_id_veterinario()
         cls.set_id_mascota()
     
     @classmethod
-    def InsertarHistorialMedico(cls):
+    def insertar_historial_medico(cls):
         cls.captura_datos()
         conexion = BaseDatos.conectar()
         
         if conexion:
-            cursor_historial = conexion.cursor
-            cursor_historial.callproc( 'InsertarHistorialMedico', [
+            cursor_historial = conexion.cursor()
+            cursor_historial.callproc('InsertarHistorialMedico', [
                 cls.get_id(),
                 cls.get_fecha(),
                 cls.get_descripcion(),
@@ -153,22 +157,19 @@ class HistorialMedico():
                 BaseDatos.desconectar()
         
     @classmethod
-    def ActualizarHistorialMedico(cls):
-        codigo = input('Ingrese el id del historial a actualiza: ')
-        conexion = BaseDatos.conectar
-        mostrar_historial = cls.BuscarHistorialMedicoID(codigo)
+    def actualizar_historial_medico(cls,codigo):
+        conexion = BaseDatos.conectar()
+        mostrar_historial = cls.buscar_historial_id(codigo)
         
         if mostrar_historial:
             try:
                 print('--------------- Escriba los nuevos datos del historial ---------------')
-                cls.set_id()
                 cls.set_fecha()
                 cls.set_descripcion()
                 cls.set_tratamiento()
-                cls.set_id_veteerinario()
+                cls.set_id_veterinario()
                 cls.set_id_mascota()
                 
-                nuevo_id = cls.get_id(),
                 nueva_fecha = cls.get_fecha(),
                 nueva_descripcion = cls.get_descripcion(),
                 nuevo_tratamiento = cls.get_tratamiento(),
@@ -176,24 +177,21 @@ class HistorialMedico():
                 nuevo_id_mas = cls.get_id_mascota()
                 
                 print(f'ID: {codigo}')
-                print(f'Nuevo id: {nuevo_id}')
-                print(f'Nueva gecha: {nueva_fecha}')
+                print(f'Nueva fecha: {nueva_fecha}')
                 print(f'Nueva descripcion: {nueva_descripcion}')
                 print(f'Nuevo tratamiento: {nuevo_tratamiento}')
                 print(f'Nuevo id veterinario: {nuevo_id_vet}')
                 print(f'Nuevo id mascota: {nuevo_id_mas}')
 
-                cursor_historial = conexion.cursor ()
+                cursor_historial = conexion.cursor()
                 cursor_historial.callproc('ActualizarHistorialMedico', [
                     codigo,
-                    nuevo_id,
                     nueva_fecha,
                     nueva_descripcion,
                     nuevo_tratamiento,
                     nuevo_id_vet,
-                    nuevo_id_mas
+                    nuevo_id_mas,
                 ])
-                
                 conexion.commit()
                 cursor_historial.closed()
                 print('Historial actualizado')
@@ -244,9 +242,9 @@ class HistorialMedico():
                     BaseDatos.desconectar()
     
     @classmethod
-    def EliminarHistorialMedico(cls,codigo):
+    def eliminar_historial_medico(cls,codigo):
         conexion = BaseDatos.conectar()
-        mostrar_historial= cls.BuscarMascotaID(codigo)
+        mostrar_historial= cls.buscar_historial_id(codigo)
         if mostrar_historial:
             try:
                 cursor_historial = conexion.cursor()
@@ -260,7 +258,7 @@ class HistorialMedico():
                 BaseDatos.desconectar()
     
     @classmethod
-    def BuscarHistorialesMedicos(cls):
+    def buscar_historiales_medicos(cls):
         conexion = BaseDatos.conectar()
         if conexion:
             try:
@@ -283,6 +281,6 @@ class HistorialMedico():
             finally:
                 if conexion:
                     cursor_historial.close()
-                    BaseDatos.desconectar()  
+                    BaseDatos.desconectar() 
                     
     
