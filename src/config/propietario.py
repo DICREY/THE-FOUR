@@ -13,12 +13,12 @@ class Propietario(Usuario):
     def set_barrio(cls):
         while True:
             try:
-                barrio=input('Ingrese la barrio del usuario: ')
+                barrio=input('Ingrese el barrio del usuario: ')
                 if len(barrio) > 4 and len(barrio) < 50 :
                     cls.__barrio = barrio
                     break
                 else:
-                    print('El barrio no cumple con los requisitos (deve tener una longitud mayor a 4 y menor a 50)')
+                    print('El barrio no cumple con los requisitos')
             except KeyboardInterrupt:
                 print('Operación cancelada por el usuario')
 
