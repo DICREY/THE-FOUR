@@ -1,4 +1,4 @@
-from config.citas import cita 
+from config.citas import Cita 
 from os import system
 from sys import stdout
 from time import sleep
