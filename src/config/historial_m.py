@@ -8,12 +8,12 @@ class HistorialMedico():
     
     @classmethod
     def __init__(cls,
-                 id: int = None,
+                 id: str = None,
                  fecha: datetime = None,
                  descripcion: str = None,
                  tratamiento: str = None,
-                 id_veterinario: int = None,
-                 id_mascota: int = None
+                 id_veterinario: str = None,
+                 id_mascota: str = None
                  ):
         
         cls.__id = id
@@ -27,8 +27,8 @@ class HistorialMedico():
     def set_id(cls):
         while True:
             try:
-                id = int(input('Escriba el id del historial: '))
-                if (1 <= id<= 1000000000):
+                id = input('Escriba el id del historial: ')
+                if (1 <= len(id)<= 1000000000):
                     cls.__id = id
                     break
                 else:
@@ -85,6 +85,7 @@ class HistorialMedico():
             cls.__tratamiento = tratamiento
         except KeyboardInterrupt:
             print("El usuario ha cancelado la entrada de texto ")
+
     @classmethod        
     def get_tratamiento(cls):
         return cls.__tratamiento
@@ -93,8 +94,8 @@ class HistorialMedico():
     def set_id_veterinario(cls):
         while True:
             try:
-                id = int(input('Escriba el id del veterinario: '))
-                if (1 <= id<= 1000000000):
+                id = input('Escriba el id del veterinario: ')
+                if (1 <= len(id) <= 1000000000):
                     cls.__id_veterinario = id
                     break
                 else:
@@ -104,6 +105,7 @@ class HistorialMedico():
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
             continue
+
     @classmethod        
     def get_id_veterinario(cls):
         return cls.__id_veterinario
@@ -112,8 +114,8 @@ class HistorialMedico():
     def set_id_mascota(cls):
         while True:
             try:
-                id = int(input('Escriba el id de la mascota: '))
-                if (1 <= id<= 1000000000):
+                id = input('Escriba el id de la mascota: ')
+                if (1 <= len(id) <= 1000000000):
                     cls.__id_mascota = id
                     break
                 else:
@@ -123,6 +125,7 @@ class HistorialMedico():
             except KeyboardInterrupt:
                 print('El usuario ha cancelado la entrada de datos.')
             continue
+
     @classmethod        
     def get_id_mascota(cls):
         return cls.__id_mascota
@@ -185,15 +188,15 @@ class HistorialMedico():
 
                 cursor_historial = conexion.cursor()
                 cursor_historial.callproc('ActualizarHistorialMedico', [
-                    codigo,
-                    nueva_fecha,
-                    nueva_descripcion,
-                    nuevo_tratamiento,
-                    nuevo_id_vet,
-                    nuevo_id_mas,
+                codigo,
+                cls.get_fecha(),
+                cls.get_descripcion(),
+                cls.get_tratamiento(),
+                cls.get_id_veterinario(),
+                cls.get_id_mascota()
                 ])
                 conexion.commit()
-                cursor_historial.closed()
+                cursor_historial.close()
                 print('Historial actualizado')
                 
             except Exception as error:

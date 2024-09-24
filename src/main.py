@@ -9,7 +9,7 @@ from config.servicios import Servicios
 from time import sleep
 from sys import stdout
 from os import system
-from menus import historial_m
+from menus import historial_m,menu_citas
 
 def main():
     name_menu=["No deberias estar aqui :)","Propietarios","Veterinarios","Administradores","Mascotas",
@@ -26,8 +26,10 @@ def main():
             "Servicios":[Servicios.insertar_servicio, Servicios.buscar_servicio_id, Servicios.buscar_servicio_nombre, Servicios.actualizar_servicio, Servicios.eliminar_servicio],
         }
         try:
-            if name_menu[5]:
+            if name_menu[opcion] == name_menu[5]:
                 historial_m.main()
+            elif name_menu[opcion] == name_menu[7]:
+                menu_citas.main()
             else:
                 while True:
                     system("cls")
@@ -105,8 +107,10 @@ def main():
                 print("Escribe una opcion valida")
                 sleep(0.5)
                 system("cls")
+
             elif opcion != 9:
                 menu(opcion)
+
             elif opcion == 9:
                 system("cls")
                 for i in name_menu[9]:

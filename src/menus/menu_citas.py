@@ -8,6 +8,7 @@ system("cls")
 def main():
     try:
         while True:
+            system("cls")
             print("-------------------- Menu Citas------------------")
             print("1. Registrar nueva cita")
             print("2. Buscar cita por fecha")
@@ -62,9 +63,3 @@ def main():
         print('El usuario ha cancelado la ejecución, por favor continúe.')
     except Exception as error:
         print(f'Ha ocurrido un error no codificado: {error}')
-    finally:
-        end = 'Gracias por usar nuestro programa'
-        for i in end:
-            print(i, end="")
-            stdout.flush()
-            sleep(0.1)
